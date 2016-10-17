@@ -1,0 +1,8 @@
+rootProject.name="lareleve"
+
+// Dependencies
+include ":logger"
+project(':logger').projectDir = new File(settingsDir, '../logger')
+
+include ":lareleve-web"
+project(':lareleve-web').projectDir = new File(settingsDir, '../lareleve-web')

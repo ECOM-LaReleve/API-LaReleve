@@ -1,0 +1,17 @@
+# Gradle
+# ------
+.gradle
+build
+
+
+# Eclipse
+# -------
+*.classpath
+*.project
+*.settings
+/bin
+/*/bin
+
+# OS X
+# ----
+.DS_Store

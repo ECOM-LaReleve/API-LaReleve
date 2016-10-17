@@ -1,0 +1,20 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: "war"
+
+sourceSets {
+    main.java.srcDirs "src/main"
+}
+
+dependencies {
+    providedCompile "javax:javaee-api:7.0"
+    compile project(':logger')
+}
+
+/* Eclipse plugin */
+apply plugin: 'eclipse'
+eclipse.project {
+    natures 'org.springsource.ide.eclipse.gradle.core.nature'
+}

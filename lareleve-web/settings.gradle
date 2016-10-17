@@ -1,0 +1,4 @@
+rootProject.name="lareleve-web"
+
+include ':logger'
+project(':logger').projectDir = new File(settingsDir, '../logger')
