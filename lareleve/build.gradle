@@ -43,10 +43,6 @@ apply plugin: 'com.bmuschko.docker-java-application'
 repositories {
     mavenCentral()
 }
-docker {
-    url = System.env.DOCKER_HOST
-    certPath = new File(System.env.DOCKER_CERT_PATH)
-}
 
 /* Imports */
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
