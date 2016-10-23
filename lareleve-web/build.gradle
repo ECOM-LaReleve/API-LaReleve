@@ -9,12 +9,23 @@ sourceSets {
 }
 
 dependencies {
-    providedCompile "javax:javaee-api:7.0"
+    /* Sub projects */
     compile project(':logger')
+
+    /* java.rs */
+    compile "javax.ws.rs:jsr311-api:1.1.1"
+    /* Jersey */
+    compile 'com.sun.jersey:jersey-server:1.19.2'
+    compile 'com.sun.jersey:jersey-core:1.19.2'
+    compile 'com.sun.jersey:jersey-servlet:1.19.2'
+}
+
+war {
+    webInf { from 'src/main/resources/WEB-INF' }
 }
 
 /* Eclipse plugin */
-apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
 eclipse.project {
     natures 'org.springsource.ide.eclipse.gradle.core.nature'
 }
