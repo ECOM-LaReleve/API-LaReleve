@@ -11,6 +11,7 @@ sourceSets {
 dependencies {
     /* Sub projects */
     compile project(':logger')
+    compile project(':lareleve-ejb')
 
     /* java.rs */
     compile "javax.ws.rs:jsr311-api:1.1.1"

@@ -6,3 +6,6 @@ project(':logger').projectDir = new File(settingsDir, '../logger')
 
 include ":lareleve-web"
 project(':lareleve-web').projectDir = new File(settingsDir, '../lareleve-web')
+
+include ':lareleve-ejb'
+project(':lareleve-ejb').projectDir = new File(settingsDir, '../lareleve-ejb')

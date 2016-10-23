@@ -2,3 +2,6 @@ rootProject.name="lareleve-web"
 
 include ':logger'
 project(':logger').projectDir = new File(settingsDir, '../logger')
+
+include ':lareleve-ejb'
+project(':lareleve-ejb').projectDir = new File(settingsDir, '../lareleve-ejb')

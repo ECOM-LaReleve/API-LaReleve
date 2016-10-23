@@ -4,6 +4,7 @@ apply plugin: 'ear'
 dependencies {
     deploy project(path: ':logger', configuration: 'archives')
     deploy project(path: ':lareleve-web', configuration: 'archives')
+    deploy project(path: ':lareleve-ejb', configuration: 'archives')
 }
 
 ear {
@@ -16,6 +17,7 @@ ear {
         /* Content of application.xml in EAR */
         webModule("lareleve-web.war", "/")
         module("logger.jar", "java")
+        module("lareleve-ejb.jar", "ejb")
     }
 }
 
