@@ -10,7 +10,7 @@ dependencies {
 ear {
     deploymentDescriptor {
         applicationName = "laReleve"
-        initializeInOrder = true
+        initializeInOrder = false
         displayName = "laReleve"
         description = "laReleve"
 
