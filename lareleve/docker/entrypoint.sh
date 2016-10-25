@@ -44,11 +44,11 @@ if [ ! -e $CONFIG_DONE ]; then
     # 2) Add MySQL driver
     # $ /subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql.jdbc,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
     # 3) Create datasource
-    # $ data-source add --name=UnifiedPushDS --driver-name=mysql --jndi-name=java:LaReleveDS --connection-url=jdbc:mysql://$MYSQL_HOST/$MYSQL_DATABASE —user-name=$MYSQL_USER —password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
+    # $ data-source add --name=UnifiedPushDS --driver-name=mysql --jndi-name=java:LaReleveDS --connection-url=jdbc:mysql://$MYSQL_HOST/$MYSQL_DATABASE -—user-name=$MYSQL_USER -—password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true
     # Full bloc of instruction
     $JBOSS_CLI "embed-server --std-out=echo,
     /subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql,driver-module-name=com.mysql.jdbc,driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource),
-    data-source add --name=LaReleveDS --driver-name=mysql --jndi-name=java:/LaReleveDS --connection-url=jdbc:mysql://$MYSQL_HOST/$MYSQL_DATABASE?autoReconnect=true&useSSL=false —user-name=$MYSQL_USER —password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true"
+    data-source add --name=LaReleveDS --driver-name=mysql --jndi-name=java:/LaReleveDS --connection-url=jdbc:mysql://$MYSQL_HOST/$MYSQL_DATABASE?autoReconnect=true&useSSL=false --user-name=$MYSQL_USER --password=$MYSQL_PASSWORD --use-ccm=false --max-pool-size=25 --blocking-timeout-wait-millis=5000 --enabled=true"
 
     # Configuration has been done. Create a file to make sure it isn't run again
     touch $CONFIG_DONE
