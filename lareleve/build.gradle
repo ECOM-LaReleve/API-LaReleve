@@ -46,32 +46,20 @@ repositories {
     mavenCentral()
 }
 
+
+
 /* Imports */
-import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 
-/* Creation of Dockerfile */
-task createDockerfile(type: Dockerfile) {
-    destFile = project.file('build/Dockerfile') // Location of Dockerfile
-
-    /* Content of Dockerfile */
-    from 'jboss/wildfly:latest'
-    maintainer 'Rémi GATTAZ "remi.gattaz@gmail.com"'
-    exposePort 8080, 9990
-    addFile 'libs/lareleve.ear', '/opt/jboss/wildfly/standalone/deployments/'
-
-    /* Create 2 environment variables used to create an admin user in wildfly. These two values can
-    be overrriden at the creation of a container */
-    environmentVariable 'ADMIN_USERNAME', 'admin'
-    environmentVariable 'ADMIN_PASSWORD', 'Admin#70365'
-    defaultCommand 'sh', '-c', '/opt/jboss/wildfly/bin/add-user.sh ${ADMIN_USERNAME} ${ADMIN_PASSWORD} --silent && /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0'
+/* copy builded libs into docker folder */
+task prepareImage(type: Copy) {
+    dependsOn build
+    from 'build/libs'
+    into 'docker/build'
 }
 
 /* Creation of Docker image */
 task buildImage(type: DockerBuildImage) {
-    dependsOn build
-    dependsOn createDockerfile
-
-    inputDir = createDockerfile.destFile.parentFile
+    dependsOn prepareImage
     tag = 'lareleve:latest'
 }
