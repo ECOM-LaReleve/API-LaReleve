@@ -22,10 +22,11 @@ public class UtilsThrowable {
 	private final static String THROWABLE_TITLE = "\n---------------- %d -- %s ----------------------";
 
 	/**
-	 * eg. ExcelFileBuilder_Error_2013-05-31_17-40-23_256.txt
+	 * Build the name of a dump error file. The name is created with the following pattern :
+	 * PREFIX_Error_DATE.txt eg. ExcelFileBuilder_Error_2013-05-31_17-40-23_256.txt
 	 *
 	 * @param aFileNamePrefix
-	 * @return
+	 * @return created name
 	 */
 	private static String buildErrorDumpFileName(String aFileNamePrefix) {
 		return String.format("%s_Error_%s.log", aFileNamePrefix,
@@ -33,8 +34,12 @@ public class UtilsThrowable {
 	}
 
 	/**
+	 * Create a String containing informations on the error. The String contains the name and the
+	 * full stacktrace leading to the error
+	 *
 	 * @param aThrowable
-	 * @return
+	 *            Throwable containing the error
+	 * @return string containing informations about the error
 	 */
 	public static String dumpError(Throwable aThrowable) {
 		StringBuilder wSB = new StringBuilder();
@@ -54,15 +59,19 @@ public class UtilsThrowable {
 	}
 
 	/**
+	 * Create a String containing informations of the error. The String contains the name and the
+	 * message of the error
+	 *
 	 * @param aThrowable
-	 * @return
+	 *            Throwable containing the error
+	 * @return string containing short informations about the error
 	 */
 	public static String dumpErrorMessages(Throwable aThrowable) {
 		StringBuilder wSB = new StringBuilder();
 		while (aThrowable != null) {
 
-			wSB.append(String.format(THROWABLE_MESSAGE, aThrowable.getClass()
-					.getSimpleName(), aThrowable.getLocalizedMessage()));
+			wSB.append(String.format(THROWABLE_MESSAGE, aThrowable.getClass().getSimpleName(),
+					aThrowable.getLocalizedMessage()));
 
 			aThrowable = aThrowable.getCause();
 		}
@@ -71,23 +80,19 @@ public class UtilsThrowable {
 	}
 
 	/**
-	 *
-	 * <pre>
-	 * /tmp/ExcelFileBuilder_Error_2013-06-01_17-43-15_560.log
-	 * /var/folders/sw/7b8ph_9j3g994751npv1g7k80000gp/T/ExcelFileBuilder_Error_2013-06-01_17-47-00_657.log
-	 * </pre>
+	 * Create a file containing the dump of the throwable
 	 *
 	 * @param aFileNamePrefix
+	 *            prefix of the name of the dump file
 	 * @param aThrowable
-	 * @return the absoutepath of the created error file
+	 *            throwable of error
+	 * @return absolute path of the created error file
 	 */
-	public static String storeErrorDumpInTmp(String aFileNamePrefix,
-			Throwable aThrowable) {
+	public static String storeErrorDumpInTmp(String aFileNamePrefix, Throwable aThrowable) {
 
 		File wTempDirFile = new File(System.getProperty("java.io.tmpdir"));
 
-		File wErrorDumpFile = new File(wTempDirFile,
-				buildErrorDumpFileName(aFileNamePrefix));
+		File wErrorDumpFile = new File(wTempDirFile, buildErrorDumpFileName(aFileNamePrefix));
 
 		String wDump = dumpError(aThrowable);
 		try {

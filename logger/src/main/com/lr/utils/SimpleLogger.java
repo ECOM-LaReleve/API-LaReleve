@@ -14,35 +14,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author gattazr
+ * Logger
  *
+ * A log line follows the following format : WHEN| LOG_LEVEL| THREAD_NAME| WHO| WHAT| INFOS
+ *
+ * @author gattazr
  */
 public class SimpleLogger implements ISimpleLogger {
 
 	static final String DUMMY_SHORT_HASHCODE = "0000";
 
+	/** Empty string */
 	static final String EMPTY = "";
 
-	// the width of the thread column
+	/** the width of the thread column */
 	static final int LENGTH_THREADNAME = 16;
 
-	// the width of the what column
+	/** the width of the what column */
 	static final int LENGTH_WHAT = 25;
 
-	// the width of the who column
+	/** the width of the who column */
 	static final int LENGTH_WHO = 25;
 
-	private final static Level[] LEVELS = {Level.OFF, Level.INFO, Level.FINE,
-			Level.FINER, Level.FINEST, Level.ALL, Level.CONFIG, Level.SEVERE,
-			Level.WARNING};
+	private final static Level[] LEVELS = { Level.OFF, Level.INFO, Level.FINE, Level.FINER,
+			Level.FINEST, Level.ALL, Level.CONFIG, Level.SEVERE, Level.WARNING };
 
 	static final String NULL = "null";
 
 	private final static String LOG_PREFIX_LEVEL = "LEVEL";
 
 	private final static String LOG_PREFIX_LOG = "LOG";
-
-	public final static SimpleLogger out = new SimpleLogger();
 
 	private final static String PATTERN_TIMESTAMP = "yyyy-MM-dd_HH-mm-ss_SSS";
 
@@ -60,29 +61,44 @@ public class SimpleLogger implements ISimpleLogger {
 	private final static String THROWABLE_TITLE = "\n---------------- %d -- %s ----------------------";
 
 	/**
-	 * @param aLevel
+	 * Create a String THREAD_NAME| WHO| WHAT| INFOS
+	 *
+	 * @param aThread
+	 *            Thread from which the event is coming from
 	 * @param aWho
+	 *            Object from which the event is coming from
 	 * @param aWhat
+	 *            Simple name for event
 	 * @param aInfos
+	 *            Detailed informations about the event
+	 * @return builded String
 	 */
 	public static String buildLogLine(final Thread aThread, final Object aWho,
 			final CharSequence aWhat, final Object... aInfos) {
-
-		String wLogText = buildLogText(aInfos);
 
 		String wLogWho = buildWhoObjectId(aWho);
 
 		String wLogWhat = (aWhat != null) ? aWhat.toString() : NULL;
 
+		String wLogText = buildLogText(aInfos);
+
 		return formatLine(aThread.getName(), wLogWho, wLogWhat, wLogText);
 	}
 
 	/**
-	 * @param aSB
-	 *            a stringbuffer to be appended
+	 * Build a String identifying an Object.
+	 *
+	 * <ul>
+	 * <li>The value empty string is used for every object set to null.</li>
+	 * <li>If the array contains a single object, the value toString of that object is returned</li>
+	 * <li>If the array contains several object, the value toString of these objects are returned in
+	 * the following format [Object1, Object2, ...]</li>
+	 * <li>If the first Object is a format, the other Objects are injected into that format.</li>
+	 * </ul>
+	 *
 	 * @param aObjects
-	 *            a table of object
-	 * @return the given StringBuffer
+	 *            Array of object to transform into String
+	 * @return builded String
 	 */
 	public static String buildLogText(final Object... aObjects) {
 
@@ -92,7 +108,7 @@ public class SimpleLogger implements ISimpleLogger {
 
 		StringBuilder wSB = new StringBuilder(128);
 
-		// converts null of Thowable to strings
+		// converts null and Throwable to strings
 		Object wObj;
 		for (int wI = 0; wI < aObjects.length; wI++) {
 			wObj = aObjects[wI];
@@ -113,9 +129,8 @@ public class SimpleLogger implements ISimpleLogger {
 		// if the first object is a format, return the result of the
 		// String.format() method
 		if (aObjects[0].toString().indexOf('%') > -1) {
-			return wSB
-					.append(String.format(aObjects[0].toString(),
-							UtilsArray.removeOneObject(aObjects, 0)))
+			return wSB.append(
+					String.format(aObjects[0].toString(), UtilsArray.removeOneObject(aObjects, 0)))
 					.toString();
 		}
 
@@ -146,8 +161,11 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
+	 * Build a String identifying an Object
+	 *
 	 * @param aWho
-	 * @return
+	 *            the Object to identify
+	 * @return builded String
 	 */
 	public static String buildWhoObjectId(final Object aWho) {
 
@@ -160,19 +178,24 @@ public class SimpleLogger implements ISimpleLogger {
 		}
 
 		return new StringBuilder().append(aWho.getClass().getName()).append('_')
-				.append(UtilsString.strAdjustRight(aWho.hashCode(), 4))
-				.toString();
+				.append(UtilsString.strAdjustRight(aWho.hashCode(), 4)).toString();
 	}
 
 	/**
-	 * @param aSourceClassName
-	 * @param aSourceMethodName
-	 * @param aText
-	 * @return
+	 * Build a String with the format "THREAD_ID| WHO| WHAT| INFOS"
+	 *
+	 * @param aThreadName
+	 *            name of thread
+	 * @param aWho
+	 *            name of class
+	 * @param aWhat
+	 *            name of event
+	 * @param aInfos
+	 *            informations
+	 * @return formated string
 	 */
-	public static String formatLine(final String aThreadName,
-			final String aSourceClassName, final String aSourceMethodName,
-			final String aText) {
+	public static String formatLine(final String aThreadName, final String aWho, final String aWhat,
+			final String aInfos) {
 
 		// clean the buffer
 		StringBuilder wSB = new StringBuilder();
@@ -180,20 +203,23 @@ public class SimpleLogger implements ISimpleLogger {
 		wSB.append(formatThreadName(aThreadName));
 
 		wSB.append(SEP_COLUMN_DELIM);
-		wSB.append(formatWho(aSourceClassName));
+		wSB.append(formatWho(aWho));
 
 		wSB.append(SEP_COLUMN_DELIM);
-		wSB.append(formatWhat(aSourceMethodName));
+		wSB.append(formatWhat(aWhat));
 
 		wSB.append(SEP_COLUMN_DELIM);
-		wSB.append(formatText(aText));
+		wSB.append(formatText(aInfos));
 
 		return wSB.toString();
 	}
 
 	/**
+	 * Format a text. Returns empty String if the String is null. Returns the String otherwise.
+	 *
 	 * @param aText
-	 * @return
+	 *            String to format
+	 * @return formated text
 	 */
 	public static String formatText(final String aText) {
 
@@ -201,9 +227,11 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
-	 * @param aSB
+	 * Format the name of a Thread into a String that can be used as THREAD_NAME in a Log line
+	 *
 	 * @param aThreadName
-	 * @return
+	 *            Name of a tread to format
+	 * @return formated name
 	 */
 	public static String formatThreadName(final String aThreadName) {
 
@@ -211,10 +239,14 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
-	 * @param e
-	 * @return
+	 * Format a throwable into a String that can be used as INFO in a log line
+	 *
+	 * @param aThrowable
+	 *            Throwable to format
+	 * @return formated throwable
 	 */
 	public static String formatThrowable(Throwable aThrowable) {
+
 		StringBuilder wSB = new StringBuilder();
 		int wThrowableLevel = 0;
 		while (aThrowable != null) {
@@ -226,50 +258,45 @@ public class SimpleLogger implements ISimpleLogger {
 			aThrowable = aThrowable.getCause();
 			wThrowableLevel++;
 		}
-
 		return wSB.toString();
-
 	}
 
 	/**
-	 * @param aLevel
-	 * @return
+	 * Format a String into a WHAT String that can be used in a Log line
+	 *
+	 * @param aWhat
+	 *            String to format
+	 * @return formated WHAT
 	 */
-	public static String formatWhat(final String aMethod) {
+	public static String formatWhat(final String aWhat) {
 
 		return UtilsString.strAdjustRight(
-				aMethod != null
-						? aMethod.replace(SEP_COLUMN, REPLACE_COLUMN)
-						: EMPTY,
-				LENGTH_WHAT, ' ');
-
+				aWhat != null ? aWhat.replace(SEP_COLUMN, REPLACE_COLUMN) : EMPTY, LENGTH_WHAT,
+				' ');
 	}
 
 	/**
-	 * @param aLevel
-	 * @return
+	 * Format a String into a WHO String that can be used in a Log line
+	 *
+	 * @param aWho
+	 *            String to format
+	 * @return formated WHO
 	 */
 	public static String formatWho(final String aWho) {
 
 		return UtilsString.strAdjustRight(
-				aWho != null ? aWho.replace(SEP_COLUMN, REPLACE_COLUMN) : EMPTY,
-				LENGTH_WHO, ' ');
-
+				aWho != null ? aWho.replace(SEP_COLUMN, REPLACE_COLUMN) : EMPTY, LENGTH_WHO, ' ');
 	}
 
-	// The default level is OFF.
-	private Logger pLogger = null;
+	private Logger pLogger;
+	// The default logging folder is the temporary directory of the JVM
 	private String plogFolderPath = System.getProperty("java.io.tmpdir");
 
 	/**
+	 * Create a FileHandler for the logger
 	 *
-	 */
-	private SimpleLogger() {
-		super();
-	};
-
-	/**
-	 * @param aHandlerName
+	 * @param aFhPattern
+	 *            Name of the FileHandler
 	 * @return
 	 */
 	private FileHandler buildLoggerFileHandler(String aFhPattern) {
@@ -284,17 +311,19 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
-	 * eg. Error_ExcelFileBuilder_2013-05-31_17-40-23_256.txt
+	 * Build a FileHandler name pattern.
+	 *
+	 * The pattern is the following : NAME_date.txt eg.
+	 * Error_ExcelFileBuilder_2013-05-31_17-40-23_256.txt
 	 *
 	 * @param aName
+	 *            name of Handler
 	 * @return
 	 */
-	private String buildLoggerFileNamePattern(String aHandlerName,
-			String aPrefixFileName) {
+	private String buildLoggerFileNamePattern(String aName) {
 		String wTimeStamp = sTimeStampFormater.format(new Date());
 
-		String wFhPattern = String.format("%s_%s_%s.log", aPrefixFileName,
-				aHandlerName, wTimeStamp);
+		String wFhPattern = String.format("%s_%s.log", aName, wTimeStamp);
 
 		wFhPattern = new File(getLogFolderPath(), wFhPattern).getAbsolutePath();
 
@@ -318,7 +347,7 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
-	 * CLose the Logger
+	 * Close the logger. Reset the level to OFF and close all handlers.
 	 */
 	public void close() {
 		if (pLogger != null) {
@@ -332,6 +361,10 @@ public class SimpleLogger implements ISimpleLogger {
 		}
 	}
 
+	/**
+	 *
+	 * @return the folder in which logger files are created when a logger file handler is used
+	 */
 	public String getLogFolderPath() {
 		return plogFolderPath;
 	}
@@ -363,7 +396,8 @@ public class SimpleLogger implements ISimpleLogger {
 
 	/**
 	 * @param aFlag
-	 * @return
+	 *            flag to test
+	 * @return true if the given flag is a valid console flag
 	 */
 	public boolean isValidConsoleFlag(String aFlag) {
 		return "LOGCONSOLE".equalsIgnoreCase(aFlag);
@@ -371,15 +405,19 @@ public class SimpleLogger implements ISimpleLogger {
 
 	/**
 	 * @param aFlag
-	 * @return
+	 *            flag to test
+	 * @return true if the given flag is a valid file flag
 	 */
 	public boolean isValidFileFlag(String aFlag) {
 		return "LOGFILE".equalsIgnoreCase(aFlag);
 	}
 
 	/**
+	 * Return true if the name given in parameter can be matched to an existing log level
+	 *
 	 * @param aLevelName
-	 * @return
+	 *            level name to test
+	 * @return true if the given level is valid
 	 */
 	public boolean isValidLevel(String aLevelName) {
 		if (aLevelName != null) {
@@ -394,8 +432,11 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
+	 * Return the level associated to the name given in parameter. Return OFF if no level matches
+	 *
 	 * @param aLevelName
-	 * @return
+	 *            name of level
+	 * @return associated level
 	 */
 	public Level levelNameToLevel(String aLevelName) {
 		if (aLevelName != null) {
@@ -410,12 +451,10 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	@Override
-	public void log(Level aLevel, Object aWho, CharSequence aWhat,
-			Object... aInfos) {
+	public void log(Level aLevel, Object aWho, CharSequence aWhat, Object... aInfos) {
 
 		if (isLoggable(aLevel)) {
-			pLogger.log(aLevel,
-					buildLogLine(Thread.currentThread(), aWho, aWhat, aInfos));
+			pLogger.log(aLevel, buildLogLine(Thread.currentThread(), aWho, aWhat, aInfos));
 		}
 	}
 
@@ -446,22 +485,26 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
+	 * Open a new logger by closing the current one if it is already open
+	 *
+	 * @param aName
+	 *            name of logger
 	 * @param aLevel
+	 *            Level
 	 * @param aWithConsole
+	 *            true if the CONSOLE Handler is used
 	 * @param aWithFile
+	 *            true if the CONSOLE Handler is used
 	 */
-	public void open(String aPrefixFileName, Level aLevel, boolean aWithConsole,
-			boolean aWithFile) {
+	public void open(String aName, Level aLevel, boolean aWithConsole, boolean aWithFile) {
 
 		close();
 
-		if ((pLogger == null) && !Level.OFF.equals(aLevel)
-				&& (aWithConsole || aWithFile)) {
+		if ((pLogger == null) && !Level.OFF.equals(aLevel) && (aWithConsole || aWithFile)) {
 
 			String wLoggerId = getClass().getSimpleName();
 			pLogger = Logger.getLogger(wLoggerId);
-			String wFhPattern = buildLoggerFileNamePattern(wLoggerId,
-					aPrefixFileName);
+			String wFhPattern = buildLoggerFileNamePattern(aName);
 			pLogger.setUseParentHandlers(false);
 
 			if (aWithConsole) {
@@ -479,10 +522,8 @@ public class SimpleLogger implements ISimpleLogger {
 
 			setLogLevel(aLevel);
 
-			logInfo(this, "<init>",
-					"Start logger=[%s] Level=[%s] WithConsole=[%b] WithFile=[%b]",
-					pLogger.getName(), pLogger.getLevel(), aWithConsole,
-					aWithFile);
+			logInfo(this, "<init>", "Start logger=[%s] Level=[%s] WithConsole=[%b] WithFile=[%b]",
+					pLogger.getName(), pLogger.getLevel(), aWithConsole, aWithFile);
 			if (aWithFile) {
 				logInfo(this, "<init>", "FileHandlerPattern=[%s] ", wFhPattern);
 			}
@@ -490,24 +531,36 @@ public class SimpleLogger implements ISimpleLogger {
 	}
 
 	/**
+	 * Open a new logger by closing the current one if it is already open
+	 *
+	 * @param aName
+	 *            name of logger
 	 * @param aLevelName
+	 *            name of level
 	 * @param aWithConsole
+	 *            true if the CONSOLE Handler is used
 	 * @param aWithFile
+	 *            true if the CONSOLE Handler is used
 	 */
-	public void open(String aPrefixFileName, String aLevelName,
-			boolean aWithConsole, boolean aWithFile) {
-		open(aPrefixFileName, levelNameToLevel(aLevelName), aWithConsole,
-				aWithFile);
+	public void open(String aName, String aLevelName, boolean aWithConsole, boolean aWithFile) {
+		open(aName, levelNameToLevel(aLevelName), aWithConsole, aWithFile);
 	}
 
-	public void setLogFolderPath(String aLogFolderPath)
-			throws FileNotFoundException {
+	/**
+	 * Change the folder in which logger files are created when a logger file handler is used
+	 *
+	 * @param aLogFolderPath
+	 *            new path
+	 * @throws FileNotFoundException
+	 *             thrown if the folder doesn't exist
+	 */
+	public void setLogFolderPath(String aLogFolderPath) throws FileNotFoundException {
 		File f = new File(aLogFolderPath);
 		if (f.isDirectory()) {
 			this.plogFolderPath = aLogFolderPath;
 		} else {
-			throw new FileNotFoundException(String
-					.format("The folder '%s' doesn't exist", aLogFolderPath));
+			throw new FileNotFoundException(
+					String.format("The folder '%s' doesn't exist", aLogFolderPath));
 		}
 
 	}

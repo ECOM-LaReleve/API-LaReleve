@@ -11,18 +11,16 @@ import java.util.logging.LogRecord;
  */
 public class SimpleLoggerFormatter extends Formatter {
 
-	private final static String PATTERN_TIMESTAMP = "yyyy-MM-dd_HH-mm-ss_SSS";
-
+	private final static String sPatternTimeStamp = "yyyy-MM-dd_HH-mm-ss_SSS";
 	private final static SimpleLoggerFormatter sFormatter = new SimpleLoggerFormatter();
-
 	private final static SimpleDateFormat sTimeStampFormater = new SimpleDateFormat(
-			PATTERN_TIMESTAMP);
+			sPatternTimeStamp);
 
 	/**
-	 * @return
+	 *
+	 * @return simple logger formatter
 	 */
 	public static Formatter getFormater() {
-
 		return sFormatter;
 	}
 
@@ -33,8 +31,7 @@ public class SimpleLoggerFormatter extends Formatter {
 	 */
 	@Override
 	public String format(LogRecord aLogRecord) {
-		String wTimeStamp = sTimeStampFormater
-				.format(new Date(aLogRecord.getMillis()));
+		String wTimeStamp = sTimeStampFormater.format(new Date(aLogRecord.getMillis()));
 
 		return String.format("%s|%8s|%s\n", wTimeStamp, aLogRecord.getLevel(),
 				aLogRecord.getMessage());
