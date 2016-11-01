@@ -14,11 +14,14 @@ dependencies {
     compile project(':lareleve-ejb')
 
     /* java.rs */
-    compile "javax.ws.rs:jsr311-api:1.1.1"
+    compile 'javax.ws.rs:jsr311-api:1.1.1'
+    /* Javax servlet */
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
     /* Jersey */
     compile 'com.sun.jersey:jersey-server:1.19.2'
     compile 'com.sun.jersey:jersey-core:1.19.2'
     compile 'com.sun.jersey:jersey-servlet:1.19.2'
+    compile 'com.sun.jersey:jersey-json:1.19.2'
     /* Jackson */
     compile "com.fasterxml.jackson.core:jackson-databind:2.6.3"
 }

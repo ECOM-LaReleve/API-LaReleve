@@ -9,10 +9,10 @@ import javax.ws.rs.core.MediaType;
  * Handler of routes /
  */
 @Path("/")
+@Produces(MediaType.APPLICATION_JSON)
 public class RootRoute {
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
 	public String find() {
 		return "{}";
 	}
