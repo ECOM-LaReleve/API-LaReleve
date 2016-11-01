@@ -3,7 +3,7 @@
 	<persistence-unit name="LaRelevePU" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/LaReleveDS</jta-data-source>
-		<class>com.lr.entity.User</class>
+		<class>com.lr.entity.Utilisateur</class>
 		<!-- <properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
