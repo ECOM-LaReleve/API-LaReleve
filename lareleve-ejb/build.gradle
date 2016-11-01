@@ -11,18 +11,14 @@ sourceSets {
 dependencies {
 	/* Sub projects */
 	compile project(':logger')
-	
+
 	/* EJB */
 	compile "javax.ejb:javax.ejb-api:3.2"
 	compile "javax.ejb:javax.ejb-api:3.2"
-    
+
 	/* Persistence and Mysql */
 	compile "javax.persistence:persistence-api:1.0"
 	compile "mysql:mysql-connector-java:6.0.4"
-}
-
-jar {
-	
 }
 
 /* Eclipse plugin */
