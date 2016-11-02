@@ -25,13 +25,13 @@ public class WebAppListener implements ServletContextListener {
 			}
 			pLogger.open("web-lareleve", Level.ALL, false, true);
 
-			SimpleLoggerRegistry.bind("DEFAULT_LARELEVE", pLogger);
+			SimpleLoggerRegistry.REGISTRY.bind("DEFAULT_LARELEVE", pLogger);
 		}
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		SimpleLoggerRegistry.unbind("DEFAULT_LARELEVE");
+		SimpleLoggerRegistry.REGISTRY.unbind("DEFAULT_LARELEVE");
 		pLogger.close();
 	}
 
