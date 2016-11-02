@@ -502,8 +502,7 @@ public class SimpleLogger implements ISimpleLogger {
 
 		if ((pLogger == null) && !Level.OFF.equals(aLevel) && (aWithConsole || aWithFile)) {
 
-			String wLoggerId = getClass().getSimpleName();
-			pLogger = Logger.getLogger(wLoggerId);
+			pLogger = Logger.getLogger(aName);
 			String wFhPattern = buildLoggerFileNamePattern(aName);
 			pLogger.setUseParentHandlers(false);
 
