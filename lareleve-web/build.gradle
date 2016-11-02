@@ -5,7 +5,7 @@ repositories {
 apply plugin: "war"
 
 sourceSets {
-    main.java.srcDirs "src/main"
+    main.java.srcDirs "src/main/java"
 }
 
 dependencies {
