@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-public class RootRoute {
+public class RootRoute extends BasicRoute {
 
 	@GET
 	public String find() {

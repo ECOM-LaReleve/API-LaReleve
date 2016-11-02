@@ -5,6 +5,7 @@ import com.lr.utils.SimpleLoggerRegistry;
 
 public abstract class BasicRoute {
 
-	static final ISimpleLogger LOGGER = SimpleLoggerRegistry.REGISTRY.lookup("DEFAULT_LARELEVE");
+	protected static final ISimpleLogger LOGGER = SimpleLoggerRegistry.REGISTRY
+			.lookup("DEFAULT_LARELEVE");
 
 }

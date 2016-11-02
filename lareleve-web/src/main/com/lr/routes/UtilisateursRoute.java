@@ -29,9 +29,10 @@ public class UtilisateursRoute extends BasicRoute {
 
 	@GET
 	public Response findAll() {
-		LOGGER.logDebug(this, "FIND ALL");
-		List<Utilisateur> utilisateurs = utilisateurEJB.findAll();
+		LOGGER.logDebug(this, "<GET />", "utilisateurEJB=[%s]",
+				(utilisateurEJB != null ? "set" : "null"));
 
+		List<Utilisateur> utilisateurs = utilisateurEJB.findAll();
 		ObjectMapper om = new ObjectMapper();
 		if (utilisateurs != null) {
 			try {
@@ -48,7 +49,9 @@ public class UtilisateursRoute extends BasicRoute {
 	@GET
 	@Path("{id : \\d+}") // id must be digits
 	public Response findById(@PathParam("id") String id) {
-		LOGGER.logDebug(this, "FIND", id);
+		LOGGER.logDebug(this, "<GET /{:id}>", "utilisateurEJB=[%s], id=%s",
+				(utilisateurEJB != null ? "set" : "null"), id);
+
 		Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
 		ObjectMapper om = new ObjectMapper();
 		if (utilisateur != null) {
