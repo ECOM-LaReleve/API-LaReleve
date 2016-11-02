@@ -13,10 +13,10 @@ dependencies {
     compile project(':logger')
     compile project(':lareleve-ejb')
 
-    /* java.rs */
-    compile 'javax.ws.rs:jsr311-api:1.1.1'
+    /* Javax RS 2.x API */
+    providedCompile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
     /* Javax servlet */
-    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     /* Jersey */
     compile 'com.sun.jersey:jersey-server:1.19.2'
     compile 'com.sun.jersey:jersey-core:1.19.2'
