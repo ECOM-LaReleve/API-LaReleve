@@ -16,15 +16,7 @@ dependencies {
     /* Javax RS 2.x API */
     providedCompile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
     /* Javax servlet */
-    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-    /* Jersey */
-    compile 'com.sun.jersey:jersey-server:1.19.2'
-    compile 'com.sun.jersey:jersey-core:1.19.2'
-    compile 'com.sun.jersey:jersey-servlet:1.19.2'
-    compile 'com.sun.jersey:jersey-json:1.19.2'
-    /* Jackson */
-    compile "com.fasterxml.jackson.core:jackson-databind:2.6.3"
-}
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'}
 
 war {
     webInf { from 'src/main/resources/WEB-INF' }

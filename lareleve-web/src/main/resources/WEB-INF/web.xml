@@ -6,14 +6,8 @@
 		<listener-class>com.lr.listeners.WebAppListener</listener-class>
 	</listener>
 
-	<servlet>
-		<servlet-name>jersey-servlet</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>jersey-servlet</servlet-name>
+		<servlet-name>javax.ws.rs.core.Application</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
