@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lr.entity.Utilisateur;
 import com.lr.remote.IUtilisateurEJBRemote;
 
@@ -27,20 +26,24 @@ public class UtilisateursRoute extends BasicRoute {
 	@EJB
 	private IUtilisateurEJBRemote utilisateurEJB;
 
+	@POST
+	public Response createUser(Utilisateur aUtilisateur) {
+		LOGGER.logDebug(this, "<POST>", "utilisateurEJB=[%s], utilisateur=%s",
+				(utilisateurEJB != null ? "set" : "null"), aUtilisateur);
+
+		utilisateurEJB.create(aUtilisateur);
+
+		return Response.status(Response.Status.OK).build();
+	}
+
 	@GET
 	public Response findAll() {
 		LOGGER.logDebug(this, "<GET />", "utilisateurEJB=[%s]",
 				(utilisateurEJB != null ? "set" : "null"));
 
 		List<Utilisateur> utilisateurs = utilisateurEJB.findAll();
-		ObjectMapper om = new ObjectMapper();
-		if (utilisateurs != null) {
-			try {
-				String jsonUtilisateurs = om.writeValueAsString(utilisateurs);
-				return Response.status(Response.Status.OK).entity(jsonUtilisateurs).build();
-			} catch (Exception e) {
-				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-			}
+		if (!utilisateurs.isEmpty()) {
+			return Response.status(Response.Status.OK).entity(utilisateurs).build();
 		}
 		return Response.status(Response.Status.NO_CONTENT).build();
 
@@ -53,15 +56,10 @@ public class UtilisateursRoute extends BasicRoute {
 				(utilisateurEJB != null ? "set" : "null"), id);
 
 		Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
-		ObjectMapper om = new ObjectMapper();
 		if (utilisateur != null) {
-			try {
-				String jsonUser = om.writeValueAsString(utilisateur);
-				return Response.status(Response.Status.OK).entity(jsonUser).build();
-			} catch (Exception e) {
-				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-			}
+			return Response.status(Response.Status.OK).entity(utilisateur).build();
 		}
+
 		return Response.status(Response.Status.NO_CONTENT).build();
 	}
 }
