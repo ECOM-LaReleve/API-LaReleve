@@ -46,24 +46,43 @@ repositories {
     mavenCentral()
 }
 
-
-
-/* Imports */
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-
 /* copy builded libs into docker folder */
 task prepareImage(type: Copy) {
     dependsOn build
     from 'build/libs'
     into 'docker/build'
 }
+
 /* When cleaning project, remove also build folder in docker folder */
 clean.doFirst {
     delete "${rootDir}/docker/build"
 }
 
 /* Creation of Docker image */
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
 task buildImage(type: DockerBuildImage) {
     dependsOn prepareImage
     tag = 'lareleve:latest'
+}
+
+task deployLocal {
+    dependsOn "build"
+    doLast {
+        // Check environment variable. JEE_CONTAINER must exist
+        def location = System.env.JEE_CONTAINER
+        if(!location) {
+            throw new GradleException('Environment variable JEE_CONTAINER is not set')
+        }
+
+        // Remove already deployed ear
+        print "remove old ear: ${location}/${project.name}*\n"
+        delete fileTree(dir: "${location}", include: "${project.name}*")
+
+        // copy new ear
+        print "set new ear: build/libs/${project.name}.ear\n"
+        copy {
+            from "build/libs/${project.name}.ear"
+            into "${location}/"
+        }
+    }
 }
