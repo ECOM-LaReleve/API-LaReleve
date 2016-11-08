@@ -27,24 +27,16 @@ eclipse.project {
     natures 'org.springsource.ide.eclipse.gradle.core.nature'
 }
 
-/* DOCKER PLUGIN */
-/* Add docker plugin as dependency */
+/* Docker plugin */
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
-
     dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:3.0.3'
+        classpath "de.gesellix:gradle-docker-plugin:2016-10-07T21-04-39"
     }
 }
-
-/* DOCKER PLUGIN CONFIGURATION */
-apply plugin: 'com.bmuschko.docker-remote-api'
-apply plugin: 'com.bmuschko.docker-java-application'
-repositories {
-    mavenCentral()
-}
+apply plugin: "de.gesellix.docker"
 
 /* copy builded libs into docker folder */
 task prepareImage(type: Copy) {
@@ -59,12 +51,14 @@ clean.doFirst {
 }
 
 /* Creation of Docker image */
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
-task buildImage(type: DockerBuildImage) {
+import de.gesellix.gradle.docker.tasks.DockerBuildTask
+task buildImage(type: DockerBuildTask) {
     dependsOn prepareImage
-    tag = 'lareleve:latest'
+    imageName = 'lareleve:latest'
+    buildContextDirectory = file("docker")
 }
 
+/* Custom task : deployLocal to deploy builded ear in $JEE_CONTAINER folder */
 task deployLocal {
     dependsOn "build"
     doLast {
