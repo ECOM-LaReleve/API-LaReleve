@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.lr.auth.Secured;
 import com.lr.entity.Credentials;
 import com.lr.remote.IAuthEJBRemote;
 
@@ -32,22 +33,23 @@ public class AuthenticationRoute extends BasicRoute {
 		String password = credentials.getPassword();
 		String hashedPassword = password;
 
-		if (authEJB.connect(username, hashedPassword)) {
-			// Sucessfull login
-			String out = String.format("{ \"username\": \"%s\", \"token\": %d}", username, 12420);
-
-			return getResponseBuilder(Status.OK).entity(out).build();
+		String token = authEJB.login(username, hashedPassword);
+		if (token != null) {
+			// if token is not null, login was sucessfull
+			String out = String.format("{ \"token\": \"%s\" }", token);
+			return responseBuilder(Status.OK).entity(out).build();
 		}
-		// Wrong username and or password
-		return getResponseBuilder(Status.NO_CONTENT).build();
+		// Wrong username and/or password
+		return responseBuilder(Status.UNAUTHORIZED).build();
 
 	}
 
 	@POST
+	@Secured
 	@Path("/logout")
 	public Response logout() {
 		LOGGER.logDebug(this, "logout", "");
-		return getResponseBuilder(Status.OK).build();
+		return responseBuilder(Status.OK).build();
 	}
 
 }
