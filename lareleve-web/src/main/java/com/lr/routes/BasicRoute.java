@@ -12,7 +12,7 @@ public abstract class BasicRoute {
 	protected static final ISimpleLogger LOGGER = SimpleLoggerRegistry.REGISTRY
 			.lookup("DEFAULT_LARELEVE");
 
-	protected ResponseBuilder getResponseBuilder(Status status) {
+	public static ResponseBuilder responseBuilder(Status status) {
 		return Response.status(status)
 				.header("Access-Control-Allow-Origin", "http://localhost:9000")
 				.header("Access-Control-Allow-Headers",

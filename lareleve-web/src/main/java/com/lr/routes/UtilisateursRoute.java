@@ -36,10 +36,10 @@ public class UtilisateursRoute extends BasicRoute {
 
 		try {
 			utilisateurEJB.create(aUtilisateur);
-			return Response.status(Response.Status.OK).build();
+			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
-			return Response.status(Response.Status.BAD_REQUEST).build();
+			return responseBuilder(Response.Status.BAD_REQUEST).build();
 		}
 	}
 
@@ -52,10 +52,10 @@ public class UtilisateursRoute extends BasicRoute {
 		try {
 			Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
 			utilisateurEJB.remove(utilisateur);
-			return Response.status(Response.Status.OK).build();
+			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<DELETE>", "Bad Request");
-			return Response.status(Response.Status.BAD_REQUEST).build();
+			return responseBuilder(Response.Status.BAD_REQUEST).build();
 		}
 	}
 
@@ -66,9 +66,9 @@ public class UtilisateursRoute extends BasicRoute {
 
 		List<Utilisateur> utilisateurs = utilisateurEJB.findAll();
 		if (!utilisateurs.isEmpty()) {
-			return getResponseBuilder(Status.OK).entity(utilisateurs).build();
+			return responseBuilder(Status.OK).entity(utilisateurs).build();
 		}
-		return Response.status(Response.Status.NO_CONTENT).build();
+		return responseBuilder(Response.Status.NO_CONTENT).build();
 
 	}
 
@@ -80,10 +80,10 @@ public class UtilisateursRoute extends BasicRoute {
 
 		Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
 		if (utilisateur != null) {
-			return Response.status(Response.Status.OK).entity(utilisateur).build();
+			return responseBuilder(Response.Status.OK).entity(utilisateur).build();
 		}
 
-		return Response.status(Response.Status.NO_CONTENT).build();
+		return responseBuilder(Response.Status.NO_CONTENT).build();
 	}
 
 	@PUT
@@ -100,10 +100,10 @@ public class UtilisateursRoute extends BasicRoute {
 			aUtilisateur.setUsername(aUtilisateur.getUsername());
 
 			utilisateurEJB.edit(utilisateur);
-			return Response.status(Response.Status.OK).build();
+			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
-			return Response.status(Response.Status.BAD_REQUEST).build();
+			return responseBuilder(Response.Status.BAD_REQUEST).build();
 		}
 	}
 }
