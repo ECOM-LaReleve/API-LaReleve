@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.lr.entity.Utilisateur;
 import com.lr.remote.IUtilisateurEJBRemote;
@@ -65,7 +66,7 @@ public class UtilisateursRoute extends BasicRoute {
 
 		List<Utilisateur> utilisateurs = utilisateurEJB.findAll();
 		if (!utilisateurs.isEmpty()) {
-			return Response.status(Response.Status.OK).entity(utilisateurs).build();
+			return getResponseBuilder(Status.OK).entity(utilisateurs).build();
 		}
 		return Response.status(Response.Status.NO_CONTENT).build();
 
