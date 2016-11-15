@@ -1,7 +1,9 @@
 package com.lr.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +33,14 @@ public class Prestation implements Serializable{
 	@JoinColumn (name="idBesoin")
 	private Besoin besoin;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idPrestation")
+	private Set<PrestationsRealisees> prestationsRealisees;
+
+
+	public void addPrestationsRealisees(PrestationsRealisees prestationRealisee) {
+		this.prestationsRealisees.add(prestationRealisee);
+	}
+
 	public Besoin getBesoin() {
 		return besoin;
 	}
@@ -40,6 +51,10 @@ public class Prestation implements Serializable{
 
 	public String getLibelle() {
 		return libelle;
+	}
+
+	public Set<PrestationsRealisees> getPrestationsRealisees() {
+		return prestationsRealisees;
 	}
 
 	public void setBesoin(Besoin besoin) {

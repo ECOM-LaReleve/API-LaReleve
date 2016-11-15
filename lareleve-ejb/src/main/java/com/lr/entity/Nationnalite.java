@@ -1,12 +1,16 @@
 package com.lr.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,9 +27,21 @@ public class Nationnalite implements Serializable{
 	@Column(nullable=false, unique=true)
 	private String libelle;
 
+	@ManyToMany()
+	@JoinTable(name = "NationnalitesIndividus", joinColumns = @JoinColumn(name="idNationnalite",referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name="idIndividu",referencedColumnName="id"))
+	Set<Individu> individus;
+
+
+	public void addIndividus(Individu individu) {
+		this.individus.add(individu);
+	}
 
 	public String getId() {
 		return id;
+	}
+
+	public Set<Individu> getIndividus(){
+		return this.individus;
 	}
 
 	public String getLibelle() {

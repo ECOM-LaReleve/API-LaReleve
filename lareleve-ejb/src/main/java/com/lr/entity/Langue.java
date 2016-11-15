@@ -1,12 +1,14 @@
 package com.lr.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,9 +25,20 @@ public class Langue implements Serializable{
 	@Column(nullable=false, unique=true)
 	private String libelle;
 
+	@OneToMany(mappedBy = "pk.langue")
+	private Set<LanguesIndividus> languesIndividus;
+
+
+	public void addLanguesIndividus(LanguesIndividus languesIndividus) {
+		this.languesIndividus.add(languesIndividus);
+	}
 
 	public int getId() {
 		return id;
+	}
+
+	public Set<LanguesIndividus> getLanguesIndividus() {
+		return languesIndividus;
 	}
 
 	public String getLibelle() {

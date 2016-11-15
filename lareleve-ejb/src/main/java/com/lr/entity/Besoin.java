@@ -2,6 +2,7 @@ package com.lr.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,13 +28,24 @@ public class Besoin implements Serializable{
 	@Column(nullable=false, unique=true)
 	private String libelle;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="idBesoin")
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="besoin")
 	private Collection<Prestation> prestations;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idBesoin")
+	private Set<ActesRealises> actesRealises;
+
+
+	public void addActesRealises(ActesRealises acteRealise) {
+		this.actesRealises.add(acteRealise);
+	}
 
 	public void addPrestations(Prestation prestation) {
 		prestation.setBesoin(this);
-		this.prestations.add(prestations);
+		this.prestations.add(prestation);
+	}
+
+	public Set<ActesRealises> getActesRealises() {
+		return actesRealises;
 	}
 
 	public int getId() {

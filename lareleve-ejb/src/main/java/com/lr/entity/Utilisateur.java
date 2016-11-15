@@ -2,6 +2,7 @@ package com.lr.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,12 +44,25 @@ public class Utilisateur implements Serializable {
 	@JoinColumn(name = "idService")
 	private Service service;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="idReferant")
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="referant")
 	private Collection<Menage> menages;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="chefPole")
 	private Collection<Pole> poles;
 
+	@ManyToMany(mappedBy="utilisateurs")
+	private Set<Role> roles;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "idUtilisateur")
+	private Set<PrestationsRealisees> prestationsRealisees;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "idUtilisateur")
+	private Set<ActesRealises> actesRealises;
+
+
+	public void addActesRealises(ActesRealises acteRealise) {
+		this.actesRealises.add(acteRealise);
+	}
 
 	public void addMenages(Menage menage) {
 		menage.setReferant(this);
@@ -59,9 +74,22 @@ public class Utilisateur implements Serializable {
 		this.poles.add(pole);
 	}
 
+	public void addPrestationsRealisees(PrestationsRealisees prestationRealisee) {
+		this.prestationsRealisees.add(prestationRealisee);
+	}
+
+	public void addRoles(Role role) {
+		this.roles.add(role);
+	}
+
+	public Set<ActesRealises> getActesRealises() {
+		return actesRealises;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 
 	public Collection<Menage> getMenages() {
 		return menages;
@@ -81,6 +109,14 @@ public class Utilisateur implements Serializable {
 
 	public String getPrenom() {
 		return prenom;
+	}
+
+	public Set<PrestationsRealisees> getPrestationsRealisees() {
+		return prestationsRealisees;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 	public Service getService() {

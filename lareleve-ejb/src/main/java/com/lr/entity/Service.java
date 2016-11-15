@@ -33,7 +33,7 @@ public class Service implements Serializable{
 	@JoinColumn(name = "idPole")
 	private Pole pole;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="idService")
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="service")
 	private Collection<Utilisateur> utilisateurs;
 
 

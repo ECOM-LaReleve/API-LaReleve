@@ -3,12 +3,10 @@ package com.lr.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,21 +23,12 @@ import javax.persistence.TemporalType;
 public class Menage implements Serializable{
 
 
-	public enum Statut{
-		/*TODO*/
-	}
-
-
 	private static final long serialVersionUID = 4987314229184230756L;
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(nullable=false, unique=true)
-	@Enumerated(EnumType.STRING)
-	private Statut statut;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp dateEntree;
@@ -57,13 +46,38 @@ public class Menage implements Serializable{
 	@JoinColumn(name = "idLogement")
 	private Logement logement;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="idMenage")
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="menage")
 	private Collection<Individu> individus;
 
+	@OneToMany(mappedBy = "pk.menage")
+	private Set<RessourcesMenages> ressourcesMenages;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
+	private Set<PrestationsRealisees> prestationsRealisees;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
+	private Set<ActesRealises> actesRealises;
+
+
+	public void addActesRealises(ActesRealises acteRealise) {
+		this.actesRealises.add(acteRealise);
+	}
 
 	public void addIndividus(Individu individu) {
 		individu.setMenage(this);
 		this.individus.add(individu);
+	}
+
+	public void addPrestationsRealisees(PrestationsRealisees prestationRealisee) {
+		this.prestationsRealisees.add(prestationRealisee);
+	}
+
+	public void addRessourcesMenages(RessourcesMenages ressourcesMenages) {
+		this.ressourcesMenages.add(ressourcesMenages);
+	}
+
+	public Set<ActesRealises> getActesRealises() {
+		return actesRealises;
 	}
 
 	public String getAdresseSortie() {
@@ -90,12 +104,16 @@ public class Menage implements Serializable{
 		return logement;
 	}
 
+	public Set<PrestationsRealisees> getPrestationsRealisees() {
+		return prestationsRealisees;
+	}
+
 	public Utilisateur getReferant() {
 		return referant;
 	}
 
-	public Statut getStatut() {
-		return statut;
+	public Set<RessourcesMenages> getRessourcesMenages() {
+		return ressourcesMenages;
 	}
 
 	public void setAdresseSortie(String adresseSortie) {
@@ -120,10 +138,6 @@ public class Menage implements Serializable{
 
 	public void setReferant(Utilisateur referant) {
 		this.referant = referant;
-	}
-
-	public void setStatut(Statut statut) {
-		this.statut = statut;
 	}
 
 

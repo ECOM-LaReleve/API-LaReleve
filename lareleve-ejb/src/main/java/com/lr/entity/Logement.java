@@ -64,7 +64,7 @@ public class Logement implements Serializable{
 
 	private int charges;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="idLogement")
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="logement")
 	private Collection<Menage> menages;
 
 	public void addMenages(Menage menage) {

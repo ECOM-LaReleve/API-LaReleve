@@ -2,7 +2,9 @@ package com.lr.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +34,7 @@ public class Individu implements Serializable{
 	public enum StatutMatrimonial{
 		/*TODO*/
 	}
+
 
 	private static final long serialVersionUID = -3413247064757562755L;
 
@@ -64,6 +69,45 @@ public class Individu implements Serializable{
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 
+	@ManyToMany(mappedBy="individus")
+	private Set<Nationnalite> nationnalites;
+
+	@OneToMany(mappedBy = "pk.individu")
+	private Set<LanguesIndividus> languesIndividus;
+
+	@OneToMany(mappedBy = "pk.individu")
+	private Set<RessourcesIndividus> ressourcesIndividus;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
+	private Set<PrestationsRealisees> prestationsRealisees;
+
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
+	private Set<ActesRealises> actesRealises;
+
+
+	public void addActesRealises(ActesRealises acteRealise) {
+		this.actesRealises.add(acteRealise);
+	}
+
+	public void addLanguesIndividus(LanguesIndividus languesIndividus) {
+		this.languesIndividus.add(languesIndividus);
+	}
+
+	public void addNationnalites(Nationnalite nationnalite) {
+		this.nationnalites.add(nationnalite);
+	}
+
+	public void addPrestationsRealisees(PrestationsRealisees prestationRealisee) {
+		this.prestationsRealisees.add(prestationRealisee);
+	}
+
+	public void addRessourcesIndividus(RessourcesIndividus ressourcesIndividus) {
+		this.ressourcesIndividus.add(ressourcesIndividus);
+	}
+
+	public Set<ActesRealises> getActesRealises() {
+		return actesRealises;
+	}
 
 	public Timestamp getDateEntreeFr() {
 		return dateEntreeFr;
@@ -73,8 +117,16 @@ public class Individu implements Serializable{
 		return id;
 	}
 
+	public Set<LanguesIndividus> getLanguesIndividus() {
+		return languesIndividus;
+	}
+
 	public Menage getMenage() {
 		return menage;
+	}
+
+	public Set<Nationnalite> getNationnalites() {
+		return nationnalites;
 	}
 
 	public String getNomNaissance() {
@@ -87,6 +139,14 @@ public class Individu implements Serializable{
 
 	public String getPrenom() {
 		return prenom;
+	}
+
+	public Set<PrestationsRealisees> getPrestationsRealisees() {
+		return prestationsRealisees;
+	}
+
+	public Set<RessourcesIndividus> getRessourcesIndividus() {
+		return ressourcesIndividus;
 	}
 
 	public StatutEntreeFrance getStatutFr() {

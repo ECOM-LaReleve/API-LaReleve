@@ -1,12 +1,16 @@
 package com.lr.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +27,17 @@ public class Acte implements Serializable{
 	@Column(nullable=false, unique=true)
 	private String libelle;
 
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idActe")
+	private Set<ActesRealises> actesRealises;
+
+
+	public void addActesRealises(ActesRealises acteRealise) {
+		this.actesRealises.add(acteRealise);
+	}
+
+	public Set<ActesRealises> getActesRealises() {
+		return actesRealises;
+	}
 
 	public int getId() {
 		return id;
