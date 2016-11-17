@@ -1,5 +1,7 @@
 package com.lr.routes;
 
+import java.sql.Timestamp;
+
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -9,9 +11,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.lr.auth.AuthToken;
 import com.lr.auth.Secured;
 import com.lr.entity.Credentials;
-import com.lr.remote.IAuthEJBRemote;
+import com.lr.remote.IAuthenticationEJBRemote;
 
 /**
  * Handler of routes /auth
@@ -22,7 +25,7 @@ import com.lr.remote.IAuthEJBRemote;
 public class AuthenticationRoute extends BasicRoute {
 
 	@EJB
-	private IAuthEJBRemote authEJB;
+	private IAuthenticationEJBRemote authEJB;
 
 	@POST
 	@Path("/login")
@@ -31,17 +34,25 @@ public class AuthenticationRoute extends BasicRoute {
 
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
+		// TODO Hash password
 		String hashedPassword = password;
 
-		String token = authEJB.login(username, hashedPassword);
-		if (token != null) {
-			// if token is not null, login was sucessfull
-			String out = String.format("{ \"token\": \"%s\" }", token);
+		if (authEJB.checkCredentials(username, hashedPassword)) {
+			// Credentials are good
+			/* Generation of token */
+			AuthToken token = new AuthToken();
+			int sec = 600; // number of seconds of valid token
+			Timestamp expirationDate = new Timestamp(System.currentTimeMillis() + sec * 1000);
+			token.setUsername(username);
+			token.setExpirationDate(expirationDate);
+
+			LOGGER.logDebug(this, "login", "Token : %s", token);
+
+			String out = String.format("{ \"token\": \"%s\" }", token.generate());
 			return responseBuilder(Status.OK).entity(out).build();
 		}
 		// Wrong username and/or password
 		return responseBuilder(Status.UNAUTHORIZED).build();
-
 	}
 
 	@POST

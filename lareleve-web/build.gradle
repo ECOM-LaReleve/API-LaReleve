@@ -18,7 +18,9 @@ dependencies {
     /* Javax servlet */
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
     /* Javax annotations */
-    providedCompile 'javax.annotation:javax.annotation-api:1.3'    
+    providedCompile 'javax.annotation:javax.annotation-api:1.3'
+    /* JWT */
+    compile 'com.auth0:java-jwt:2.2.1'
 }
 
 war {

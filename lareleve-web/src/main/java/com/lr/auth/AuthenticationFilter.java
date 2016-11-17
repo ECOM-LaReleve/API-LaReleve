@@ -1,6 +1,7 @@
 package com.lr.auth;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
+import com.auth0.jwt.JWTVerifyException;
 import com.lr.routes.BasicRoute;
 import com.lr.utils.ISimpleLogger;
 import com.lr.utils.SimpleLoggerRegistry;
@@ -32,7 +34,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 		// Check if the HTTP Authorization header is present and formatted correctly
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
 			// throw new NotAuthorizedException("Authorization header must be provided");
-			LOGGER.logInfo(this, "authentication", "Authorization header not provided");
+			LOGGER.logDebug(this, "authentication", "Authorization header not provided");
 			requestContext
 					.abortWith(BasicRoute.responseBuilder(Response.Status.UNAUTHORIZED).build());
 			return;
@@ -44,16 +46,20 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 		try {
 			// Validate the token
 			validateToken(token);
-		} catch (Exception e) {
+		} catch (JWTVerifyException e) {
 			LOGGER.logInfo(this, "authentication", "Invalid token");
 			requestContext
 					.abortWith(BasicRoute.responseBuilder(Response.Status.UNAUTHORIZED).build());
 		}
 	}
 
-	private void validateToken(String token) throws Exception {
-		// Check if it was issued by the server and if it's not expired
-		// Throw an Exception if the token is invalid
-		LOGGER.logDebug(this, "validateToken", "Checking token %s", token);
+	private boolean validateToken(String jwToken) throws JWTVerifyException {
+		// Check it's not expired
+		LOGGER.logDebug(this, "validateToken", "Checking token %s", jwToken);
+
+		AuthToken token = AuthToken.decode(jwToken); // Retrieve token
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		return token.getExpirationDate().before(now);
 	}
 }
