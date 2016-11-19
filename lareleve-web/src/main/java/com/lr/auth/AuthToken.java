@@ -39,6 +39,18 @@ public class AuthToken implements Serializable {
 	private String username;
 	private Timestamp expirationDate;
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof AuthToken) {
+			AuthToken token = (AuthToken) obj;
+
+			if (username.equals(token.username) && expirationDate.equals(token.expirationDate)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public String generate() {
 
 		/* Place data in MAP */

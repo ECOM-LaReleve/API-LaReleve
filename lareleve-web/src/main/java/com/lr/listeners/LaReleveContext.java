@@ -1,19 +1,26 @@
 package com.lr.listeners;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import com.lr.auth.AuthToken;
 import com.lr.utils.SimpleLogger;
 import com.lr.utils.SimpleLoggerRegistry;
 
-public class WebAppListener implements ServletContextListener {
+public class LaReleveContext implements ServletContextListener {
+
+	/** Tokens Map */
+	public static Map<String, List<AuthToken>> TOKENS = new HashMap<>();
 
 	private SimpleLogger pLogger = null;
 
-	public WebAppListener() {
+	public LaReleveContext() {
 		if (pLogger == null) {
 			pLogger = new SimpleLogger();
 			String wLogDir = System.getProperty("jboss.server.log.dir");
