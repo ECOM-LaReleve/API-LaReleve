@@ -19,6 +19,7 @@ import javax.ws.rs.ext.Provider;
 
 import com.lr.entity.Role.RoleName;
 import com.lr.listeners.LaReleveContext;
+import com.lr.routes.BasicRoute;
 import com.lr.utils.ISimpleLogger;
 
 @Secured
@@ -82,7 +83,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 		// The method annotations override the class annotations
 		if (methodRoles.isEmpty() && !checkPermissions(classRoles, authToken.getRoles())
 				|| !checkPermissions(methodRoles, authToken.getRoles())) {
-			requestContext.abortWith(Response.status(Response.Status.FORBIDDEN).build());
+			requestContext.abortWith(BasicRoute.responseBuilder(Response.Status.FORBIDDEN).build());
 		}
 	}
 }
