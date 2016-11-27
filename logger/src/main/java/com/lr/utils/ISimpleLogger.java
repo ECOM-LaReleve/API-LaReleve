@@ -15,7 +15,7 @@ public interface ISimpleLogger {
 
 	/**
 	 * return true if logging with the level aLevel is possible
-	 * 
+	 *
 	 * @param aLevel
 	 *            level to test
 	 * @return true if logging with the level aLevel is possible

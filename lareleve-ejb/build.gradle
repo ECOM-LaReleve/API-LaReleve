@@ -12,6 +12,9 @@ dependencies {
 	/* Sub projects */
 	compile project(':logger')
 
+	/* Javax */
+	compileOnly "javax:javaee-api:7.0"
+	
 	/* EJB */
 	compile "javax.ejb:javax.ejb-api:3.2"
 	/* Persistence and Mysql */

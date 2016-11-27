@@ -3,7 +3,7 @@
 	<display-name>LaReleve REST API</display-name>
 	
  	<listener>
-		<listener-class>com.lr.listeners.WebAppListener</listener-class>
+		<listener-class>com.lr.listeners.LaReleveContext</listener-class>
 	</listener>
 
 	<servlet-mapping>
