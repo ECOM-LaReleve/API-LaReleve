@@ -1,8 +1,10 @@
 package com.lr.routes;
 
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.SecurityContext;
 
 import com.lr.listeners.LaReleveContext;
 import com.lr.utils.ISimpleLogger;
@@ -20,5 +22,8 @@ public abstract class BasicRoute {
 				.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
 				.header("Access-Control-Max-Age", "1209600");
 	}
+
+	@Context
+	protected SecurityContext securityContext;
 
 }
