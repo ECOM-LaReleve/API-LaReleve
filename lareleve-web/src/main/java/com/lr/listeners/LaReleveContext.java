@@ -13,6 +13,10 @@ import com.lr.auth.AuthToken;
 import com.lr.utils.SimpleLogger;
 import com.lr.utils.SimpleLoggerRegistry;
 
+/**
+ * Context of LaReleve API
+ *
+ */
 public class LaReleveContext implements ServletContextListener {
 
 	/** Tokens Map */

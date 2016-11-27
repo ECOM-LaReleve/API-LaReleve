@@ -34,6 +34,13 @@ public class AuthenticationRoute extends BasicRoute {
 	@EJB
 	private IAuthenticationEJBRemote authEJB;
 
+	/**
+	 * Login route
+	 *
+	 * @param credentials
+	 *            credentials used to login
+	 * @return Reponse
+	 */
 	@POST
 	@Path("/login")
 	public Response login(Credentials credentials) {
@@ -75,11 +82,19 @@ public class AuthenticationRoute extends BasicRoute {
 		return responseBuilder(Status.UNAUTHORIZED).build();
 	}
 
+	/**
+	 * Logout route. This route is only accessible to connected users
+	 *
+	 * @param securityContext
+	 *            information about the user accessing this route
+	 * @return Response
+	 */
 	@POST
 	@Secured
 	@Path("/logout")
 	public Response logout(@Context SecurityContext securityContext) {
 		LOGGER.logDebug(this, "logout", "");
+		/* Retrieve running user informations */
 		LaRelevePrincipal principal = null;
 		try {
 			principal = (LaRelevePrincipal) securityContext.getUserPrincipal();
@@ -88,6 +103,7 @@ public class AuthenticationRoute extends BasicRoute {
 			return responseBuilder(Status.INTERNAL_SERVER_ERROR).build();
 		}
 
+		/* Retrieve used token and remove it from authorized tokens */
 		String username = principal.getName();
 		List<AuthToken> usertokens = LaReleveContext.TOKENS.get(username);
 		if (usertokens != null) {
@@ -100,7 +116,5 @@ public class AuthenticationRoute extends BasicRoute {
 		LOGGER.logSevere(this, "logout",
 				"The token used to run this secured route could not be removed");
 		return responseBuilder(Status.INTERNAL_SERVER_ERROR).build();
-
 	}
-
 }
