@@ -1,7 +1,7 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,56 +19,52 @@ import javax.persistence.TemporalType;
 @Entity
 public class ActesRealises implements Serializable {
 
-
-	public enum StatutActe{
-		/*TODO*/
+	public enum StatutActe {
+		/* TODO */
 	}
 
-
 	private static final long serialVersionUID = -3413677856784892255L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private int seqActe;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StatutActe statut;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp dateRealisation;
+	private Date dateRealisation;
 
 	private String commentaire;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idActe", nullable=false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idActe", nullable = false)
 	private Acte acte;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "idUtilisateur", nullable=false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idUtilisateur", nullable = false)
 	private Utilisateur utilisateur;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idIndividu")
 	private Individu individu;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPrestationRealisee")
 	private PrestationsRealisees prestationRealisee;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idBesoin")
 	private Besoin besoin;
-
 
 	public Acte getActe() {
 		return acte;
@@ -82,7 +78,7 @@ public class ActesRealises implements Serializable {
 		return commentaire;
 	}
 
-	public Timestamp getDateRealisation() {
+	public Date getDateRealisation() {
 		return dateRealisation;
 	}
 
@@ -126,7 +122,7 @@ public class ActesRealises implements Serializable {
 		this.commentaire = commentaire;
 	}
 
-	public void setDateRealisation(Timestamp dateRealisation) {
+	public void setDateRealisation(Date dateRealisation) {
 		this.dateRealisation = dateRealisation;
 	}
 
@@ -157,6 +153,5 @@ public class ActesRealises implements Serializable {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
 
 }

@@ -1,8 +1,8 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,44 +20,41 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Menages")
-public class Menage implements Serializable{
-
+public class Menage implements Serializable {
 
 	private static final long serialVersionUID = 4987314229184230756L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp dateEntree;
+	private Date dateEntree;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp dateSortie;
+	private Date dateSortie;
 
 	private String adresseSortie;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idReferant")
 	private Utilisateur referant;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idLogement")
 	private Logement logement;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="menage")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "menage")
 	private Collection<Individu> individus;
 
 	@OneToMany(mappedBy = "pk.menage")
 	private Set<RessourcesMenages> ressourcesMenages;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
 	private Set<PrestationsRealisees> prestationsRealisees;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
 	private Set<ActesRealises> actesRealises;
-
 
 	public void addActesRealises(ActesRealises acteRealise) {
 		this.actesRealises.add(acteRealise);
@@ -84,11 +81,11 @@ public class Menage implements Serializable{
 		return adresseSortie;
 	}
 
-	public Timestamp getDateEntree() {
+	public Date getDateEntree() {
 		return dateEntree;
 	}
 
-	public Timestamp getDateSortie() {
+	public Date getDateSortie() {
 		return dateSortie;
 	}
 
@@ -120,11 +117,11 @@ public class Menage implements Serializable{
 		this.adresseSortie = adresseSortie;
 	}
 
-	public void setDateEntree(Timestamp dateEntree) {
+	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
 	}
 
-	public void setDateSortie(Timestamp dateSortie) {
+	public void setDateSortie(Date dateSortie) {
 		this.dateSortie = dateSortie;
 	}
 
@@ -139,6 +136,5 @@ public class Menage implements Serializable{
 	public void setReferant(Utilisateur referant) {
 		this.referant = referant;
 	}
-
 
 }

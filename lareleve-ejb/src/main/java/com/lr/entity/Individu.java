@@ -1,7 +1,7 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,21 +23,17 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Individus")
-public class Individu implements Serializable{
+public class Individu implements Serializable {
 
-
-	public enum StatutEntreeFrance{
-		/*TODO*/
+	public enum StatutEntreeFrance {
+		/* TODO */
 	}
 
-
-	public enum StatutMatrimonial{
-		/*TODO*/
+	public enum StatutMatrimonial {
+		/* TODO */
 	}
-
 
 	private static final long serialVersionUID = -3413247064757562755L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,16 +56,16 @@ public class Individu implements Serializable{
 	private StatutMatrimonial statutMatrimonial;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp dateEntreeFr;
+	private Date dateEntreeFr;
 
 	@Enumerated(EnumType.STRING)
 	private StatutEntreeFrance statutFr;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 
-	@ManyToMany(mappedBy="individus")
+	@ManyToMany(mappedBy = "individus")
 	private Set<Nationnalite> nationnalites;
 
 	@OneToMany(mappedBy = "pk.individu")
@@ -78,12 +74,11 @@ public class Individu implements Serializable{
 	@OneToMany(mappedBy = "pk.individu")
 	private Set<RessourcesIndividus> ressourcesIndividus;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
 	private Set<PrestationsRealisees> prestationsRealisees;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
 	private Set<ActesRealises> actesRealises;
-
 
 	public void addActesRealises(ActesRealises acteRealise) {
 		this.actesRealises.add(acteRealise);
@@ -109,7 +104,7 @@ public class Individu implements Serializable{
 		return actesRealises;
 	}
 
-	public Timestamp getDateEntreeFr() {
+	public Date getDateEntreeFr() {
 		return dateEntreeFr;
 	}
 
@@ -165,7 +160,7 @@ public class Individu implements Serializable{
 		return villeNaissance;
 	}
 
-	public void setDateEntreeFr(Timestamp dateEntreeFr) {
+	public void setDateEntreeFr(Date dateEntreeFr) {
 		this.dateEntreeFr = dateEntreeFr;
 	}
 
@@ -204,7 +199,5 @@ public class Individu implements Serializable{
 	public void setVilleNaissance(String villeNaissance) {
 		this.villeNaissance = villeNaissance;
 	}
-
-
 
 }
