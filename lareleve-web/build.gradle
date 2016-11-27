@@ -23,10 +23,6 @@ dependencies {
     compile 'com.auth0:java-jwt:2.2.1'
 }
 
-war {
-    webInf { from 'src/main/resources/WEB-INF' }
-}
-
 /* Eclipse plugin */
 apply plugin: 'eclipse-wtp'
 eclipse.project {
