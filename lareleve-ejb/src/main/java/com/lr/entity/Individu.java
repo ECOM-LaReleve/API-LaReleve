@@ -74,10 +74,10 @@ public class Individu implements Serializable {
 	@OneToMany(mappedBy = "pk.individu")
 	private Set<RessourcesIndividus> ressourcesIndividus;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "individu")
 	private Set<PrestationsRealisees> prestationsRealisees;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idIndividu")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "individu")
 	private Set<ActesRealises> actesRealises;
 
 	public void addActesRealises(ActesRealises acteRealise) {

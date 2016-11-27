@@ -15,8 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Actes")
-public class Acte implements Serializable{
-
+public class Acte implements Serializable {
 
 	private static final long serialVersionUID = -5051726920264580998L;
 
@@ -24,12 +23,11 @@ public class Acte implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idActe")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "acte")
 	private Set<ActesRealises> actesRealises;
-
 
 	public void addActesRealises(ActesRealises acteRealise) {
 		this.actesRealises.add(acteRealise);

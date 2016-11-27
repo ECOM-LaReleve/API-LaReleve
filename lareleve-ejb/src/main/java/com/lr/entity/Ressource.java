@@ -15,21 +15,19 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Ressources")
-public class Ressource implements Serializable{
+public class Ressource implements Serializable {
 
-
-	public enum Type{
-		INDIVIDU ("individu"),
-		MENAGE ("menage");
+	public enum Type {
+		INDIVIDU("individu"), MENAGE("menage");
 
 		private String name = "";
 
-		Type(String name){
+		Type(String name) {
 			this.name = name;
 		}
 
 		@Override
-		public String toString(){
+		public String toString() {
 			return name;
 		}
 	}
@@ -40,11 +38,11 @@ public class Ressource implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
 	@Enumerated(EnumType.STRING)
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Type type;
 
 	@OneToMany(mappedBy = "pk.ressource")
@@ -52,7 +50,6 @@ public class Ressource implements Serializable{
 
 	@OneToMany(mappedBy = "pk.ressource")
 	private Set<RessourcesIndividus> ressourcesIndividus;
-
 
 	public void addRessourcesIndividus(RessourcesIndividus ressourcesIndividus) {
 		this.ressourcesIndividus.add(ressourcesIndividus);

@@ -17,8 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Poles")
-public class Pole implements Serializable{
-
+public class Pole implements Serializable {
 
 	private static final long serialVersionUID = 7483223108623355830L;
 
@@ -26,16 +25,15 @@ public class Pole implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "chefPole")
 	private Utilisateur chefPole;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="pole")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pole")
 	private Collection<Service> services;
-
 
 	public void addServices(Service service) {
 		service.setPole(this);
@@ -69,6 +67,5 @@ public class Pole implements Serializable{
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
 
 }

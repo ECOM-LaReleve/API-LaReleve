@@ -50,10 +50,10 @@ public class Menage implements Serializable {
 	@OneToMany(mappedBy = "pk.menage")
 	private Set<RessourcesMenages> ressourcesMenages;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "menage")
 	private Set<PrestationsRealisees> prestationsRealisees;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idMenage")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "menage")
 	private Set<ActesRealises> actesRealises;
 
 	public void addActesRealises(ActesRealises acteRealise) {

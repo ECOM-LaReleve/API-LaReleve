@@ -64,7 +64,7 @@ public class PrestationsRealisees implements Serializable {
 	@JoinColumn(name = "idIndividu")
 	private Individu individu;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idPrestationRealisee")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "prestationRealisee")
 	private Collection<ActesRealises> actesRealises;
 
 	public void addActesRealises(ActesRealises acteRealise) {

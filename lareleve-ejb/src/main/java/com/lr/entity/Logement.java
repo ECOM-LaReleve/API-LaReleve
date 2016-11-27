@@ -17,20 +17,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Logements")
-public class Logement implements Serializable{
+public class Logement implements Serializable {
 
-
-	public enum StatutLogement{
-		/*TODO*/
+	public enum StatutLogement {
+		/* TODO */
 	}
 
-
-	public enum TypeLogement{
-		/*TODO*/
+	public enum TypeLogement {
+		/* TODO */
 	}
 
 	private static final long serialVersionUID = -7647927882656722276L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,11 +39,11 @@ public class Logement implements Serializable{
 
 	private int idGestimmMenages;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StatutLogement statut;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String adresse;
 
 	private int etage;
@@ -64,7 +61,7 @@ public class Logement implements Serializable{
 
 	private int charges;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="logement")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "logement")
 	private Collection<Menage> menages;
 
 	public void addMenages(Menage menage) {
@@ -179,6 +176,5 @@ public class Logement implements Serializable{
 	public void setType(TypeLogement type) {
 		this.type = type;
 	}
-
 
 }

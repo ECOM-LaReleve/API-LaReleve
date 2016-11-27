@@ -16,8 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Besoins")
-public class Besoin implements Serializable{
-
+public class Besoin implements Serializable {
 
 	private static final long serialVersionUID = 4841875255683148757L;
 
@@ -25,15 +24,14 @@ public class Besoin implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="besoin")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "besoin")
 	private Collection<Prestation> prestations;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idBesoin")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "besoin")
 	private Set<ActesRealises> actesRealises;
-
 
 	public void addActesRealises(ActesRealises acteRealise) {
 		this.actesRealises.add(acteRealise);

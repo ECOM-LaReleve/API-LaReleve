@@ -21,44 +21,42 @@ import javax.persistence.Table;
 @Table(name = "Utilisateurs")
 public class Utilisateur implements Serializable {
 
-
 	private static final long serialVersionUID = 2254274640238186573L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String username;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nom;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String prenom;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idService")
 	private Service service;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="referant")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "referant")
 	private Collection<Menage> menages;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="chefPole")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "chefPole")
 	private Collection<Pole> poles;
 
-	@ManyToMany(mappedBy="utilisateurs")
+	@ManyToMany(mappedBy = "utilisateurs")
 	private Set<Role> roles;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "idUtilisateur")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "utilisateur")
 	private Set<PrestationsRealisees> prestationsRealisees;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "idUtilisateur")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "utilisateur")
 	private Set<ActesRealises> actesRealises;
-
 
 	public void addActesRealises(ActesRealises acteRealise) {
 		this.actesRealises.add(acteRealise);
@@ -89,7 +87,6 @@ public class Utilisateur implements Serializable {
 	public int getId() {
 		return id;
 	}
-
 
 	public Collection<Menage> getMenages() {
 		return menages;
@@ -150,7 +147,6 @@ public class Utilisateur implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
 
 	@Override
 	public String toString() {

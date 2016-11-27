@@ -15,8 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Roles")
-public class Role implements Serializable{
-
+public class Role implements Serializable {
 
 	private static final long serialVersionUID = -8157658127538663403L;
 
@@ -24,13 +23,12 @@ public class Role implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
 	@ManyToMany()
-	@JoinTable(name = "RolesUtilisateurs", joinColumns = @JoinColumn(name="idRole",referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name="idUtilisateur",referencedColumnName="id"))
+	@JoinTable(name = "RolesUtilisateurs", joinColumns = @JoinColumn(name = "idRole", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "idUtilisateur", referencedColumnName = "id"))
 	Set<Utilisateur> utilisateurs;
-
 
 	public void addUtilisateurs(Utilisateur utilisateur) {
 		this.utilisateurs.add(utilisateur);
@@ -55,6 +53,5 @@ public class Role implements Serializable{
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
 
 }

@@ -17,8 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Prestations")
-public class Prestation implements Serializable{
-
+public class Prestation implements Serializable {
 
 	private static final long serialVersionUID = 687176476972886825L;
 
@@ -26,16 +25,15 @@ public class Prestation implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn (name="idBesoin")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idBesoin")
 	private Besoin besoin;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "idPrestation")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "prestation")
 	private Set<PrestationsRealisees> prestationsRealisees;
-
 
 	public void addPrestationsRealisees(PrestationsRealisees prestationRealisee) {
 		this.prestationsRealisees.add(prestationRealisee);

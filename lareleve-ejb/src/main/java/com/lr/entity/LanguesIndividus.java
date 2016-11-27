@@ -10,21 +10,17 @@ import javax.persistence.Id;
 @Entity
 public class LanguesIndividus implements Serializable {
 
-
-	public enum Level{
-		/*TODO*/
+	public enum Level {
+		/* TODO */
 	}
 
-
 	private static final long serialVersionUID = -3413243678757562755L;
-
 
 	@Id
 	private LanguesIndividusID pk;
 
 	@Enumerated(EnumType.STRING)
 	private Level niveauLangue;
-
 
 	public Level getNiveauLangue() {
 		return niveauLangue;

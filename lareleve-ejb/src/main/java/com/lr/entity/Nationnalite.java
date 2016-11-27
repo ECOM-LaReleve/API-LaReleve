@@ -15,8 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Nationnalites")
-public class Nationnalite implements Serializable{
-
+public class Nationnalite implements Serializable {
 
 	private static final long serialVersionUID = -4261585549879441362L;
 
@@ -24,13 +23,12 @@ public class Nationnalite implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
 	@ManyToMany()
-	@JoinTable(name = "NationnalitesIndividus", joinColumns = @JoinColumn(name="idNationnalite",referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name="idIndividu",referencedColumnName="id"))
+	@JoinTable(name = "NationnalitesIndividus", joinColumns = @JoinColumn(name = "idNationnalite", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "idIndividu", referencedColumnName = "id"))
 	Set<Individu> individus;
-
 
 	public void addIndividus(Individu individu) {
 		this.individus.add(individu);
@@ -40,7 +38,7 @@ public class Nationnalite implements Serializable{
 		return id;
 	}
 
-	public Set<Individu> getIndividus(){
+	public Set<Individu> getIndividus() {
 		return this.individus;
 	}
 

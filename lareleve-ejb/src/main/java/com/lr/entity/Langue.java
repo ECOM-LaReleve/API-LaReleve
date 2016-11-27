@@ -13,8 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Langues")
-public class Langue implements Serializable{
-
+public class Langue implements Serializable {
 
 	private static final long serialVersionUID = -8407119004464828014L;
 
@@ -22,12 +21,11 @@ public class Langue implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
 	@OneToMany(mappedBy = "pk.langue")
 	private Set<LanguesIndividus> languesIndividus;
-
 
 	public void addLanguesIndividus(LanguesIndividus languesIndividus) {
 		this.languesIndividus.add(languesIndividus);

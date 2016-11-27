@@ -17,8 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Services")
-public class Service implements Serializable{
-
+public class Service implements Serializable {
 
 	private static final long serialVersionUID = -3847457095945195715L;
 
@@ -26,16 +25,15 @@ public class Service implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable=false, unique=true)
+	@Column(nullable = false, unique = true)
 	private String libelle;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPole")
 	private Pole pole;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="service")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "service")
 	private Collection<Utilisateur> utilisateurs;
-
 
 	public void addUtilisateurs(Utilisateur utilisateur) {
 		utilisateur.setService(this);
@@ -69,6 +67,5 @@ public class Service implements Serializable{
 	public void setPole(Pole pole) {
 		this.pole = pole;
 	}
-
 
 }
