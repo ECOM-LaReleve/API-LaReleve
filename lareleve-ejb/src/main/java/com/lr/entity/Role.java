@@ -17,6 +17,10 @@ import javax.persistence.Table;
 @Table(name = "Roles")
 public class Role implements Serializable {
 
+	public static enum RoleName {
+		TS, DAE, DG, Accueil
+	}
+
 	private static final long serialVersionUID = -8157658127538663403L;
 
 	@Id
