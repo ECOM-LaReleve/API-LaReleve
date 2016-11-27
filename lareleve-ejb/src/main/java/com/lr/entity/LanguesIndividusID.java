@@ -2,24 +2,22 @@ package com.lr.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class LanguesIndividusID implements Serializable{
+public class LanguesIndividusID implements Serializable {
 
 	private static final long serialVersionUID = -3413243678876782755L;
 
-
 	@ManyToOne
-	@Column(name="idLangue")
+	@JoinColumn(name = "idLangue")
 	private Langue langue;
 
 	@ManyToOne
-	@Column(name="idIndividu")
+	@JoinColumn(name = "idIndividu")
 	private Individu individu;
-
 
 	public Individu getIndividu() {
 		return individu;
