@@ -19,6 +19,7 @@ import com.lr.auth.AuthToken;
 import com.lr.auth.LaRelevePrincipal;
 import com.lr.auth.Secured;
 import com.lr.entity.Credentials;
+import com.lr.entity.Role.RoleName;
 import com.lr.listeners.LaReleveContext;
 import com.lr.remote.IAuthenticationEJBRemote;
 
@@ -36,7 +37,8 @@ public class AuthenticationRoute extends BasicRoute {
 	@POST
 	@Path("/login")
 	public Response login(Credentials credentials) {
-		LOGGER.logDebug(this, "login", "username=%s", credentials.getUsername());
+		LOGGER.logDebug(this, "AuthenticationRoute.login", "username=%s",
+				credentials.getUsername());
 
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
@@ -44,15 +46,20 @@ public class AuthenticationRoute extends BasicRoute {
 		String hashedPassword = password;
 
 		if (authEJB.checkCredentials(username, hashedPassword)) {
+
 			// Credentials are good
+			/* Retrieve roles */
+			List<RoleName> roleNames = authEJB.getRoles(username);
+
 			/* Generation of token */
 			AuthToken token = new AuthToken();
 			int sec = 600; // number of seconds of valid token
 			Timestamp expirationDate = new Timestamp(System.currentTimeMillis() + sec * 1000);
 			token.setUsername(username);
 			token.setExpirationDate(expirationDate);
+			token.setRoles(roleNames);
 
-			LOGGER.logDebug(this, "login", "Token : %s", token);
+			LOGGER.logInfo(this, "login", "Successful login : %s", token);
 			/* Save the token */
 			List<AuthToken> usertokens = LaReleveContext.TOKENS.get(username);
 			if (usertokens == null) {

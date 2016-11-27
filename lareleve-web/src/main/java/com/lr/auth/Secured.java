@@ -7,9 +7,16 @@ import java.lang.annotation.Target;
 
 import javax.ws.rs.NameBinding;
 
+import com.lr.entity.Role.RoleName;
+
+/**
+ *
+ * Annotation to secure REST endpoint
+ *
+ */
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.METHOD })
 public @interface Secured {
-	Role[] value() default {};
+	RoleName[] value() default {};
 }
