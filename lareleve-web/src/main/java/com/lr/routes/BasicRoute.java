@@ -4,13 +4,12 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
+import com.lr.listeners.LaReleveContext;
 import com.lr.utils.ISimpleLogger;
-import com.lr.utils.SimpleLoggerRegistry;
 
 public abstract class BasicRoute {
 
-	protected static final ISimpleLogger LOGGER = SimpleLoggerRegistry.REGISTRY
-			.lookup("DEFAULT_LARELEVE");
+	protected static final ISimpleLogger LOGGER = LaReleveContext.LOGGER;
 
 	public static ResponseBuilder responseBuilder(Status status) {
 		return Response.status(status)

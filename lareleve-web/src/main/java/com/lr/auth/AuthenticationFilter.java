@@ -18,15 +18,14 @@ import com.auth0.jwt.JWTVerifyException;
 import com.lr.listeners.LaReleveContext;
 import com.lr.routes.BasicRoute;
 import com.lr.utils.ISimpleLogger;
-import com.lr.utils.SimpleLoggerRegistry;
 
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
-	protected static final ISimpleLogger LOGGER = SimpleLoggerRegistry.REGISTRY
-			.lookup("DEFAULT_LARELEVE");
+	/** Logger */
+	protected static final ISimpleLogger LOGGER = LaReleveContext.LOGGER;
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
