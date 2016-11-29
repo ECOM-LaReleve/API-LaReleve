@@ -40,10 +40,10 @@ apply plugin: "de.gesellix.docker"
 
 /* copy builded libs into docker folder */
 task prepareImage(type: Copy) {
-    dependsOn build
     from 'build/libs'
     into 'docker/build'
 }
+prepareImage.dependsOn build
 
 /* When cleaning project, remove also build folder in docker folder */
 clean.doFirst {
@@ -53,14 +53,13 @@ clean.doFirst {
 /* Creation of Docker image */
 import de.gesellix.gradle.docker.tasks.DockerBuildTask
 task buildImage(type: DockerBuildTask) {
-    dependsOn prepareImage
-    imageName = 'lareleve:latest'
+    imageName = 'gattazr/lareleve:latest'
     buildContextDirectory = file("docker")
 }
+buildImage.dependsOn prepareImage
 
 /* Custom task : deployLocal to deploy builded ear in $JEE_CONTAINER folder */
 task deployLocal {
-    dependsOn "build"
     doLast {
         // Check environment variable. JEE_CONTAINER must exist
         def location = System.env.JEE_CONTAINER
@@ -80,3 +79,4 @@ task deployLocal {
         }
     }
 }
+deployLocal.dependsOn build
