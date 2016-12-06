@@ -11,7 +11,17 @@ import javax.persistence.Id;
 public class LanguesIndividus implements Serializable {
 
 	public enum Level {
-		/* TODO */
+		Maternelle("Maternelle"), Courant("Courant"), Bilingue("Bilingue"), Notion("Notion");
+		private String name = "";
+
+		private Level(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -3413243678757562755L;

@@ -13,14 +13,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "ActesRealisees.findAll", query = "SELECT a FROM ActesRealisees a") })
 public class ActesRealises implements Serializable {
 
 	public enum StatutActe {
-		/* TODO */
+		Honore("Honore"), NonHonore("Non honore");
+		private String name = "";
+
+		private StatutActe(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -3413677856784892255L;

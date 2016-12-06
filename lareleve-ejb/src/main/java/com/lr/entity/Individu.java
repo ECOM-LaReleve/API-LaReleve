@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,14 +25,40 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Individus")
+@NamedQueries({ @NamedQuery(name = "Individu.findAll", query = "SELECT i FROM Individu i") })
 public class Individu implements Serializable {
 
 	public enum StatutEntreeFrance {
-		/* TODO */
+		EP_DemandeAsile("En procedure de demande d'asile"), EP_DemandeTitreSejour(
+				"En procédure de demande de titre de sejour"), EP_CNDA(
+						"En procedure CNDA"), Deboute("Deboute"), PI_Refugie(
+								"Protection internationale refugie"), PI_TitreSubsidiaire(
+										"Protection internationale à titre subsidiaire");
+		private String name = "";
+
+		private StatutEntreeFrance(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	public enum StatutMatrimonial {
-		/* TODO */
+		Celibataire("Celibataire"), Marie("Marie"), divorce("Divorce"), veuf("Veuf"), EnCouple(
+				"En couple");
+		private String name = "";
+
+		private StatutMatrimonial(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -3413247064757562755L;
@@ -160,6 +188,10 @@ public class Individu implements Serializable {
 		return villeNaissance;
 	}
 
+	public void setActesRealises(Set<ActesRealises> actesRealises) {
+		this.actesRealises = actesRealises;
+	}
+
 	public void setDateEntreeFr(Date dateEntreeFr) {
 		this.dateEntreeFr = dateEntreeFr;
 	}
@@ -168,8 +200,16 @@ public class Individu implements Serializable {
 		this.id = id;
 	}
 
+	public void setLanguesIndividus(Set<LanguesIndividus> languesIndividus) {
+		this.languesIndividus = languesIndividus;
+	}
+
 	public void setMenage(Menage menage) {
 		this.menage = menage;
+	}
+
+	public void setNationnalites(Set<Nationnalite> nationnalites) {
+		this.nationnalites = nationnalites;
 	}
 
 	public void setNomNaissance(String nomNaissance) {
@@ -182,6 +222,14 @@ public class Individu implements Serializable {
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+
+	public void setPrestationsRealisees(Set<PrestationsRealisees> prestationsRealisees) {
+		this.prestationsRealisees = prestationsRealisees;
+	}
+
+	public void setRessourcesIndividus(Set<RessourcesIndividus> ressourcesIndividus) {
+		this.ressourcesIndividus = ressourcesIndividus;
 	}
 
 	public void setStatutFr(StatutEntreeFrance statutFr) {
