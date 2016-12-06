@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -48,7 +49,7 @@ public class Individu implements Serializable {
 	@Column(nullable = false)
 	private String prenom;
 
-	private int tel;
+	private String tel;
 
 	private String villeNaissance;
 
@@ -64,6 +65,9 @@ public class Individu implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
+
+	@OneToOne(mappedBy="chefMenage")
+	private Menage chefMenage ;
 
 	@ManyToMany(mappedBy = "individus")
 	private Set<Nationnalite> nationnalites;
@@ -102,6 +106,10 @@ public class Individu implements Serializable {
 
 	public Set<ActesRealises> getActesRealises() {
 		return actesRealises;
+	}
+
+	public Menage getChefMenage() {
+		return chefMenage;
 	}
 
 	public Date getDateEntreeFr() {
@@ -152,12 +160,16 @@ public class Individu implements Serializable {
 		return statutMatrimonial;
 	}
 
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
 
 	public String getVilleNaissance() {
 		return villeNaissance;
+	}
+
+	public void setChefMenage(Menage chefMenage) {
+		this.chefMenage = chefMenage;
 	}
 
 	public void setDateEntreeFr(Date dateEntreeFr) {
@@ -192,7 +204,7 @@ public class Individu implements Serializable {
 		this.statutMatrimonial = statutMatrimonial;
 	}
 
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 

@@ -13,13 +13,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Menages")
+@NamedQueries({
+	@NamedQuery(name = "Menage.findAll", query = "SELECT m FROM Menage m"),
+	@NamedQuery(name = "Menage.findByNomChefMenage", query = "SELECT m FROM Menage m WHERE m.chefMenage.nomUsage = :name")
+})
+
 public class Menage implements Serializable {
 
 	private static final long serialVersionUID = 4987314229184230756L;
@@ -34,7 +42,13 @@ public class Menage implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateSortie;
 
+	private String adresseActuelle;
+
 	private String adresseSortie;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idChefMenage")
+	private Individu chefMenage;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idReferant")
@@ -77,8 +91,16 @@ public class Menage implements Serializable {
 		return actesRealises;
 	}
 
+	public String getAdresseActuelle() {
+		return adresseActuelle;
+	}
+
 	public String getAdresseSortie() {
 		return adresseSortie;
+	}
+
+	public Individu getChefMenage() {
+		return chefMenage;
 	}
 
 	public Date getDateEntree() {
@@ -113,8 +135,16 @@ public class Menage implements Serializable {
 		return ressourcesMenages;
 	}
 
+	public void setAdresseActuelle(String adresseActuelle) {
+		this.adresseActuelle = adresseActuelle;
+	}
+
 	public void setAdresseSortie(String adresseSortie) {
 		this.adresseSortie = adresseSortie;
+	}
+
+	public void setChefMenage(Individu chefMenage) {
+		this.chefMenage = chefMenage;
 	}
 
 	public void setDateEntree(Date dateEntree) {

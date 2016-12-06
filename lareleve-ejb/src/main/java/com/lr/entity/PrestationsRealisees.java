@@ -15,15 +15,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "PrestationsRealisees.findAll", query = "SELECT p FROM PrestationsRealisees p"),
+	@NamedQuery(name = "PrestationsRealisees.findByIdMenage", query = "SELECT p FROM PrestationsRealisees p WHERE p.menage.id = :id"),
+	@NamedQuery(name = "PrestationsRealisees.findByIdIndividu", query = "SELECT p FROM PrestationsRealisees p WHERE p.individu.id = :id")
+})
 public class PrestationsRealisees implements Serializable {
 
 	public enum StatutPrestation {
-		/* TODO */
+		EnCours, Validee, Refusee;
 	}
 
 	private static final long serialVersionUID = -3413677878744895755L;
