@@ -1,30 +1,27 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Utilisateurs")
+@NamedQueries({
+	@NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM Utilisateur u")
+})
 public class Utilisateur implements Serializable {
 
-	private static final long serialVersionUID = 2254274640238186573L;
+	private static final long serialVersionUID = 7524415434131282699L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 
 	@Column(nullable = false, unique = true)
@@ -39,6 +36,7 @@ public class Utilisateur implements Serializable {
 	@Column(nullable = false)
 	private String prenom;
 
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idService")
 	private Service service;
@@ -49,7 +47,7 @@ public class Utilisateur implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "chefPole")
 	private Collection<Pole> poles;
 
-	@ManyToMany(mappedBy = "utilisateurs")
+	@ManyToMany(mappedBy = "utilisateurs", fetch = FetchType.LAZY)
 	private Set<Role> roles;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "utilisateur")
@@ -84,14 +82,16 @@ public class Utilisateur implements Serializable {
 		return actesRealises;
 	}
 
+	 */
+
 	public int getId() {
 		return id;
 	}
-
+	/*
 	public Collection<Menage> getMenages() {
 		return menages;
 	}
-
+	 */
 	public String getNom() {
 		return nom;
 	}
@@ -99,15 +99,15 @@ public class Utilisateur implements Serializable {
 	public String getPassword() {
 		return password;
 	}
-
+	/*
 	public Collection<Pole> getPoles() {
 		return poles;
 	}
-
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
-
+	/*
 	public Set<PrestationsRealisees> getPrestationsRealisees() {
 		return prestationsRealisees;
 	}
@@ -119,12 +119,12 @@ public class Utilisateur implements Serializable {
 	public Service getService() {
 		return service;
 	}
-
+	 */
 	public String getUsername() {
 		return username;
 	}
 
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -139,11 +139,11 @@ public class Utilisateur implements Serializable {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
+	/*
 	public void setService(Service service) {
 		this.service = service;
 	}
-
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}

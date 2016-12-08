@@ -27,11 +27,40 @@ import javax.persistence.TemporalType;
 public class Individu implements Serializable {
 
 	public enum StatutEntreeFrance {
-		/* TODO */
+		EP_DemandeAsile("En procedure de demande d'asile"),
+		EP_DemandeTitreSejour("En procédure de demande de titre de sejour"),
+		EP_CNDA("En procedure CNDA"),
+		Deboute("Deboute"),
+		PI_Refugie("Protection internationale refugie"),
+		PI_TitreSubsidiaire("Protection internationale à titre subsidiaire");
+
+		private String name = "";
+
+		private StatutEntreeFrance(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	public enum StatutMatrimonial {
-		/* TODO */
+		MARIE("Marie"),
+		CELIBATAIRE("Celibataire"),
+		VEUF("Veuf");
+
+		private String name = "";
+
+		private StatutMatrimonial(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -3413247064757562755L;
@@ -66,7 +95,7 @@ public class Individu implements Serializable {
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 
-	@OneToOne(mappedBy="chefMenage")
+	@OneToOne(mappedBy="chefMenage", fetch = FetchType.LAZY)
 	private Menage chefMenage ;
 
 	@ManyToMany(mappedBy = "individus")

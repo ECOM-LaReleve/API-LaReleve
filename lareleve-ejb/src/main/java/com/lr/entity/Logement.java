@@ -20,11 +20,33 @@ import javax.persistence.Table;
 public class Logement implements Serializable {
 
 	public enum StatutLogement {
-		/* TODO */
+		PASSIF("Passif"), ACTIF("Actif");
+
+		private String name = "";
+
+		StatutLogement(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	public enum TypeLogement {
-		/* TODO */
+		APPARTEMENT("Appartement"), MAISON("Maison");
+
+		private String name = "";
+
+		TypeLogement(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -7647927882656722276L;

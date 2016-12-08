@@ -1,18 +1,12 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +21,7 @@ public class Service implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String libelle;
-
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPole")
 	private Pole pole;
@@ -39,7 +33,7 @@ public class Service implements Serializable {
 		utilisateur.setService(this);
 		this.utilisateurs.add(utilisateur);
 	}
-
+	 */
 	public int getId() {
 		return id;
 	}
@@ -47,7 +41,7 @@ public class Service implements Serializable {
 	public String getLibelle() {
 		return libelle;
 	}
-
+	/*
 	public Pole getPole() {
 		return pole;
 	}
@@ -55,7 +49,7 @@ public class Service implements Serializable {
 	public Collection<Utilisateur> getUtilisateurs() {
 		return utilisateurs;
 	}
-
+	 */
 	private void setId(int id) {
 		this.id = id;
 	}
@@ -63,9 +57,9 @@ public class Service implements Serializable {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
+	/*
 	public void setPole(Pole pole) {
 		this.pole = pole;
 	}
-
+	 */
 }

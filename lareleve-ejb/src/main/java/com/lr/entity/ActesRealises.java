@@ -19,8 +19,19 @@ import javax.persistence.TemporalType;
 @Entity
 public class ActesRealises implements Serializable {
 
+
 	public enum StatutActe {
-		/* TODO */
+		Honore("Honore"), NonHonore("Non honore");
+		private String name = "";
+
+		private StatutActe(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -3413677856784892255L;

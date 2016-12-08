@@ -62,6 +62,7 @@ public class MenagesRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<GET />", "menageEJB=[%s]", (menageEJB != null ? "set" : "null"));
 
 		List<Menage> menages = menageEJB.findAll();
+		LOGGER.logDebug(this, "<NB LISTE />", menages.size());
 		if (!menages.isEmpty()) {
 			return responseBuilder(Status.OK).entity(menages).build();
 		}
@@ -82,10 +83,23 @@ public class MenagesRoute extends BasicRoute {
 		return responseBuilder(Response.Status.NO_CONTENT).build();
 	}
 
+	@GET
+	@Path("{name}")
+	public Response findByNameChefMenage(@PathParam("name") String name) {
+		LOGGER.logDebug(this, "<GET /{:name}>", "menageEJB=[%s], id=%s",
+				(menageEJB != null ? "set" : "null"), name);
+
+		List<Menage> menage = menageEJB.findByNameChefMenage(name);
+		if (menage != null) {
+			return responseBuilder(Response.Status.OK).entity(menage).build();
+		}
+		return responseBuilder(Response.Status.NO_CONTENT).build();
+	}
+
 	@PUT
 	@Path("{id : \\d+}") // id must be digits
 	public Response updateMenage(@PathParam("id") String id, Menage aMenage) {
-		LOGGER.logDebug(this, "<PUT>", "utilisateurEJB=[%s], utilisateur=%s",(menageEJB != null ? "set" : "null"), aMenage);
+		LOGGER.logDebug(this, "<PUT>", "menageEJB=[%s], menage=%s",(menageEJB != null ? "set" : "null"), aMenage);
 
 		try {
 			Menage menage = menageEJB.find(Integer.parseInt(id));
@@ -95,7 +109,7 @@ public class MenagesRoute extends BasicRoute {
 			menage.setDateEntree(aMenage.getDateEntree());
 			menage.setDateSortie(aMenage.getDateSortie());
 			menage.setLogement(aMenage.getLogement());
-			menage.setReferant(aMenage.getReferant());
+			//menage.setReferant(aMenage.getReferant());
 			menageEJB.edit(menage);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {

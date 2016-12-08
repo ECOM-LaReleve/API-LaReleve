@@ -30,7 +30,18 @@ import javax.persistence.TemporalType;
 public class PrestationsRealisees implements Serializable {
 
 	public enum StatutPrestation {
-		EnCours, Validee, Refusee;
+		EnCours("EnCours"), Validee("Validee"), Refusee("Refusee");
+
+		private String name = "";
+
+		StatutPrestation(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return name;
+		}
 	}
 
 	private static final long serialVersionUID = -3413677878744895755L;
@@ -58,11 +69,11 @@ public class PrestationsRealisees implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idPrestation", nullable = false)
 	private Prestation prestation;
-
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idUtilisateur", nullable = false)
 	private Utilisateur utilisateur;
-
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
@@ -117,11 +128,11 @@ public class PrestationsRealisees implements Serializable {
 	public StatutPrestation getStatut() {
 		return statut;
 	}
-
+	/*
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
-
+	 */
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
@@ -157,9 +168,9 @@ public class PrestationsRealisees implements Serializable {
 	public void setStatut(StatutPrestation statut) {
 		this.statut = statut;
 	}
-
+	/*
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
+	 */
 }

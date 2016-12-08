@@ -25,7 +25,8 @@ import javax.persistence.TemporalType;
 @Table(name = "Menages")
 @NamedQueries({
 	@NamedQuery(name = "Menage.findAll", query = "SELECT m FROM Menage m"),
-	@NamedQuery(name = "Menage.findByNomChefMenage", query = "SELECT m FROM Menage m WHERE m.chefMenage.nomUsage = :name")
+	@NamedQuery(name = "Menage.findById", query = "SELECT m FROM Menage m WHERE m.id = :id"),
+	@NamedQuery(name = "Menage.findByNameChefMenage", query = "SELECT m FROM Menage m WHERE m.chefMenage.nomUsage = :name")
 })
 
 public class Menage implements Serializable {
@@ -46,14 +47,15 @@ public class Menage implements Serializable {
 
 	private String adresseSortie;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "idChefMenage")
 	private Individu chefMenage;
 
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idReferant")
 	private Utilisateur referant;
-
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idLogement")
 	private Logement logement;
@@ -126,11 +128,11 @@ public class Menage implements Serializable {
 	public Set<PrestationsRealisees> getPrestationsRealisees() {
 		return prestationsRealisees;
 	}
-
+	/*
 	public Utilisateur getReferant() {
 		return referant;
 	}
-
+	 */
 	public Set<RessourcesMenages> getRessourcesMenages() {
 		return ressourcesMenages;
 	}
@@ -162,9 +164,9 @@ public class Menage implements Serializable {
 	public void setLogement(Logement logement) {
 		this.logement = logement;
 	}
-
+	/*
 	public void setReferant(Utilisateur referant) {
 		this.referant = referant;
 	}
-
+	 */
 }

@@ -1,18 +1,12 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +21,7 @@ public class Pole implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String libelle;
-
+	/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "chefPole")
 	private Utilisateur chefPole;
@@ -43,7 +37,7 @@ public class Pole implements Serializable {
 	public Utilisateur getChefPole() {
 		return chefPole;
 	}
-
+	 */
 	public int getId() {
 		return id;
 	}
@@ -51,7 +45,7 @@ public class Pole implements Serializable {
 	public String getLibelle() {
 		return libelle;
 	}
-
+	/*
 	public Collection<Service> getServices() {
 		return services;
 	}
@@ -59,7 +53,7 @@ public class Pole implements Serializable {
 	public void setChefPole(Utilisateur chefPole) {
 		this.chefPole = chefPole;
 	}
-
+	 */
 	private void setId(int id) {
 		this.id = id;
 	}
