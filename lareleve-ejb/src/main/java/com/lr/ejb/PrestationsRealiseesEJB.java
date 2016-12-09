@@ -52,7 +52,7 @@ public class PrestationsRealiseesEJB extends BasicEJB implements IPrestationsRea
 	@Override
 	public void remove(PrestationsRealisees prest) {
 		LOGGER.logDebug(this, "<DELETE>", "em=[%s], prestationRealisees=%s", em, prest);
-		em.remove(prest);
+		em.remove(em.merge(prest));
 	}
 
 }

@@ -7,10 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Poles")
+@NamedQueries({
+	@NamedQuery(name = "Pole.findAll", query = "SELECT p FROM Pole p"),
+	@NamedQuery(name = "Pole.findById", query = "SELECT p FROM Pole p WHERE p.id = :id")
+})
 public class Pole implements Serializable {
 
 	private static final long serialVersionUID = 7483223108623355830L;
@@ -21,11 +27,11 @@ public class Pole implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String libelle;
-	/*
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "chefPole")
-	private Utilisateur chefPole;
 
+	//	@ManyToOne(fetch = FetchType.EAGER)
+	//	@JoinColumn(name = "chefPole")
+	//	private Utilisateur chefPole;
+	/*
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pole")
 	private Collection<Service> services;
 
@@ -33,11 +39,11 @@ public class Pole implements Serializable {
 		service.setPole(this);
 		this.services.add(service);
 	}
-
-	public Utilisateur getChefPole() {
-		return chefPole;
-	}
 	 */
+	//	public Utilisateur getChefPole() {
+	//		return chefPole;
+	//	}
+
 	public int getId() {
 		return id;
 	}
@@ -49,12 +55,12 @@ public class Pole implements Serializable {
 	public Collection<Service> getServices() {
 		return services;
 	}
-
-	public void setChefPole(Utilisateur chefPole) {
-		this.chefPole = chefPole;
-	}
 	 */
-	private void setId(int id) {
+	//	public void setChefPole(Utilisateur chefPole) {
+	//		this.chefPole = chefPole;
+	//	}
+
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -30,10 +30,8 @@ public class UtilisateursRoute extends BasicRoute {
 	private IUtilisateurEJBRemote utilisateurEJB;
 
 	@POST
-	public Response createUser(Utilisateur aUtilisateur) {
-		LOGGER.logDebug(this, "<POST>", "utilisateurEJB=[%s], utilisateur=%s",
-				(utilisateurEJB != null ? "set" : "null"), aUtilisateur);
-
+	public Response create(Utilisateur aUtilisateur) {
+		LOGGER.logDebug(this, "<POST>", "utilisateurEJB=[%s], utilisateur=%s",(utilisateurEJB != null ? "set" : "null"), aUtilisateur);
 		try {
 			utilisateurEJB.create(aUtilisateur);
 			return responseBuilder(Response.Status.OK).build();
@@ -45,10 +43,8 @@ public class UtilisateursRoute extends BasicRoute {
 
 	@DELETE
 	@Path("{id : \\d+}") // id must be digits
-	public Response deleteUser(@PathParam("id") String id) {
-		LOGGER.logDebug(this, "<DELETE>", "utilisateurEJB=[%s], utilisateur=%s",
-				(utilisateurEJB != null ? "set" : "null"), id);
-
+	public Response delete(@PathParam("id") String id) {
+		LOGGER.logDebug(this, "<DELETE>", "utilisateurEJB=[%s], utilisateur=%s",(utilisateurEJB != null ? "set" : "null"), id);
 		try {
 			Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
 			utilisateurEJB.remove(utilisateur);
@@ -61,9 +57,7 @@ public class UtilisateursRoute extends BasicRoute {
 
 	@GET
 	public Response findAll() {
-		LOGGER.logDebug(this, "<GET />", "utilisateurEJB=[%s]",
-				(utilisateurEJB != null ? "set" : "null"));
-
+		LOGGER.logDebug(this, "<GET />", "utilisateurEJB=[%s]",(utilisateurEJB != null ? "set" : "null"));
 		List<Utilisateur> utilisateurs = utilisateurEJB.findAll();
 		if (!utilisateurs.isEmpty()) {
 			return responseBuilder(Status.OK).entity(utilisateurs).build();
@@ -75,30 +69,24 @@ public class UtilisateursRoute extends BasicRoute {
 	@GET
 	@Path("{id : \\d+}") // id must be digits
 	public Response findById(@PathParam("id") String id) {
-		LOGGER.logDebug(this, "<GET /{:id}>", "utilisateurEJB=[%s], id=%s",
-				(utilisateurEJB != null ? "set" : "null"), id);
-
+		LOGGER.logDebug(this, "<GET /{:id}>", "utilisateurEJB=[%s], id=%s",(utilisateurEJB != null ? "set" : "null"), id);
 		Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
 		if (utilisateur != null) {
 			return responseBuilder(Response.Status.OK).entity(utilisateur).build();
 		}
-
 		return responseBuilder(Response.Status.NO_CONTENT).build();
 	}
 
 	@PUT
 	@Path("{id : \\d+}") // id must be digits
-	public Response updateUser(@PathParam("id") String id, Utilisateur aUtilisateur) {
-		LOGGER.logDebug(this, "<PUT>", "utilisateurEJB=[%s], utilisateur=%s",
-				(utilisateurEJB != null ? "set" : "null"), aUtilisateur);
-
+	public Response update(@PathParam("id") String id, Utilisateur aUtilisateur) {
+		LOGGER.logDebug(this, "<PUT>", "utilisateurEJB=[%s], utilisateur=%s",(utilisateurEJB != null ? "set" : "null"), aUtilisateur);
 		try {
 			Utilisateur utilisateur = utilisateurEJB.find(Integer.parseInt(id));
 			utilisateur.setNom(aUtilisateur.getNom());
 			utilisateur.setPassword(aUtilisateur.getPassword());
 			utilisateur.setPrenom(aUtilisateur.getPrenom());
 			utilisateur.setUsername(aUtilisateur.getUsername());
-
 			utilisateurEJB.edit(utilisateur);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {

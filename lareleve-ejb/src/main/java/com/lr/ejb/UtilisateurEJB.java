@@ -36,8 +36,6 @@ implements IUtilisateurEJBLocal, IUtilisateurEJBRemote {
 		LOGGER.logDebug(this, "<READ ALL>", "em=[%s]", em);
 		Query query = em.createNamedQuery("Utilisateur.findAll");
 		return query.getResultList();
-		//String wQuery = String.format("select object(o) from %s as o", Utilisateur.class.getName());
-		//return em.createQuery(wQuery).getResultList();
 	}
 
 	@Override

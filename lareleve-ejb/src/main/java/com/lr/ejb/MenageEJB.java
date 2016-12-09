@@ -12,9 +12,9 @@ import com.lr.remote.IMenageEJBRemote;
 public class MenageEJB extends BasicEJB implements IMenageEJBRemote {
 
 	@Override
-	public void create(Menage m) {
-		LOGGER.logDebug(this, "<CREATE>", "em=[%s], menage=%s", em, m);
-		em.persist(m);
+	public void create(Menage menage) {
+		LOGGER.logDebug(this, "<CREATE>", "em=[%s], menage=%s", em, menage);
+		em.persist(menage);
 	}
 
 	@Override
@@ -42,18 +42,17 @@ public class MenageEJB extends BasicEJB implements IMenageEJBRemote {
 	}
 
 	@Override
-	public List<Menage> findByNameChefMenage(String name) {
-		LOGGER.logDebug(this, "<READ>", "em=[%s], chefMenage=%s", em, name);
-		Query query = em.createNamedQuery("Menage.findByNameChefMenage");
-		query.setParameter("name", name);
+	public List<Menage> findByIdReferant(Object id) {
+		LOGGER.logDebug(this, "<READ>", "em=[%s], idReferant=%s", em, id);
+		Query query = em.createNamedQuery("Menage.findByIdReferant");
+		query.setParameter("id", id);
 		return query.getResultList();
 	}
 
 	@Override
 	public void remove(Menage m) {
 		LOGGER.logDebug(this, "<DELETE>", "em=[%s], menage=%s", em, m);
-		LOGGER.logDebug(this, "<DELETE WHO>", m.getId() + " " +m.getAdresseActuelle());
-		em.remove(m);
+		em.remove(em.merge(m));
 	}
 
 }

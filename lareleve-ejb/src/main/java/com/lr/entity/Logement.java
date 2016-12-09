@@ -1,18 +1,14 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -83,13 +79,13 @@ public class Logement implements Serializable {
 
 	private int charges;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "logement")
-	private Collection<Menage> menages;
+	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "logement")
+	//private Collection<Menage> menages;
 
-	public void addMenages(Menage menage) {
-		menage.setLogement(this);
-		this.menages.add(menage);
-	}
+	//public void addMenages(Menage menage) {
+	//	menage.setLogement(this);
+	//	this.menages.add(menage);
+	//}
 
 	public String getAdresse() {
 		return adresse;
@@ -131,9 +127,9 @@ public class Logement implements Serializable {
 		return loyer;
 	}
 
-	public Collection<Menage> getMenages() {
-		return menages;
-	}
+	//public Collection<Menage> getMenages() {
+	//	return menages;
+	//}
 
 	public StatutLogement getStatut() {
 		return statut;

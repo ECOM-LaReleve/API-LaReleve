@@ -30,7 +30,7 @@ public class MenagesRoute extends BasicRoute {
 	private IMenageEJBRemote menageEJB;
 
 	@POST
-	public Response createMenage(Menage aMenage) {
+	public Response create(Menage aMenage) {
 		LOGGER.logDebug(this, "<POST>", "MenageEJB=[%s], menage=%s", (menageEJB != null ? "set" : "null"), aMenage);
 
 		try {
@@ -44,7 +44,7 @@ public class MenagesRoute extends BasicRoute {
 
 	@DELETE
 	@Path("{id : \\d+}") // id must be digits
-	public Response deleteMenage(@PathParam("id") String id) {
+	public Response delete(@PathParam("id") String id) {
 		LOGGER.logDebug(this, "<DELETE>", "menageEJB=[%s], menage=%s", (menageEJB != null ? "set" : "null"), id);
 
 		try {
@@ -84,12 +84,12 @@ public class MenagesRoute extends BasicRoute {
 	}
 
 	@GET
-	@Path("{name}")
-	public Response findByNameChefMenage(@PathParam("name") String name) {
+	@Path("/referant{id : \\d+}") // id must be digits
+	public Response findByNameChefMenage(@PathParam("id") String id) {
 		LOGGER.logDebug(this, "<GET /{:name}>", "menageEJB=[%s], id=%s",
-				(menageEJB != null ? "set" : "null"), name);
+				(menageEJB != null ? "set" : "null"), id);
 
-		List<Menage> menage = menageEJB.findByNameChefMenage(name);
+		List<Menage> menage = menageEJB.findByIdReferant(Integer.parseInt(id));
 		if (menage != null) {
 			return responseBuilder(Response.Status.OK).entity(menage).build();
 		}
@@ -98,18 +98,18 @@ public class MenagesRoute extends BasicRoute {
 
 	@PUT
 	@Path("{id : \\d+}") // id must be digits
-	public Response updateMenage(@PathParam("id") String id, Menage aMenage) {
+	public Response update(@PathParam("id") String id, Menage aMenage) {
 		LOGGER.logDebug(this, "<PUT>", "menageEJB=[%s], menage=%s",(menageEJB != null ? "set" : "null"), aMenage);
 
 		try {
 			Menage menage = menageEJB.find(Integer.parseInt(id));
-			menage.setChefMenage(aMenage.getChefMenage());
+			//menage.setChefMenage(aMenage.getChefMenage());
 			menage.setAdresseActuelle(aMenage.getAdresseActuelle());
 			menage.setAdresseSortie(aMenage.getAdresseSortie());
 			menage.setDateEntree(aMenage.getDateEntree());
 			menage.setDateSortie(aMenage.getDateSortie());
-			menage.setLogement(aMenage.getLogement());
-			//menage.setReferant(aMenage.getReferant());
+			//menage.setLogement(aMenage.getLogement());
+			menage.setReferant(aMenage.getReferant());
 			menageEJB.edit(menage);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {

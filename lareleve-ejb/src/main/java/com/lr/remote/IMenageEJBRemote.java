@@ -17,7 +17,7 @@ public interface IMenageEJBRemote {
 
 	List<Menage> findAll();
 
-	List<Menage> findByNameChefMenage(String name);
+	List<Menage> findByIdReferant(Object id);
 
 	void remove(Menage menage);
 
