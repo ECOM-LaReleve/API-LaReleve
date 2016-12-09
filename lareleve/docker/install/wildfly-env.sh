@@ -1,4 +1,4 @@
 #!/bin/bash
-export ACTIVATE_ADMIN=1
-export ADMIN_USERNAME='admin'
-export ADMIN_PASSWORD='admin123'
+export ACTIVATE_ADMIN=${ACTIVATE_ADMIN:-"1"}
+export ADMIN_USERNAME=${ADMIN_USERNAME:-"admin"}
+export ADMIN_PASSWORD=${ADMIN_PASSWORD:-"admin123"}

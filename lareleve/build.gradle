@@ -50,10 +50,13 @@ clean.doFirst {
     delete "${rootDir}/docker/build"
 }
 
+def IMAGE_NAME = "gattazr/lareleve"
+def TAG_NAME = "latest"
+
 /* Creation of Docker image */
 import de.gesellix.gradle.docker.tasks.DockerBuildTask
 task buildImage(type: DockerBuildTask) {
-    imageName = 'gattazr/lareleve:latest'
+    imageName = IMAGE_NAME + ':' + TAG_NAME
     buildContextDirectory = file("docker")
 }
 buildImage.dependsOn prepareImage
