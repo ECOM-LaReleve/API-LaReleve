@@ -1,10 +1,7 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,16 +9,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Utilisateurs")
+@NamedQueries({
+	@NamedQuery(name = "Utilisateur.findAll", query = "SELECT u FROM Utilisateur u"),
+	@NamedQuery(name = "Utilisateur.findByIdService", query = "SELECT u FROM Utilisateur u WHERE u.service.id = :id")
+})
 public class Utilisateur implements Serializable {
 
-	private static final long serialVersionUID = 2254274640238186573L;
+	private static final long serialVersionUID = 7524415434131282699L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,17 +40,20 @@ public class Utilisateur implements Serializable {
 	@Column(nullable = false)
 	private String prenom;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idService")
 	private Service service;
 
+	/*
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "referant")
 	private Collection<Menage> menages;
+	 */
 
+	/*
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "chefPole")
 	private Collection<Pole> poles;
 
-	@ManyToMany(mappedBy = "utilisateurs")
+	@ManyToMany(mappedBy = "utilisateurs", fetch = FetchType.LAZY)
 	private Set<Role> roles;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "utilisateur")
@@ -61,21 +65,28 @@ public class Utilisateur implements Serializable {
 	public void addActesRealises(ActesRealises acteRealise) {
 		this.actesRealises.add(acteRealise);
 	}
+	 */
 
+	/*
 	public void addMenages(Menage menage) {
 		menage.setReferant(this);
 		this.menages.add(menage);
 	}
-
+	 */
+	/*
 	public void addPoles(Pole pole) {
 		pole.setChefPole(this);
 		this.poles.add(pole);
 	}
+	 */
 
+	/*
 	public void addPrestationsRealisees(PrestationsRealisees prestationRealisee) {
 		this.prestationsRealisees.add(prestationRealisee);
 	}
+	 */
 
+	/*
 	public void addRoles(Role role) {
 		this.roles.add(role);
 	}
@@ -84,14 +95,16 @@ public class Utilisateur implements Serializable {
 		return actesRealises;
 	}
 
+	 */
+
 	public int getId() {
 		return id;
 	}
-
+	/*
 	public Collection<Menage> getMenages() {
 		return menages;
 	}
-
+	 */
 	public String getNom() {
 		return nom;
 	}
@@ -99,15 +112,15 @@ public class Utilisateur implements Serializable {
 	public String getPassword() {
 		return password;
 	}
-
+	/*
 	public Collection<Pole> getPoles() {
 		return poles;
 	}
-
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
-
+	/*
 	public Set<PrestationsRealisees> getPrestationsRealisees() {
 		return prestationsRealisees;
 	}
@@ -115,7 +128,7 @@ public class Utilisateur implements Serializable {
 	public Set<Role> getRoles() {
 		return roles;
 	}
-
+	 */
 	public Service getService() {
 		return service;
 	}
@@ -124,7 +137,7 @@ public class Utilisateur implements Serializable {
 		return username;
 	}
 
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
