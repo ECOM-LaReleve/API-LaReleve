@@ -3,7 +3,6 @@ package com.lr.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,10 +12,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "ActesRealises.findAll", query = "SELECT a FROM ActesRealises a"),
+	@NamedQuery(name = "ActesRealises.findByIdMenage", query = "SELECT a FROM ActesRealises a WHERE a.menage.id = :id"),
+	@NamedQuery(name = "ActesRealises.findByIdIndividu", query = "SELECT a FROM ActesRealises a WHERE a.individu.id = :id"),
+	@NamedQuery(name = "ActesRealises.findByIdUtilisateur", query = "SELECT a FROM ActesRealises a WHERE a.utilisateur.id = :id"),
+	@NamedQuery(name = "ActesRealises.findByIdBesoin", query = "SELECT a FROM ActesRealises a WHERE a.besoin.id = :id"),
+	@NamedQuery(name = "ActesRealises.findByIdPrestation", query = "SELECT a FROM ActesRealises a WHERE a.prestationRealisee.id = :id"),
+	@NamedQuery(name = "ActesRealises.findByIdActe", query = "SELECT a FROM ActesRealises a WHERE a.acte.id = :id")
+})
 public class ActesRealises implements Serializable {
 
 
@@ -40,40 +50,35 @@ public class ActesRealises implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(nullable = false)
-	private int seqActe;
-
-	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StatutActe statut;
 
-	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRealisation;
 
 	private String commentaire;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idActe", nullable = false)
 	private Acte acte;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUtilisateur", nullable = false)
 	private Utilisateur utilisateur;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idIndividu")
 	private Individu individu;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idPrestationRealisee")
 	private PrestationsRealisees prestationRealisee;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idBesoin")
 	private Besoin besoin;
 
@@ -109,10 +114,6 @@ public class ActesRealises implements Serializable {
 		return prestationRealisee;
 	}
 
-	public int getSeqActe() {
-		return seqActe;
-	}
-
 	public StatutActe getStatut() {
 		return statut;
 	}
@@ -137,7 +138,7 @@ public class ActesRealises implements Serializable {
 		this.dateRealisation = dateRealisation;
 	}
 
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -151,10 +152,6 @@ public class ActesRealises implements Serializable {
 
 	public void setPrestationRealisee(PrestationsRealisees prestationRealisee) {
 		this.prestationRealisee = prestationRealisee;
-	}
-
-	public void setSeqActe(int seqActe) {
-		this.seqActe = seqActe;
 	}
 
 	public void setStatut(StatutActe statut) {

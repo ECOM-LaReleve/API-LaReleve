@@ -76,15 +76,5 @@ public class BesoinsRoute extends BasicRoute {
 		return responseBuilder(Response.Status.NO_CONTENT).build();
 	}
 
-	@GET
-	@Path("{libelle}")
-	public Response findByLibelle(@PathParam("libelle") String libelle) {
-		LOGGER.logDebug(this, "<GET /{:libelle}>", "besoinEJB=[%s], libelle=%s",(besoinEJB != null ? "set" : "null"), libelle);
-		Besoin besoin = besoinEJB.findByLibelle(libelle);
-		if (besoin != null) {
-			return responseBuilder(Response.Status.OK).entity(besoin).build();
-		}
-		return responseBuilder(Response.Status.NO_CONTENT).build();
-	}
 
 }

@@ -11,9 +11,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import com.lr.entity.Individu;
 import com.lr.entity.Menage;
@@ -57,14 +59,22 @@ public class IndividusRoute extends BasicRoute {
 	}
 
 	@GET
-	public Response findAll() {
+	public Response findAll(@Context UriInfo info) {
 		LOGGER.logDebug(this, "<GET />", "individuEJB=[%s]", (individuEJB != null ? "set" : "null"));
-		List<Individu> individus = individuEJB.findAll();
-		LOGGER.logDebug(this, "<NB LISTE />", individus.size());
-		if (!individus.isEmpty()) {
-			return responseBuilder(Status.OK).entity(individus).build();
+		String id = info.getQueryParameters().getFirst("idmenage");
+		String name = info.getQueryParameters().getFirst("menage");
+		if(id!=null){
+			return findIndividusByIdMenage(id);
+		}else if(name!=null){
+			return findMenageByNameIndividu(name);
+		}else {
+			List<Individu> individus = individuEJB.findAll();
+			if (!individus.isEmpty()) {
+				return responseBuilder(Status.OK).entity(individus).build();
+			}else{
+				return responseBuilder(Response.Status.NO_CONTENT).build();
+			}
 		}
-		return responseBuilder(Response.Status.NO_CONTENT).build();
 
 	}
 
@@ -79,20 +89,22 @@ public class IndividusRoute extends BasicRoute {
 		return responseBuilder(Response.Status.NO_CONTENT).build();
 	}
 
-	@GET
-	@Path("/menage{id : \\d+}") // id must be digits
-	public Response findIndividusByIdMenage(@PathParam("id") String id) {
+	private Response findIndividusByIdMenage(String id) {
 		LOGGER.logDebug(this, "<GET /{:name}>", "individuEJB=[%s], id=%s",(individuEJB != null ? "set" : "null"), id);
-		List<Individu> individus = individuEJB.findIndividusByIdMenage(Integer.parseInt(id));
+		List<Individu> individus = null;
+		try{
+			int idMenage = Integer.parseInt(id);
+			individus = individuEJB.findIndividusByIdMenage(idMenage);
+		}catch(NumberFormatException e){
+			responseBuilder(Response.Status.BAD_REQUEST).build();
+		}
 		if (individus != null) {
 			return responseBuilder(Response.Status.OK).entity(individus).build();
 		}
 		return responseBuilder(Response.Status.NO_CONTENT).build();
 	}
 
-	@GET
-	@Path("/menage{name}")
-	public Response findMenageByNameIndividu(@PathParam("name") String name) {
+	private Response findMenageByNameIndividu(String name) {
 		LOGGER.logDebug(this, "<GET /{:name}>", "individuEJB=[%s], name=%s",(individuEJB != null ? "set" : "null"), name);
 		List<Menage> menage = individuEJB.findMenageByNameIndividu(name);
 		if (menage != null) {

@@ -36,16 +36,34 @@ public class PrestationsRealiseesEJB extends BasicEJB implements IPrestationsRea
 	}
 
 	@Override
-	public List<PrestationsRealisees> findByIdIndividu(int id) {
+	public List<PrestationsRealisees> findByIdIndividu(Object id) {
 		LOGGER.logDebug(this, "<READ BY INDIVIDU>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("PrestationsRealisees.findByIdIndividu");
+		query.setParameter("id", id);
 		return query.getResultList();
 	}
 
 	@Override
-	public List<PrestationsRealisees> findByIdMenage(int id) {
+	public List<PrestationsRealisees> findByIdMenage(Object id) {
 		LOGGER.logDebug(this, "<READ BY MENAGE>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("PrestationsRealisees.findByIdMenage");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<PrestationsRealisees> findByIdPrestation(Object id) {
+		LOGGER.logDebug(this, "<READ BY PRESTATION>", "em=[%s], id=%s", em, id);
+		Query query = em.createNamedQuery("PrestationsRealisees.findByIdPrestation");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<PrestationsRealisees> findByIdUtilisateur(Object id) {
+		LOGGER.logDebug(this, "<READ BY UTILISATEUR>", "em=[%s], id=%s", em, id);
+		Query query = em.createNamedQuery("PrestationsRealisees.findByIdUtilisateur");
+		query.setParameter("id", id);
 		return query.getResultList();
 	}
 

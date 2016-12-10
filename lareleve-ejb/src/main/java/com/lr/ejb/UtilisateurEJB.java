@@ -39,6 +39,14 @@ implements IUtilisateurEJBLocal, IUtilisateurEJBRemote {
 	}
 
 	@Override
+	public List<Utilisateur> findByIdService(Object id) {
+		LOGGER.logDebug(this, "<READ BY ID SERVICE>", "em=[%s], id=%s", em, id);
+		Query query = em.createNamedQuery("Utilisateur.findByIdService");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
+	@Override
 	public void remove(Utilisateur utilisateur) {
 		LOGGER.logDebug(this, "<DELETE>", utilisateur);
 		em.remove(em.merge(utilisateur));

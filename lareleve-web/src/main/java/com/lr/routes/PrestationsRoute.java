@@ -10,9 +10,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import com.lr.entity.Prestation;
 import com.lr.remote.IPrestationEJBRemote;
@@ -55,21 +57,30 @@ public class PrestationsRoute extends BasicRoute {
 	}
 
 	@GET
-	public Response findAll() {
+	public Response findAll(@Context UriInfo info) {
 		LOGGER.logDebug(this, "<GET />", "prestationEJB=[%s]",(prestationEJB != null ? "set" : "null"));
-		List<Prestation> prestations = prestationEJB.findAll();
-		if (!prestations.isEmpty()) {
-			return responseBuilder(Status.OK).entity(prestations).build();
+		String id = info.getQueryParameters().getFirst("idbesoin");
+		if(id!=null){
+			return findByBesoinId(id);
+		}else{
+			List<Prestation> prestations = prestationEJB.findAll();
+			if (!prestations.isEmpty()) {
+				return responseBuilder(Status.OK).entity(prestations).build();
+			}
+			return responseBuilder(Response.Status.NO_CONTENT).build();
 		}
-		return responseBuilder(Response.Status.NO_CONTENT).build();
 
 	}
 
-	@GET
-	@Path("/besoin{id : \\d+}") // id must be digits
-	public Response findByBesoinId(@PathParam("id") String id) {
+	private Response findByBesoinId(String id) {
 		LOGGER.logDebug(this, "<GET BY BESOIN /{:id}>", "prestationEJB=[%s], id=%s",(prestationEJB != null ? "set" : "null"), id);
-		List<Prestation> prestation = prestationEJB.findByBesoinId(Integer.parseInt(id));
+		List<Prestation> prestation = null;
+		try{
+			int idBesoin = Integer.parseInt(id);
+			prestation = prestationEJB.findByBesoinId(idBesoin);
+		}catch(NumberFormatException e){
+			responseBuilder(Response.Status.BAD_REQUEST).build();
+		}
 		if (prestation != null) {
 			return responseBuilder(Response.Status.OK).entity(prestation).build();
 		}

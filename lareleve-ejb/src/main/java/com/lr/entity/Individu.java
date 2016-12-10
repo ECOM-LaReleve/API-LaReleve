@@ -3,6 +3,7 @@ package com.lr.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -95,7 +96,7 @@ public class Individu implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StatutEntreeFrance statutFr;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 

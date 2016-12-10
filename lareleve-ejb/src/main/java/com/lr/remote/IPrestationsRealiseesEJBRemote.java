@@ -17,9 +17,13 @@ public interface IPrestationsRealiseesEJBRemote {
 
 	List<PrestationsRealisees> findAll();
 
-	List<PrestationsRealisees> findByIdIndividu(int id);
+	List<PrestationsRealisees> findByIdIndividu(Object id);
 
-	List<PrestationsRealisees> findByIdMenage(int id);
+	List<PrestationsRealisees> findByIdMenage(Object id);
+
+	List<PrestationsRealisees> findByIdPrestation(Object id);
+
+	List<PrestationsRealisees> findByIdUtilisateur(Object id);
 
 	void remove(PrestationsRealisees prest);
 
