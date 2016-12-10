@@ -3,7 +3,7 @@
 # HAWKULAR
 if [ ! -z "$HAWKULAR_USERNAME" ]; then
     cd $INSTALL_FOLDER/hawkular/
-    curl -u $HAWKULAR_USERNAME:$HAWKULAR_PASSWORD http://192.168.99.100:8080/hawkular/wildfly-agent/download
+    curl -u $HAWKULAR_USERNAME:$HAWKULAR_PASSWORD http://$HAWKULAR_HOST/hawkular/wildfly-agent/download
     if [ $? -ne 0 ]; then
         exit 1; # Exit on failure
     fi
