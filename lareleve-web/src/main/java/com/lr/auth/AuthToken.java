@@ -93,9 +93,14 @@ public class AuthToken implements Serializable {
 		final HashMap<String, Object> claims = new HashMap<String, Object>();
 		claims.put("username", this.username);
 		claims.put("expirationDate", this.expirationDate);
-		claims.put("roles", this.roles.size());
-		for (int i = 0; i < this.roles.size(); i++) {
-			claims.put("roles_" + i, this.roles.get(i));
+
+		if (this.roles != null) {
+			claims.put("roles", this.roles.size());
+			for (int i = 0; i < this.roles.size(); i++) {
+				claims.put("roles_" + i, this.roles.get(i));
+			}
+		} else {
+			claims.put("roles", 0);
 		}
 
 		/* Sign */
@@ -162,12 +167,11 @@ public class AuthToken implements Serializable {
 	public String toString() {
 		StringBuilder strRoles = new StringBuilder();
 		strRoles.append('[');
-		if (roles.size() > 0) {
+		if (roles != null && roles.size() > 0) {
 			strRoles.append(roles.get(0));
 			for (int i = 1; i < roles.size(); i++) {
 				strRoles.append(", " + roles.get(i));
 			}
-
 		}
 		strRoles.append(']');
 
