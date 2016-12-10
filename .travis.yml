@@ -14,7 +14,7 @@ script:
   - gradle buildImage --stacktrace
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then; docker push gattazr/lareleve:latest; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then; docker push gattazr/lareleve:stable; fi
   - if [ "$TRAVIS_BRANCH" == "develop" ]; then; docker push gattazr/lareleve:latest; fi
 
 cache:
