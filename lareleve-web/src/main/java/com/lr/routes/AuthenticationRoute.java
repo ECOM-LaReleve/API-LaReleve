@@ -18,6 +18,7 @@ import com.lr.auth.AuthToken;
 import com.lr.auth.LaRelevePrincipal;
 import com.lr.auth.Secured;
 import com.lr.entity.Credentials;
+import com.lr.entity.MD5Hashing;
 import com.lr.entity.Role.RoleName;
 import com.lr.listeners.LaReleveContext;
 import com.lr.remote.IAuthenticationEJBRemote;
@@ -51,8 +52,7 @@ public class AuthenticationRoute extends BasicRoute {
 
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
-		// TODO Hash password
-		String hashedPassword = authEJB.MD5Hashing(password);
+		String hashedPassword = MD5Hashing.getInstance().MD5Hashing(password);
 
 		if (authEJB.checkCredentials(username, hashedPassword)) {
 

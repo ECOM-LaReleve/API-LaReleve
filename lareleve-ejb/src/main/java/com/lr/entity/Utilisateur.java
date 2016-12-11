@@ -148,7 +148,7 @@ public class Utilisateur implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = MD5Hashing.getInstance().MD5Hashing(password);
 	}
 
 	public void setPrenom(String prenom) {
@@ -162,6 +162,8 @@ public class Utilisateur implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+
 
 	@Override
 	public String toString() {

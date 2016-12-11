@@ -13,5 +13,4 @@ public interface IAuthenticationEJBRemote {
 
 	public List<RoleName> getRoles(String username);
 
-	public String MD5Hashing(String password);
 }
