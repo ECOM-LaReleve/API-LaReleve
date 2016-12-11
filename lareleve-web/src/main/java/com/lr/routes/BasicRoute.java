@@ -15,6 +15,8 @@ public abstract class BasicRoute {
 
 	protected static final ISimpleLogger LOGGER = LaReleveContext.LOGGER;
 
+	public static final String ENCODING = ";charset=utf-8";
+
 	public static ResponseBuilder responseBuilder(Status status) {
 		return Response.status(status);
 		// .header("Access-Control-Allow-Origin", "*")

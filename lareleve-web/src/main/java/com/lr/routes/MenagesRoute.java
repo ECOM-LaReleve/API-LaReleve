@@ -24,8 +24,8 @@ import com.lr.remote.IMenageEJBRemote;
  * Handler of routes /menages
  */
 @Path("/menages")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class MenagesRoute extends BasicRoute {
 
 	@EJB

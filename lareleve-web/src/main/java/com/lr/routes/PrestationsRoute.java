@@ -23,8 +23,8 @@ import com.lr.remote.IPrestationEJBRemote;
  * Handler of routes /prestations
  */
 @Path("/prestations")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class PrestationsRoute extends BasicRoute {
 
 	@EJB

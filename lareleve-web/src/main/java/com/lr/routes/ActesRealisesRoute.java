@@ -24,8 +24,8 @@ import com.lr.remote.IActesRealisesEJBRemote;
  * Handler of routes /actesrealises
  */
 @Path("/actesrealises")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class ActesRealisesRoute extends BasicRoute {
 
 	@EJB

@@ -111,7 +111,8 @@ public class Utilisateur implements Serializable {
 	}
 
 	public String getPassword() {
-		return password;
+		//return password;
+		return null;
 	}
 	/*
 	public Collection<Pole> getPoles() {

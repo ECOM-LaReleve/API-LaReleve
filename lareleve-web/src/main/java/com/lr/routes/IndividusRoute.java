@@ -25,8 +25,8 @@ import com.lr.remote.IIndividuEJBRemote;
  * Handler of routes /individus
  */
 @Path("/individus")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class IndividusRoute extends BasicRoute {
 
 	@EJB

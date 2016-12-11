@@ -21,8 +21,8 @@ import com.lr.remote.IPoleEJBRemote;
  * Handler of routes /actes
  */
 @Path("/poles")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class PolesRoute extends BasicRoute {
 
 	@EJB

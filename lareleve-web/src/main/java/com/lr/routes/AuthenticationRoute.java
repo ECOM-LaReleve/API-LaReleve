@@ -27,8 +27,8 @@ import com.lr.remote.IUtilisateurEJBRemote;
  * Handler of routes /auth
  */
 @Path("/auth")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class AuthenticationRoute extends BasicRoute {
 
 	@EJB

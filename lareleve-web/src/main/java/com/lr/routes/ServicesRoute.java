@@ -21,8 +21,8 @@ import com.lr.remote.IServiceEJBRemote;
  * Handler of routes /actes
  */
 @Path("/services")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class ServicesRoute extends BasicRoute {
 
 	@EJB

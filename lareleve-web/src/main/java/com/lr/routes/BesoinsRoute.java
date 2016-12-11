@@ -21,8 +21,8 @@ import com.lr.remote.IBesoinEJBRemote;
  * Handler of routes /besoins
  */
 @Path("/besoins")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
+@Produces(MediaType.APPLICATION_JSON + BasicRoute.ENCODING)
 public class BesoinsRoute extends BasicRoute {
 
 	@EJB
