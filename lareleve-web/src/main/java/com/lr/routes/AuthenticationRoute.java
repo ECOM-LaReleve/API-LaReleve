@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.lr.auth.AuthResponse;
 import com.lr.auth.AuthToken;
 import com.lr.auth.LaRelevePrincipal;
 import com.lr.auth.Secured;
@@ -42,8 +43,7 @@ public class AuthenticationRoute extends BasicRoute {
 	@POST
 	@Path("/login")
 	public Response login(Credentials credentials) {
-		LOGGER.logDebug(this, "AuthenticationRoute.login", "username=%s",
-				credentials.getUsername());
+		LOGGER.logDebug(this, "AuthenticationRoute.login", "username=%s",credentials.getUsername());
 
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
@@ -73,8 +73,15 @@ public class AuthenticationRoute extends BasicRoute {
 			usertokens.add(token);
 			LaReleveContext.TOKENS.put(username, usertokens);
 
-			String out = String.format("{ \"token\": \"%s\" }", token.generate());
-			return responseBuilder(Status.OK).entity(out).build();
+			//String out = String.format("{ \"token\": \"%s\" }", token.generate());
+			AuthResponse response = new AuthResponse();
+			response.setToken(token.generate());
+			LOGGER.logInfo(this, "token : ", token.generate());
+			LOGGER.logInfo(this, "token set : ", response.getToken());
+			response.setRoles(roleNames);
+			LOGGER.logInfo(this, "roles : ", roleNames);
+			LOGGER.logInfo(this, "roles set : ", response.getRoles());
+			return responseBuilder(Status.OK).entity(response).build();
 		}
 		// Wrong username and/or password
 		return responseBuilder(Status.UNAUTHORIZED).build();
