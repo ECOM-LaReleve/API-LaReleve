@@ -47,6 +47,14 @@ implements IUtilisateurEJBLocal, IUtilisateurEJBRemote {
 	}
 
 	@Override
+	public Utilisateur findByUsername(String name) {
+		LOGGER.logDebug(this, "<READ BY USERNAME>", "em=[%s], name=%s", em, name);
+		Query query = em.createNamedQuery("Utilisateur.findByUsername");
+		query.setParameter("name", name);
+		return (Utilisateur) query.getSingleResult();
+	}
+
+	@Override
 	public void remove(Utilisateur utilisateur) {
 		LOGGER.logDebug(this, "<DELETE>", utilisateur);
 		em.remove(em.merge(utilisateur));

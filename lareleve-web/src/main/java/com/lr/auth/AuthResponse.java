@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.lr.entity.Role.RoleName;
+import com.lr.entity.Utilisateur;
 
 public class AuthResponse implements Serializable {
 
@@ -11,13 +12,18 @@ public class AuthResponse implements Serializable {
 
 	private String token;
 	private List<RoleName> roles;
+	private Utilisateur user;
 
 	public List<RoleName> getRoles(){
-		return roles;
+		return this.roles;
 	}
 
 	public String getToken(){
-		return token;
+		return this.token;
+	}
+
+	public Utilisateur getUtilisateur(){
+		return this.user;
 	}
 
 	public void setRoles(List<RoleName> roleNames){
@@ -26,6 +32,10 @@ public class AuthResponse implements Serializable {
 
 	public void setToken(String token){
 		this.token = token;
+	}
+
+	public void setUtilisateur(Utilisateur username){
+		this.user = username;
 	}
 
 }

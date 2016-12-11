@@ -21,6 +21,7 @@ import com.lr.entity.Credentials;
 import com.lr.entity.Role.RoleName;
 import com.lr.listeners.LaReleveContext;
 import com.lr.remote.IAuthenticationEJBRemote;
+import com.lr.remote.IUtilisateurEJBRemote;
 
 /**
  * Handler of routes /auth
@@ -32,6 +33,9 @@ public class AuthenticationRoute extends BasicRoute {
 
 	@EJB
 	private IAuthenticationEJBRemote authEJB;
+
+	@EJB
+	private IUtilisateurEJBRemote userEJB;
 
 	/**
 	 * Login route
@@ -76,11 +80,8 @@ public class AuthenticationRoute extends BasicRoute {
 			//String out = String.format("{ \"token\": \"%s\" }", token.generate());
 			AuthResponse response = new AuthResponse();
 			response.setToken(token.generate());
-			LOGGER.logInfo(this, "token : ", token.generate());
-			LOGGER.logInfo(this, "token set : ", response.getToken());
 			response.setRoles(roleNames);
-			LOGGER.logInfo(this, "roles : ", roleNames);
-			LOGGER.logInfo(this, "roles set : ", response.getRoles());
+			response.setUtilisateur(userEJB.findByUsername(username));
 			return responseBuilder(Status.OK).entity(response).build();
 		}
 		// Wrong username and/or password

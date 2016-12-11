@@ -19,6 +19,8 @@ public interface IUtilisateurEJBRemote {
 
 	List<Utilisateur> findByIdService(Object id);
 
+	Utilisateur findByUsername(String name);
+
 	void remove(Utilisateur utilisateur);
 
 }
