@@ -52,7 +52,7 @@ public class AuthenticationRoute extends BasicRoute {
 		String username = credentials.getUsername();
 		String password = credentials.getPassword();
 		// TODO Hash password
-		String hashedPassword = password;
+		String hashedPassword = authEJB.MD5Hashing(password);
 
 		if (authEJB.checkCredentials(username, hashedPassword)) {
 

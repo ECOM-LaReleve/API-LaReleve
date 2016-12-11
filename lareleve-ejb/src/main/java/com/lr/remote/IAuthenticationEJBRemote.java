@@ -12,4 +12,6 @@ public interface IAuthenticationEJBRemote {
 	public boolean checkCredentials(String username, String hashedPassword);
 
 	public List<RoleName> getRoles(String username);
+
+	public String MD5Hashing(String password);
 }
