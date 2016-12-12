@@ -33,7 +33,7 @@ public class NationnalitesRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "nationnaliteEJB=[%s], nationnalite=%s",(nationnaliteEJB != null ? "set" : "null"), aNationnalite);
 		try {
 			nationnaliteEJB.create(aNationnalite);
-			return responseBuilder(Response.Status.OK).build();
+			return responseBuilder(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

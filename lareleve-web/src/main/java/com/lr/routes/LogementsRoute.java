@@ -33,7 +33,7 @@ public class LogementsRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "logementEJB=[%s], logement=%s",(logementEJB != null ? "set" : "null"), aLogement);
 		try {
 			logementEJB.create(aLogement);
-			return responseBuilder(Response.Status.OK).build();
+			return responseBuilder(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

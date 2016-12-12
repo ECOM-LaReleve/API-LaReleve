@@ -33,7 +33,7 @@ public class BesoinsRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "besoinEJB=[%s], besoin=%s",(besoinEJB != null ? "set" : "null"), aBesoin);
 		try {
 			besoinEJB.create(aBesoin);
-			return responseBuilder(Response.Status.OK).build();
+			return responseBuilder(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

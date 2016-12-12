@@ -33,7 +33,7 @@ public class LanguesIndividusRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "langueindividuEJB=[%s], langueindividu=%s",(langueindividuEJB != null ? "set" : "null"), alangueindividu);
 		try {
 			langueindividuEJB.create(alangueindividu);
-			return responseBuilder(Response.Status.OK).build();
+			return responseBuilder(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

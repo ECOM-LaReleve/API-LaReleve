@@ -37,7 +37,7 @@ public class IndividusRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "IndividuEJB=[%s], individu=%s", (individuEJB != null ? "set" : "null"), aIndividu);
 		try {
 			individuEJB.create(aIndividu);
-			return responseBuilder(Response.Status.OK).build();
+			return responseBuilder(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

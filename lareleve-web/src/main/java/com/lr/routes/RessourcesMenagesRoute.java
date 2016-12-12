@@ -33,7 +33,7 @@ public class RessourcesMenagesRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "ressourcemenageEJB=[%s], ressourcemenage=%s",(ressourcemenageEJB != null ? "set" : "null"), aressourcemenage);
 		try {
 			ressourcemenageEJB.create(aressourcemenage);
-			return responseBuilder(Response.Status.OK).build();
+			return responseBuilder(Response.Status.CREATED).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

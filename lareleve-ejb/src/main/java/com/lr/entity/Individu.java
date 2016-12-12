@@ -96,7 +96,7 @@ public class Individu implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StatutEntreeFrance statutFr;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "idMenage")
 	private Menage menage;
 

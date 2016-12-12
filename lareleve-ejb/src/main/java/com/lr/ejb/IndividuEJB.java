@@ -15,7 +15,7 @@ public class IndividuEJB extends BasicEJB implements IIndividuEJBRemote{
 	@Override
 	public void create(Individu individu) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], individu=%s", em, individu);
-		em.persist(individu);
+		em.merge(individu);
 	}
 
 	@Override
