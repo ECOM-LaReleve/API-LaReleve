@@ -36,8 +36,8 @@ public class MenagesRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "MenageEJB=[%s], menage=%s", (menageEJB != null ? "set" : "null"), aMenage);
 		try {
 			int newid = menageEJB.create(aMenage);
-			String out = String.format("{ \"id\": \"%s\" }", newid);
-			return responseBuilder(Response.Status.CREATED).entity(out).build();
+			aMenage.setId(newid);
+			return responseBuilder(Response.Status.CREATED).entity(aMenage).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();
