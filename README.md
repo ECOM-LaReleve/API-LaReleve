@@ -16,201 +16,201 @@
 
 **Utilisateurs**
 
-Description | Route |
------------ | ----- |
-Find all | /utilisateurs
-Find by id | /utilisateurs/{id}
-POST | /utilisateurs
-PUT | /utilisateurs/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /utilisateurs | Find all
+GET | /utilisateurs/{id} | Find by id
+POST | /utilisateurs | |
+PUT | /utilisateurs/{id} | |
 
 
 **Individus**
 
-Description | Route |
------------ | ----- |
-Find all | /individus
-Find by id | /individus/{id}
-Find menage by individu name | /individus?menage={nomUsage}
-Find individu by id menage | /individus?idmenage={id}
-POST | /individus
-PUT | /individus/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /individus | Find all
+GET | /individus/{id} | Find by id
+GET | /individus?menage={nomUsage} | Find menage by individu name
+GET | /individus?idmenage={id} | Find individu by id menage
+POST | /individus | |
+PUT | /individus/{id} | |
 
 
 **Menages**
 
-Description | Route |
------------ | ----- |
-Find all | /menages
-Find by id | /menages/{id}
-Find menage by id referent | /menages?idreferant={id}
-POST | /menages
-PUT |/menages/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /menages | Find all
+GET | /menages/{id} | Find by id
+GET | /menages?idreferant={id} | Find menage by id referent
+POST | /menages | |
+PUT | /menages/{id} | |
 
 
 **Poles**
 
-Description | Route |
------------ | ----- |
-Find all | /poles
-Find by id | /poles/{id}
-POST | /poles
-PUT | /poles/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /poles | Find all
+GET | /poles/{id} | Find by id
+POST | /poles | |
+PUT | /poles/{id} | |
 
 
 **Services**
 
-Description | Route |
------------ | ----- |
-Find all | /services
-Find by id | /services/{id}
-POST | /services
-PUT | /services/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /services | Find all
+GET | /services/{id} | Find by id
+POST | /services | |
+PUT | /services/{id} | |
 
 
 **Besoins**
 
-Description | Route |
------------ | ----- |
-Find all | /besoins
-Find by id | /besoins/{id}
-POST | /besoins
-PUT | /besoins/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /besoins | Find all
+GET | /besoins/{id} | Find by id
+POST | /besoins | |
+PUT | /besoins/{id} | |
 
 
 **Prestations**
 
-Description | Route |
------------ | ----- |
-Find all | /prestations
-Find by id | /prestations/{id}
-POST | /prestations
-PUT | /prestations/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /prestations | Find all
+GET | /prestations/{id} | Find by id
+POST | /prestations | |
+PUT | /prestations/{id} | |
 
 
 **Prestations réalisées**
 
-Description | Route |
------------ | ----- |
-Find all | /prestationsrealisees
-Find by id | /prestationsrealisees/{id}
-Find prestations realisees by id utilisateur | /prestationsrealisees?idutilisateur={id}
-Find prestations realisees by id individu | /prestationsrealisees?idindividu={id}
-Find prestations realisees by id menage | /prestationsrealisees?idmenage={id}
-Find prestations realisees by id prestation | /prestationsrealisees?idprestation={id}
-POST | /prestationsrealisees
-PUT | /prestationsrealisees/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /prestationsrealisees | Find all 
+GET | /prestationsrealisees/{id} | Find by id
+GET | /prestationsrealisees?idutilisateur={id} | Find prestations realisees by id utilisateur
+GET | /prestationsrealisees?idindividu={id} | Find prestations realisees by id individu
+GET | /prestationsrealisees?idmenage={id} | Find prestations realisees by id menage
+GET | /prestationsrealisees?idprestation={id} | Find prestations realisees by id prestation
+POST | /prestationsrealisees | |
+PUT | /prestationsrealisees/{id} | |
 
 
 **Actes**
 
-Description | Route |
------------ | ----- |
-Find all | /actes
-Find by id | /actes/{id}
-POST | /actes
-PUT | /actes/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /actes | Find all
+GET | /actes/{id} | Find by id
+POST | /actes | |
+PUT | /actes/{id} | |
 
 
 **Actes réalisés**
 
-Description | Route |
------------ | ----- |
-Find all | /actesrealises
-Find by id | /actesrealises/{id}
-Find actes realises by id utilisateur | /actesrealisees?idutilisateur={id}
-Find actes realises by id individu | /actesrealisees?idindividu={id}
-Find actes realises by id menage | /actesrealisees?idmenage={id}
-Find actes realises by id acte | /actesrealisees?idacte={id}
-Find actes realises by id besoin | /actesrealisees?idbesoin={id}
-Find actes realises by id prestation | /actesrealisees?idprestation={id}
-POST | /actesrealises
-PUT | /actesrealises/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /actesrealises | Find all
+GET | /actesrealises/{id} | Find by id
+GET | /actesrealisees?idutilisateur={id} | Find actes realises by id utilisateur
+GET | /actesrealisees?idindividu={id} | Find actes realises by id individu
+GET | /actesrealisees?idmenage={id} | Find actes realises by id menage
+GET | /actesrealisees?idacte={id} | Find actes realises by id acte
+GET | /actesrealisees?idbesoin={id} | Find actes realises by id besoin
+GET | /actesrealisees?idprestation={id} | Find actes realises by id prestation
+POST | /actesrealises | |
+PUT | /actesrealises/{id} | |
 
 
 **Logements**
 
-Description | Route |
------------ | ----- |
-Find all | /logements
-Find by id | /logements/{id}
-POST | /logements
-PUT | /logements/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /logements | Find all
+GET | /logements/{id} | Find by id
+POST | /logements | |
+PUT | /logements/{id} | |
 
 
 **Langues**
 
-Description | Route |
------------ | ----- |
-Find all | /langues
-Find by id | /langues/{id}
-POST | /langues
-PUT | /langues/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /langues | Find all
+GET | /langues/{id} | Find by id
+POST | /langues | |
+PUT | /langues/{id} | |
 
 
 **Langues individus**
 
-Description | Route |
------------ | ----- |
-Find all | /languesindividus
-Find by id | /languesindividus/{id}
-Find langues individus by id langue | /languesindividus?idlangue={id}
-Find langues individus by id individu | /languesindividus?idindividu={id}
-POST | /languesindividus
-PUT | /languesindividus/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /languesindividus | Find all
+GET | /languesindividus/{id} | Find by id
+GET | /languesindividus?idlangue={id} | Find langues individus by id langue
+GET | /languesindividus?idindividu={id} | Find langues individus by id individu
+POST | /languesindividus | |
+PUT | /languesindividus/{id} | |
 
 
 **Nationnalités**
 
-Description | Route |
------------ | ----- |
-Find all | /nationnalites
-Find by id | /nationnalites/{id}
-POST | /nationnalites
-PUT | /nationnalites/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /nationnalites | Find all 
+GET | /nationnalites/{id} | Find by id
+POST | /nationnalites | |
+PUT | /nationnalites/{id} | |
 
 
 **Nationnalités individus**
 
-Description | Route |
------------ | ----- |
-Find all | /nationnalitesindividus
-Find by id | /nationnalitesindividus/{id}
-Find nationnalites individus by id nationnalite | /nationnalitesindividus?idnationnalite={id}
-Find nationnalites individus by id individu | /nationnalitesindividus?idindividu={id}
-POST | /nationnalitesindividus
-PUT | /nationnalitesindividus/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /nationnalitesindividus | Find all
+GET | /nationnalitesindividus/{id} | Find by id
+GET | /nationnalitesindividus?idnationnalite={id} | Find nationnalites individus by id nationnalite
+GET | /nationnalitesindividus?idindividu={id} | Find nationnalites individus by id individu
+POST | /nationnalitesindividus | |
+PUT | /nationnalitesindividus/{id} | |
 
 
 **Ressources**
 
-Description | Route |
------------ | ----- |
-Find all | /ressources
-Find by id | /ressources/{id}
-POST | /ressources
-PUT | /ressources/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /ressources | Find all
+GET | /ressources/{id} | Find by id
+POST | /ressources | |
+PUT | /ressources/{id} | |
 
 
 **Ressources individus**
 
-Description | Route |
------------ | ----- |
-Find all | /ressourcesindividus
-Find by id | /ressourcesindividus/{id}
-Find ressource individus by id individu | /ressourcesindividus?idindividu={id}
-Find ressource individus by id ressource | /ressourcesindividus?idressource={id}
-POST | /ressourcesindividus
-PUT | /ressourcesindividus/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /ressourcesindividus | Find all
+GET | /ressourcesindividus/{id} | Find by id 
+GET | /ressourcesindividus?idindividu={id} | Find ressource individus by id individu
+GET | /ressourcesindividus?idressource={id} | Find ressource individus by id ressource
+POST | /ressourcesindividus | |
+PUT | /ressourcesindividus/{id} | |
 
 
 **Ressources menages**
 
-Description | Route |
------------ | ----- |
-Find all | /ressourcesmenages
-Find by id | /ressourcesmenages/{id}
-Find ressource menages by id menage | /ressourcesmenages?idmenage={id}
-Find ressource menages by id ressource | /ressourcesmenages?idressource={id}
-POST | /ressourcesmenages
-PUT | /ressourcesmenages/{id}
+Request | Route | Description |
+------- | ----- | ----------- |
+GET | /ressourcesmenages | Find all
+GET | /ressourcesmenages/{id} | Find by id
+GET | /ressourcesmenages?idmenage={id} | Find ressource menages by id menage
+GET | /ressourcesmenages?idressource={id} | Find ressource menages by id ressource
+POST | /ressourcesmenages | |
+PUT | /ressourcesmenages/{id} | |
 
