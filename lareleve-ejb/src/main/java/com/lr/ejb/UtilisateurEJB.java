@@ -3,6 +3,7 @@ package com.lr.ejb;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 import com.lr.entity.Utilisateur;
 import com.lr.local.IUtilisateurEJBLocal;
@@ -10,12 +11,14 @@ import com.lr.remote.IUtilisateurEJBRemote;
 
 @Stateless
 public class UtilisateurEJB extends BasicEJB
-		implements IUtilisateurEJBLocal, IUtilisateurEJBRemote {
+implements IUtilisateurEJBLocal, IUtilisateurEJBRemote {
 
 	@Override
-	public void create(Utilisateur utilisateur) {
+	public int create(Utilisateur utilisateur) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], utilisateur=%s", em, utilisateur);
 		em.persist(utilisateur);
+		em.flush();
+		return utilisateur.getId();
 	}
 
 	@Override
@@ -31,10 +34,26 @@ public class UtilisateurEJB extends BasicEJB
 	}
 
 	@Override
-	public List<Utilisateur> findAll() {
+	public List findAll() {
 		LOGGER.logDebug(this, "<READ ALL>", "em=[%s]", em);
-		String wQuery = String.format("select object(o) from %s as o", Utilisateur.class.getName());
-		return em.createQuery(wQuery).getResultList();
+		Query query = em.createNamedQuery("Utilisateur.findAll");
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Utilisateur> findByIdService(Object id) {
+		LOGGER.logDebug(this, "<READ BY ID SERVICE>", "em=[%s], id=%s", em, id);
+		Query query = em.createNamedQuery("Utilisateur.findByIdService");
+		query.setParameter("id", id);
+		return query.getResultList();
+	}
+
+	@Override
+	public Utilisateur findByUsername(String name) {
+		LOGGER.logDebug(this, "<READ BY USERNAME>", "em=[%s], name=%s", em, name);
+		Query query = em.createNamedQuery("Utilisateur.findByUsername");
+		query.setParameter("name", name);
+		return (Utilisateur) query.getSingleResult();
 	}
 
 	@Override

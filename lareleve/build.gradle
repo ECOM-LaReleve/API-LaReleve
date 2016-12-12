@@ -27,43 +27,59 @@ eclipse.project {
     natures 'org.springsource.ide.eclipse.gradle.core.nature'
 }
 
-/* DOCKER PLUGIN */
-/* Add docker plugin as dependency */
+/* Docker plugin */
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
-
     dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:3.0.3'
+        classpath "de.gesellix:gradle-docker-plugin:2016-10-07T21-04-39"
     }
 }
-
-/* DOCKER PLUGIN CONFIGURATION */
-apply plugin: 'com.bmuschko.docker-remote-api'
-apply plugin: 'com.bmuschko.docker-java-application'
-repositories {
-    mavenCentral()
-}
-
-
-
-/* Imports */
-import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+apply plugin: "de.gesellix.docker"
 
 /* copy builded libs into docker folder */
 task prepareImage(type: Copy) {
-    dependsOn build
     from 'build/libs'
     into 'docker/build'
 }
+prepareImage.dependsOn build
+
 /* When cleaning project, remove also build folder in docker folder */
 clean.doFirst {
     delete "${rootDir}/docker/build"
 }
 
+def IMAGE_NAME = "gattazr/lareleve"
+def TAG_NAME = "latest"
+
 /* Creation of Docker image */
-task buildImage(type: DockerBuildImage) {
-    dependsOn prepareImage
-    tag = 'lareleve:latest'
+import de.gesellix.gradle.docker.tasks.DockerBuildTask
+task buildImage(type: DockerBuildTask) {
+    imageName = IMAGE_NAME + ':' + TAG_NAME
+    buildContextDirectory = file("docker")
 }
+buildImage.dependsOn prepareImage
+
+/* Custom task : deployLocal to deploy builded ear in $JEE_CONTAINER folder */
+task deployLocal {
+    doLast {
+        // Check environment variable. JEE_CONTAINER must exist
+        def location = System.env.JEE_CONTAINER
+        if(!location) {
+            throw new GradleException('Environment variable JEE_CONTAINER is not set')
+        }
+
+        // Remove already deployed ear
+        print "remove old ear: ${location}/${project.name}*\n"
+        delete fileTree(dir: "${location}", include: "${project.name}*")
+
+        // copy new ear
+        print "set new ear: build/libs/${project.name}.ear\n"
+        copy {
+            from "build/libs/${project.name}.ear"
+            into "${location}/"
+        }
+    }
+}
+deployLocal.dependsOn build
