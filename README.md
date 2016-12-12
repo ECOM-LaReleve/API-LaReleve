@@ -17,7 +17,7 @@
 **GET**
 
 
-FIND ALL :
+Find all :
 ```javascript 
 /poles  
 /services  
@@ -40,7 +40,7 @@ FIND ALL :
 ```
 
 
-FIND BY ID :
+Find by id :
 ```javascript
 /poles/{id}
 /services/{id}
@@ -63,110 +63,110 @@ FIND BY ID :
 ```
 
 
-FIND PRESTATIONS REALISEES BY ID UTILISATEUR :
+Find prestations realisees by id utilisateur :
 ```javascript
 /prestationsrealisees?idutilisateur={id}
 ```
 
-FIND PRESTATIONS REALISEES BY ID INDIVIDU :
+Find prestations realisees by id individu :
 ```javascript
 /prestationsrealisees?idindividu={id}
 ```
 
-FIND PRESTATIONS REALISEES BY ID MENAGE :
+Find prestations realisees by id menage :
 ```javascript
 /prestationsrealisees?idmenage={id}
 ```
 
-FIND PRESTATIONS REALISEES BY ID PRESTATION :
+Find prestations realisees by id prestation :
 ```javascript
 /prestationsrealisees?idprestation={id}
 ```
 
 
-FIND ACTES REALISES BY ID UTILISATEUR :
+Find actes realises by id utilisateur :
 ```javascript
 /actesrealisees?idutilisateur={id}
 ```
 
-FIND ACTES REALISES BY ID INDIVIDU :
+Find actes realises by id individu :
 ```javascript
 /actesrealisees?idindividu={id}
 ```
 
-FIND ACTES REALISES BY ID MENAGE :
+Find actes realises by id menage :
 ```javascript
 /actesrealisees?idmenage={id}
 ```
 
-FIND ACTES REALISES BY ID ACTE :
+Find actes realises by id acte :
 ```javascript
 /actesrealisees?idacte={id}
 ```
 
-FIND ACTES REALISES BY ID BESOIN :
+Find actes realises by id besoin :
 ```javascript
 /actesrealisees?idbesoin={id}
 ```
 
-FIND ACTES REALISES BY ID PRESTATION :
+Find actes realises by id prestation :
 ```javascript
 /actesrealisees?idprestation={id}
 ```
 
 
-FIND MENAGE BY ID REFERENT:
+Find menage by id referent :
 ```javascript
 /menages?idreferant={id}
 ```
 
-FIND MENAGE BY INDIVIDU NAME:
+Find menage by individu name :
 ```javascript
 /individus?menage={nomUsage}
 ```
 
-FIND INDIVIDUS BY ID MENAGE:
+Find individu by id menage :
 ```javascript
 /individus?idmenage={id}
 ```
 
 
-FIND LANGUES INDIVIDUS BY ID LANGUE :
+Find langues individus by id langue :
 ```javascript
 /languesindividus?idlangue={id}
 ```
 
-FIND LANGUES INDIVIDUS BY ID INDIVIDU :
+Find langues individus by id individu :
 ```javascript
 /languesindividus?idindividu={id}
 ```
 
-FIND NATIONNALITES INDIVIDUS BY ID NATIONNALITE :
+Find nationnalites individus by id nationnalite :
 ```javascript
 /nationnalitesindividus?idnationnalite={id}
 ```
 
-FIND NATIONNALITES INDIVIDUS BY ID INDIVIDU :
+Find nationnalites individus by id individu :
 ```javascript
 /nationnalitesindividus?idindividu={id}
 ```
 
-FIND RESSOURCES INDIVIDUS BY ID INDIVIDU :
+Find ressource individus by id individu :
 ```javascript
 /ressourcesindividus?idindividu={id}
 ```
 
-FIND RESSOURCES INDIVIDUS BY ID RESSOURCE :
+Find ressource individus by id ressource :
 ```javascript
 /ressourcesindividus?idressource={id}
 ```
 
-FIND RESSOURCES MENAGES BY ID MENAGE :
+Find ressource menages by id menage :
 ```javascript
 /ressourcesmenages?idmenage={id}
 ```
 
-FIND RESSOURCES MENAGES BY ID RESSOURCE :
+Find ressource menages by id ressource :
 ```javascript
 /ressourcesmenages?idressource={id}
 ```
