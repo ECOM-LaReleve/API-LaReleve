@@ -9,14 +9,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Logements")
+@NamedQueries({
+	@NamedQuery(name = "Logement.findAll", query = "SELECT l FROM Logement l"),
+	@NamedQuery(name = "Logement.findById", query = "SELECT l FROM Logement l WHERE l.id = :id")
+})
 public class Logement implements Serializable {
 
 	public enum StatutLogement {
-		PASSIF("Passif"), ACTIF("Actif");
+		Passif("Passif"), Actif("Actif");
 
 		private String name = "";
 
@@ -31,7 +37,7 @@ public class Logement implements Serializable {
 	}
 
 	public enum TypeLogement {
-		APPARTEMENT("Appartement"), MAISON("Maison");
+		Appartement("Appartement"), Maison("Maison");
 
 		private String name = "";
 

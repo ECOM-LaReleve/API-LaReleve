@@ -16,7 +16,7 @@ public class RessourcesIndividusID implements Serializable {
 	private Individu individu;
 
 	@ManyToOne
-	@JoinColumn(name = "idRessource")
+	@JoinColumn(name = "idRessources")
 	private Ressource ressource;
 
 	public Individu getIndividu() {
