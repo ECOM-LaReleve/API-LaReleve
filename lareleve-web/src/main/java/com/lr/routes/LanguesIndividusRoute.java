@@ -74,7 +74,7 @@ public class LanguesIndividusRoute extends BasicRoute {
 	}
 
 	private Response findByIdLangue(String id) {
-		LOGGER.logDebug(this, "<GET /{:idlangue}>", "languelangueEJB=[%s], idlangue=%s",(langueindividuEJB != null ? "set" : "null"), id);
+		LOGGER.logDebug(this, "<GET /{:idlangue}>", "langueindividuEJB=[%s], idlangue=%s",(langueindividuEJB != null ? "set" : "null"), id);
 		List<LanguesIndividus> languesindividus = null;
 		try{
 			int idlangue = Integer.parseInt(id);
