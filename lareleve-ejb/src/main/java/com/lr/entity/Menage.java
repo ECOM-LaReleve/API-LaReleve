@@ -3,6 +3,7 @@ package com.lr.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -41,6 +42,9 @@ public class Menage implements Serializable {
 	private String adresseActuelle;
 
 	private String adresseSortie;
+
+	@Column(nullable = false)
+	private String nomChefMenage;
 
 	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	//@JoinColumn(name = "idChefMenage")
@@ -123,25 +127,29 @@ public class Menage implements Serializable {
 	//	return prestationsRealisees;
 	//}
 
-	public Utilisateur getReferant() {
-		return referant;
+	public String getNomChefMenage() {
+		return nomChefMenage;
 	}
 
 	//public Set<RessourcesMenages> getRessourcesMenages() {
 	//	return ressourcesMenages;
 	//}
 
-	public void setAdresseActuelle(String adresseActuelle) {
-		this.adresseActuelle = adresseActuelle;
+	public Utilisateur getReferant() {
+		return referant;
 	}
 
-	public void setAdresseSortie(String adresseSortie) {
-		this.adresseSortie = adresseSortie;
+	public void setAdresseActuelle(String adresseActuelle) {
+		this.adresseActuelle = adresseActuelle;
 	}
 
 	//public void setChefMenage(Individu chefMenage) {
 	//	this.chefMenage = chefMenage;
 	//}
+
+	public void setAdresseSortie(String adresseSortie) {
+		this.adresseSortie = adresseSortie;
+	}
 
 	public void setDateEntree(Date dateEntree) {
 		this.dateEntree = dateEntree;
@@ -157,6 +165,10 @@ public class Menage implements Serializable {
 
 	public void setLogement(Logement logement) {
 		this.logement = logement;
+	}
+
+	public void setNomChefMenage(String nomChefMenage) {
+		this.nomChefMenage = nomChefMenage;
 	}
 
 	public void setReferant(Utilisateur referant) {

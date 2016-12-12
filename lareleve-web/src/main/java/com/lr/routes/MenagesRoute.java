@@ -112,8 +112,9 @@ public class MenagesRoute extends BasicRoute {
 			menage.setAdresseSortie(aMenage.getAdresseSortie());
 			menage.setDateEntree(aMenage.getDateEntree());
 			menage.setDateSortie(aMenage.getDateSortie());
-			//menage.setLogement(aMenage.getLogement());
+			menage.setLogement(aMenage.getLogement());
 			menage.setReferant(aMenage.getReferant());
+			menage.setNomChefMenage(aMenage.getNomChefMenage());
 			menageEJB.edit(menage);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {
