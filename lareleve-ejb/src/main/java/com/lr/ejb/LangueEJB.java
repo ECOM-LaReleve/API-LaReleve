@@ -18,6 +18,12 @@ public class LangueEJB extends BasicEJB implements ILangueEJBRemote{
 	}
 
 	@Override
+	public void edit(Langue langue) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], langue=%s", em, langue);
+		em.merge(langue);
+	}
+
+	@Override
 	public Langue find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Langue.findById");

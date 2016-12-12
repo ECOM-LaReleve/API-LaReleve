@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -96,6 +97,22 @@ public class PrestationsRoute extends BasicRoute {
 			return responseBuilder(Response.Status.OK).entity(prestation).build();
 		}
 		return responseBuilder(Response.Status.NO_CONTENT).build();
+	}
+
+	@PUT
+	@Path("{id : \\d+}") // id must be digits
+	public Response update(@PathParam("id") String id, Prestation aPrestation) {
+		LOGGER.logDebug(this, "<PUT>", "prestationsEJB=[%s], prestations=%s",(prestationEJB != null ? "set" : "null"), aPrestation);
+		try {
+			Prestation prestation = prestationEJB.find(Integer.parseInt(id));
+			prestation.setLibelle(aPrestation.getLibelle());
+			prestation.setBesoin(aPrestation.getBesoin());
+			prestationEJB.edit(prestation);
+			return responseBuilder(Response.Status.OK).build();
+		} catch (Exception e) {
+			LOGGER.logDebug(this, "<POST>", "Bad Request");
+			return responseBuilder(Response.Status.BAD_REQUEST).build();
+		}
 	}
 
 

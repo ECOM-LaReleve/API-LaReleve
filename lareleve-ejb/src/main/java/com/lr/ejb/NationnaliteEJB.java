@@ -18,6 +18,12 @@ public class NationnaliteEJB extends BasicEJB implements INationnaliteEJBRemote{
 	}
 
 	@Override
+	public void edit(Nationnalite nationnalite) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], nationnalite=%s", em, nationnalite);
+		em.merge(nationnalite);
+	}
+
+	@Override
 	public Nationnalite find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Nationnalite.findById");

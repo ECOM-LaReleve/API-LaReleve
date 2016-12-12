@@ -11,6 +11,8 @@ public interface IActeEJBRemote {
 
 	void create(Acte acte);
 
+	void edit(Acte acte);
+
 	Acte find(Object id);
 
 	List<Acte> findAll();

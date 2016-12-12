@@ -18,6 +18,11 @@ public class BesoinEJB extends BasicEJB implements IBesoinEJBRemote{
 	}
 
 	@Override
+	public void edit(Besoin besoin) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], besoin=%s", em, besoin);
+		em.merge(besoin);
+	}
+	@Override
 	public Besoin find(Object id) {
 		LOGGER.logDebug(this, "<READ BY ID>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Besoin.findById");

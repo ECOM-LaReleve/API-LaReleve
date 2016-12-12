@@ -18,6 +18,12 @@ public class PrestationEJB extends BasicEJB implements IPrestationEJBRemote{
 	}
 
 	@Override
+	public void edit(Prestation prest) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], prest=%s", em, prest);
+		em.merge(prest);
+	}
+
+	@Override
 	public Prestation find(Object id) {
 		LOGGER.logDebug(this, "<READ BY ID>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Prestation.findById");

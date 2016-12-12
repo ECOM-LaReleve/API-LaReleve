@@ -11,6 +11,8 @@ public interface IBesoinEJBRemote {
 
 	void create(Besoin besoin);
 
+	void edit(Besoin besoin);
+
 	Besoin find(Object id);
 
 	List<Besoin> findAll();

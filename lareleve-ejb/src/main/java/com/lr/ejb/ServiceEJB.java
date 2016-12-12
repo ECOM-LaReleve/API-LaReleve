@@ -18,6 +18,12 @@ public class ServiceEJB extends BasicEJB implements IServiceEJBRemote {
 	}
 
 	@Override
+	public void edit(Service service) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], service=%s", em, service);
+		em.merge(service);
+	}
+
+	@Override
 	public Service find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Service.findById");

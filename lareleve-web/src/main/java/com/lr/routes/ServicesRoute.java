@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -75,6 +76,22 @@ public class ServicesRoute extends BasicRoute {
 			return responseBuilder(Response.Status.OK).entity(service).build();
 		}
 		return responseBuilder(Response.Status.NO_CONTENT).build();
+	}
+
+	@PUT
+	@Path("{id : \\d+}") // id must be digits
+	public Response update(@PathParam("id") String id, Service aService) {
+		LOGGER.logDebug(this, "<PUT>", "servicesEJB=[%s], services=%s",(serviceEJB != null ? "set" : "null"), aService);
+		try {
+			Service service = serviceEJB.find(Integer.parseInt(id));
+			service.setLibelle(aService.getLibelle());
+			service.setPole(aService.getPole());
+			serviceEJB.edit(service);
+			return responseBuilder(Response.Status.OK).build();
+		} catch (Exception e) {
+			LOGGER.logDebug(this, "<POST>", "Bad Request");
+			return responseBuilder(Response.Status.BAD_REQUEST).build();
+		}
 	}
 
 }

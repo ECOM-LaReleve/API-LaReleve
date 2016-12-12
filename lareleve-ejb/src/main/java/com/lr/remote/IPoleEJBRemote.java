@@ -11,6 +11,8 @@ public interface IPoleEJBRemote {
 
 	void create(Pole pole);
 
+	void edit(Pole pole);
+
 	Pole find(Object id);
 
 	List<Pole> findAll();

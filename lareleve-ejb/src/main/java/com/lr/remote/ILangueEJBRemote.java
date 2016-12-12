@@ -11,6 +11,8 @@ public interface ILangueEJBRemote {
 
 	void create(Langue langue);
 
+	void edit(Langue langue);
+
 	Langue find(Object id);
 
 	List<Langue> findAll();

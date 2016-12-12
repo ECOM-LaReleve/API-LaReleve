@@ -11,6 +11,8 @@ public interface IServiceEJBRemote {
 
 	void create(Service service);
 
+	void edit(Service service);
+
 	Service find(Object id);
 
 	List<Service> findAll();

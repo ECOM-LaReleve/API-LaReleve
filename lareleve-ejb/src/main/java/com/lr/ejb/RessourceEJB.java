@@ -18,6 +18,12 @@ public class RessourceEJB extends BasicEJB implements IRessourceEJBRemote{
 	}
 
 	@Override
+	public void edit(Ressource ressource) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], ressource=%s", em, ressource);
+		em.merge(ressource);
+	}
+
+	@Override
 	public Ressource find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Ressource.findById");

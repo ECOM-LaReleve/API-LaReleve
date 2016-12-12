@@ -11,6 +11,8 @@ public interface IRessourceEJBRemote {
 
 	void create(Ressource res);
 
+	void edit(Ressource res);
+
 	Ressource find(Object id);
 
 	List<Ressource> findAll();

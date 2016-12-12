@@ -11,6 +11,8 @@ public interface IPrestationEJBRemote {
 
 	void create(Prestation prest);
 
+	void edit(Prestation prest);
+
 	Prestation find(Object id);
 
 	List<Prestation> findAll();

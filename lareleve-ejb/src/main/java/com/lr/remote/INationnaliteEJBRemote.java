@@ -11,6 +11,8 @@ public interface INationnaliteEJBRemote {
 
 	void create(Nationnalite nationnalite);
 
+	void edit(Nationnalite nationnalite);
+
 	Nationnalite find(Object id);
 
 	List<Nationnalite> findAll();

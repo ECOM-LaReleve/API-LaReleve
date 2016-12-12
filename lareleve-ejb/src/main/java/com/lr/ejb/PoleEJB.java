@@ -18,6 +18,12 @@ public class PoleEJB extends BasicEJB implements IPoleEJBRemote {
 	}
 
 	@Override
+	public void edit(Pole pole) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], pole=%s", em, pole);
+		em.merge(pole);
+	}
+
+	@Override
 	public Pole find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Pole.findById");

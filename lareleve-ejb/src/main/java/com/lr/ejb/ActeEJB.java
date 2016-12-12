@@ -18,6 +18,12 @@ public class ActeEJB extends BasicEJB implements IActeEJBRemote{
 	}
 
 	@Override
+	public void edit(Acte acte) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], acte=%s", em, acte);
+		em.merge(acte);
+	}
+
+	@Override
 	public Acte find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Acte.findById");
