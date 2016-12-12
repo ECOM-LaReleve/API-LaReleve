@@ -17,11 +17,12 @@
 **GET**
 
 
-FIND ALL : 
-/poles
-/services
-/besoins
-/prestations
+FIND ALL :
+```javascript 
+/poles  
+/services  
+/besoins  
+/prestations  
 /actes
 /prestationsrealisees
 /actesrealisees
@@ -36,9 +37,11 @@ FIND ALL :
 /utilisateurs
 /individus
 /menages
+```
 
 
-FIND BY ID : 
+FIND BY ID :
+```javascript
 /poles/{id}
 /services/{id}
 /besoins/{id}
@@ -57,78 +60,121 @@ FIND BY ID :
 /utilisateurs/{id}
 /individus/{id}
 /menages/{id}
+```
 
 
 FIND PRESTATIONS REALISEES BY ID UTILISATEUR :
+```javascript
 /prestationsrealisees?idutilisateur={id}
+```
 
 FIND PRESTATIONS REALISEES BY ID INDIVIDU :
+```javascript
 /prestationsrealisees?idindividu={id}
+```
 
 FIND PRESTATIONS REALISEES BY ID MENAGE :
+```javascript
 /prestationsrealisees?idmenage={id}
+```
 
 FIND PRESTATIONS REALISEES BY ID PRESTATION :
+```javascript
 /prestationsrealisees?idprestation={id}
+```
 
 
 FIND ACTES REALISES BY ID UTILISATEUR :
+```javascript
 /actesrealisees?idutilisateur={id}
+```
 
 FIND ACTES REALISES BY ID INDIVIDU :
+```javascript
 /actesrealisees?idindividu={id}
+```
 
 FIND ACTES REALISES BY ID MENAGE :
+```javascript
 /actesrealisees?idmenage={id}
+```
 
 FIND ACTES REALISES BY ID ACTE :
+```javascript
 /actesrealisees?idacte={id}
+```
 
 FIND ACTES REALISES BY ID BESOIN :
+```javascript
 /actesrealisees?idbesoin={id}
+```
 
 FIND ACTES REALISES BY ID PRESTATION :
+```javascript
 /actesrealisees?idprestation={id}
+```
 
 
 FIND MENAGE BY ID REFERENT:
+```javascript
 /menages?idreferant={id}
+```
 
 FIND MENAGE BY INDIVIDU NAME:
+```javascript
 /individus?menage={nomUsage}
+```
 
 FIND INDIVIDUS BY ID MENAGE:
+```javascript
 /individus?idmenage={id}
+```
 
 
 FIND LANGUES INDIVIDUS BY ID LANGUE :
+```javascript
 /languesindividus?idlangue={id}
+```
 
 FIND LANGUES INDIVIDUS BY ID INDIVIDU :
+```javascript
 /languesindividus?idindividu={id}
+```
 
 FIND NATIONNALITES INDIVIDUS BY ID NATIONNALITE :
+```javascript
 /nationnalitesindividus?idnationnalite={id}
+```
 
 FIND NATIONNALITES INDIVIDUS BY ID INDIVIDU :
+```javascript
 /nationnalitesindividus?idindividu={id}
+```
 
 FIND RESSOURCES INDIVIDUS BY ID INDIVIDU :
+```javascript
 /ressourcesindividus?idindividu={id}
+```
 
 FIND RESSOURCES INDIVIDUS BY ID RESSOURCE :
+```javascript
 /ressourcesindividus?idressource={id}
+```
 
 FIND RESSOURCES MENAGES BY ID MENAGE :
+```javascript
 /ressourcesmenages?idmenage={id}
+```
 
 FIND RESSOURCES MENAGES BY ID RESSOURCE :
+```javascript
 /ressourcesmenages?idressource={id}
-
+```
 
 
 **POST**
 
+```javascript
 /poles
 /services
 /besoins
@@ -147,11 +193,12 @@ FIND RESSOURCES MENAGES BY ID RESSOURCE :
 /utilisateurs
 /individus
 /menages
-
+```
 
 
 **PUT**
 
+```javascript
 /poles/{id}
 /services/{id}
 /besoins/{id}
@@ -170,3 +217,4 @@ FIND RESSOURCES MENAGES BY ID RESSOURCE :
 /utilisateurs/{id}
 /individus/{id}
 /menages/{id}
+```
