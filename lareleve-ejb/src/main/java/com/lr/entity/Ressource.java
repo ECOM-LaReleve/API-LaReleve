@@ -1,7 +1,6 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,15 +9,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Ressources")
+@NamedQueries({
+	@NamedQuery(name = "Ressource.findAll", query = "SELECT r FROM Ressource r"),
+	@NamedQuery(name = "Ressource.findById", query = "SELECT r FROM Ressource r WHERE r.id = :id")
+})
 public class Ressource implements Serializable {
 
 	public enum Type {
-		INDIVIDU("individu"), MENAGE("menage");
+		Individu("individu"), Menage("menage");
 
 		private String name = "";
 
@@ -36,7 +40,7 @@ public class Ressource implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	@Column(nullable = false, unique = true)
 	private String libelle;
@@ -45,41 +49,48 @@ public class Ressource implements Serializable {
 	@Column(nullable = false)
 	private Type type;
 
+	/*
 	@OneToMany(mappedBy = "pk.ressource")
 	private Set<RessourcesMenages> ressourcesMenages;
-
+	 */
+	/*
 	@OneToMany(mappedBy = "pk.ressource")
 	private Set<RessourcesIndividus> ressourcesIndividus;
-
+	 */
+	/*
 	public void addRessourcesIndividus(RessourcesIndividus ressourcesIndividus) {
 		this.ressourcesIndividus.add(ressourcesIndividus);
 	}
-
+	 */
+	/*
 	public void addRessourcesMenages(RessourcesMenages ressourcesMenages) {
 		this.ressourcesMenages.add(ressourcesMenages);
 	}
+	 */
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 	public String getLibelle() {
 		return libelle;
 	}
-
+	/*
 	public Set<RessourcesIndividus> getRessourcesIndividus() {
 		return ressourcesIndividus;
 	}
-
+	 */
+	/*
 	public Set<RessourcesMenages> getRessourcesMenages() {
 		return ressourcesMenages;
 	}
+	 */
 
 	public Type getType() {
 		return type;
 	}
 
-	private void setId(String id) {
+	private void setId(int id) {
 		this.id = id;
 	}
 

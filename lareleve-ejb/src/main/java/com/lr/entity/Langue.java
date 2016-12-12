@@ -1,18 +1,22 @@
 package com.lr.entity;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Langues")
+@NamedQueries({
+	@NamedQuery(name = "Langue.findAll", query = "SELECT l FROM Langue l"),
+	@NamedQuery(name = "Langue.findById", query = "SELECT l FROM Langue l WHERE l.id = :id")
+})
 public class Langue implements Serializable {
 
 	private static final long serialVersionUID = -8407119004464828014L;
@@ -24,21 +28,23 @@ public class Langue implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String libelle;
 
+	/*
 	@OneToMany(mappedBy = "pk.langue")
 	private Set<LanguesIndividus> languesIndividus;
-
+	 */
+	/*
 	public void addLanguesIndividus(LanguesIndividus languesIndividus) {
 		this.languesIndividus.add(languesIndividus);
 	}
-
+	 */
 	public int getId() {
 		return id;
 	}
-
+	/*
 	public Set<LanguesIndividus> getLanguesIndividus() {
 		return languesIndividus;
 	}
-
+	 */
 	public String getLibelle() {
 		return libelle;
 	}
