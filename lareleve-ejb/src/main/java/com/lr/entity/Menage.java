@@ -50,9 +50,9 @@ public class Menage implements Serializable {
 	@JoinColumn(name = "idReferant")
 	private Utilisateur referant;
 
-	//@ManyToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name = "idLogement")
-	//private Logement logement;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idLogement")
+	private Logement logement;
 
 	//@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "menage")
 	//private Collection<Individu> individus;
@@ -115,9 +115,9 @@ public class Menage implements Serializable {
 	//	return individus;
 	//}
 
-	//public Logement getLogement() {
-	//	return logement;
-	//}
+	public Logement getLogement() {
+		return logement;
+	}
 
 	//public Set<PrestationsRealisees> getPrestationsRealisees() {
 	//	return prestationsRealisees;
@@ -155,9 +155,9 @@ public class Menage implements Serializable {
 		this.id = id;
 	}
 
-	//public void setLogement(Logement logement) {
-	//	this.logement = logement;
-	//}
+	public void setLogement(Logement logement) {
+		this.logement = logement;
+	}
 
 	public void setReferant(Utilisateur referant) {
 		this.referant = referant;
