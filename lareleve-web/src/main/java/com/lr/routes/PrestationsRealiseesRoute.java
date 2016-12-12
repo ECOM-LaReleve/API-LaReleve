@@ -171,6 +171,7 @@ public class PrestationsRealiseesRoute extends BasicRoute {
 			prest.setStatut(aPrest.getStatut());
 			prest.setUtilisateur(aPrest.getUtilisateur());
 			prest.setCommentaire(aPrest.getCommentaire());
+			prest.setPrestation(aPrest.getPrestation());
 			prestationEJB.edit(prest);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {
