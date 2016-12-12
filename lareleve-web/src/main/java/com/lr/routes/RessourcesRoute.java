@@ -33,8 +33,9 @@ public class RessourcesRoute extends BasicRoute {
 	public Response create(Ressource aRessource) {
 		LOGGER.logDebug(this, "<POST>", "ressourceEJB=[%s], ressource=%s",(ressourceEJB != null ? "set" : "null"), aRessource);
 		try {
-			ressourceEJB.create(aRessource);
-			return responseBuilder(Response.Status.CREATED).build();
+			int newid = ressourceEJB.create(aRessource);
+			aRessource.setId(newid);
+			return responseBuilder(Response.Status.CREATED).entity(aRessource).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

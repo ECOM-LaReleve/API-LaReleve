@@ -12,9 +12,11 @@ import com.lr.remote.IPrestationEJBRemote;
 public class PrestationEJB extends BasicEJB implements IPrestationEJBRemote{
 
 	@Override
-	public void create(Prestation prest) {
+	public int create(Prestation prest) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], prestation=%s", em, prest);
 		em.persist(prest);
+		em.flush();
+		return prest.getId();
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class Nationnalite implements Serializable {
 		return libelle;
 	}
 
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

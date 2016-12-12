@@ -12,9 +12,11 @@ import com.lr.remote.IServiceEJBRemote;
 public class ServiceEJB extends BasicEJB implements IServiceEJBRemote {
 
 	@Override
-	public void create(Service service) {
+	public int create(Service service) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], service=%s", em, service);
 		em.persist(service);
+		em.flush();
+		return service.getId();
 	}
 
 	@Override

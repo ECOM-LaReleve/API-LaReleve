@@ -9,7 +9,7 @@ import com.lr.entity.Acte;
 @Remote
 public interface IActeEJBRemote {
 
-	void create(Acte acte);
+	int create(Acte acte);
 
 	void edit(Acte acte);
 

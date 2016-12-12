@@ -12,9 +12,11 @@ import com.lr.remote.IBesoinEJBRemote;
 public class BesoinEJB extends BasicEJB implements IBesoinEJBRemote{
 
 	@Override
-	public void create(Besoin besoin) {
+	public int create(Besoin besoin) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], besoin=%s", em, besoin);
 		em.persist(besoin);
+		em.flush();
+		return besoin.getId();
 	}
 
 	@Override

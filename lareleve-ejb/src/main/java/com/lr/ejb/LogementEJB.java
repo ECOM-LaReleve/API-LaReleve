@@ -12,9 +12,11 @@ import com.lr.remote.ILogementEJBRemote;
 public class LogementEJB extends BasicEJB implements ILogementEJBRemote{
 
 	@Override
-	public void create(Logement logement) {
+	public int create(Logement logement) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], logement=%s", em, logement);
 		em.persist(logement);
+		em.flush();
+		return logement.getId();
 	}
 
 	@Override

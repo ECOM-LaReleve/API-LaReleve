@@ -11,9 +11,11 @@ import com.lr.remote.IPrestationsRealiseesEJBRemote;
 public class PrestationsRealiseesEJB extends BasicEJB implements IPrestationsRealiseesEJBRemote{
 
 	@Override
-	public void create(PrestationsRealisees prest) {
+	public int create(PrestationsRealisees prest) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], prestationRealisees=%s", em, prest);
 		em.persist(prest);
+		em.flush();
+		return prest.getId();
 	}
 
 	@Override

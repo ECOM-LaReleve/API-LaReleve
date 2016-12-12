@@ -9,7 +9,7 @@ import com.lr.entity.Pole;
 @Remote
 public interface IPoleEJBRemote {
 
-	void create(Pole pole);
+	int create(Pole pole);
 
 	void edit(Pole pole);
 

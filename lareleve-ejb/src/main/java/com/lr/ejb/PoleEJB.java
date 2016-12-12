@@ -12,9 +12,11 @@ import com.lr.remote.IPoleEJBRemote;
 public class PoleEJB extends BasicEJB implements IPoleEJBRemote {
 
 	@Override
-	public void create(Pole pole) {
+	public int create(Pole pole) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], pole=%s", em, pole);
 		em.persist(pole);
+		em.flush();
+		return pole.getId();
 	}
 
 	@Override

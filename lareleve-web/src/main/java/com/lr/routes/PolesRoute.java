@@ -33,8 +33,9 @@ public class PolesRoute extends BasicRoute {
 	public Response create(Pole aPole) {
 		LOGGER.logDebug(this, "<POST>", "poleEJB=[%s], pole=%s",(poleEJB != null ? "set" : "null"), aPole);
 		try {
-			poleEJB.create(aPole);
-			return responseBuilder(Response.Status.CREATED).build();
+			int newid = poleEJB.create(aPole);
+			aPole.setId(newid);
+			return responseBuilder(Response.Status.CREATED).entity(aPole).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

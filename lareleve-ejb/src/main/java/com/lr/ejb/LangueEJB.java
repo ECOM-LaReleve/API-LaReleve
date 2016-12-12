@@ -12,9 +12,11 @@ import com.lr.remote.ILangueEJBRemote;
 public class LangueEJB extends BasicEJB implements ILangueEJBRemote{
 
 	@Override
-	public void create(Langue langue) {
+	public int create(Langue langue) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], langue=%s", em, langue);
 		em.persist(langue);
+		em.flush();
+		return langue.getId();
 	}
 
 	@Override

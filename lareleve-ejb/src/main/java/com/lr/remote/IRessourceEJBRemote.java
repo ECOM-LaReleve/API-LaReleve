@@ -9,7 +9,7 @@ import com.lr.entity.Ressource;
 @Remote
 public interface IRessourceEJBRemote {
 
-	void create(Ressource res);
+	int create(Ressource res);
 
 	void edit(Ressource res);
 

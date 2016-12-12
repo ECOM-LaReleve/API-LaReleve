@@ -9,7 +9,7 @@ import com.lr.entity.Langue;
 @Remote
 public interface ILangueEJBRemote {
 
-	void create(Langue langue);
+	int create(Langue langue);
 
 	void edit(Langue langue);
 

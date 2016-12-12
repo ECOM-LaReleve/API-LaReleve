@@ -12,9 +12,11 @@ import com.lr.remote.IRessourceEJBRemote;
 public class RessourceEJB extends BasicEJB implements IRessourceEJBRemote{
 
 	@Override
-	public void create(Ressource ressource) {
+	public int create(Ressource ressource) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], ressource=%s", em, ressource);
 		em.persist(ressource);
+		em.flush();
+		return ressource.getId();
 	}
 
 	@Override

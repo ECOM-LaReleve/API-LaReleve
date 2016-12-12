@@ -9,7 +9,7 @@ import com.lr.entity.Nationnalite;
 @Remote
 public interface INationnaliteEJBRemote {
 
-	void create(Nationnalite nationnalite);
+	int create(Nationnalite nationnalite);
 
 	void edit(Nationnalite nationnalite);
 

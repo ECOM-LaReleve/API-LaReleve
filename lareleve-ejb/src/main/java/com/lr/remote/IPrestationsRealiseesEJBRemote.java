@@ -9,7 +9,7 @@ import com.lr.entity.PrestationsRealisees;
 @Remote
 public interface IPrestationsRealiseesEJBRemote {
 
-	void create(PrestationsRealisees prest);
+	int create(PrestationsRealisees prest);
 
 	void edit(PrestationsRealisees prest);
 

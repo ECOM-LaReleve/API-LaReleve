@@ -9,7 +9,7 @@ import com.lr.entity.Besoin;
 @Remote
 public interface IBesoinEJBRemote {
 
-	void create(Besoin besoin);
+	int create(Besoin besoin);
 
 	void edit(Besoin besoin);
 

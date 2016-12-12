@@ -36,8 +36,9 @@ public class PrestationsRealiseesRoute extends BasicRoute {
 		LOGGER.logDebug(this, "<POST>", "prestationsRealiseesEJB=[%s], prestationsRealisee=%s", (prestationEJB != null ? "set" : "null"), aPrest);
 
 		try {
-			prestationEJB.create(aPrest);
-			return responseBuilder(Response.Status.CREATED).build();
+			int newid = prestationEJB.create(aPrest);
+			aPrest.setId(newid);
+			return responseBuilder(Response.Status.CREATED).entity(aPrest).build();
 		} catch (Exception e) {
 			LOGGER.logDebug(this, "<POST>", "Bad Request");
 			return responseBuilder(Response.Status.BAD_REQUEST).build();

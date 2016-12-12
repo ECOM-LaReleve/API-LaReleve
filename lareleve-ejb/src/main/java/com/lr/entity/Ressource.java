@@ -90,7 +90,7 @@ public class Ressource implements Serializable {
 		return type;
 	}
 
-	private void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

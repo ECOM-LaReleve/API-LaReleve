@@ -14,9 +14,11 @@ public class UtilisateurEJB extends BasicEJB
 implements IUtilisateurEJBLocal, IUtilisateurEJBRemote {
 
 	@Override
-	public void create(Utilisateur utilisateur) {
+	public int create(Utilisateur utilisateur) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], utilisateur=%s", em, utilisateur);
 		em.persist(utilisateur);
+		em.flush();
+		return utilisateur.getId();
 	}
 
 	@Override

@@ -12,9 +12,11 @@ import com.lr.remote.INationnaliteEJBRemote;
 public class NationnaliteEJB extends BasicEJB implements INationnaliteEJBRemote{
 
 	@Override
-	public void create(Nationnalite nationnalite) {
+	public int create(Nationnalite nationnalite) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], nationnalite=%s", em, nationnalite);
 		em.persist(nationnalite);
+		em.flush();
+		return nationnalite.getId();
 	}
 
 	@Override

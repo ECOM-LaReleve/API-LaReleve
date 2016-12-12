@@ -12,9 +12,11 @@ import com.lr.remote.IActesRealisesEJBRemote;
 public class ActesRealisesEJB extends BasicEJB implements IActesRealisesEJBRemote{
 
 	@Override
-	public void create(ActesRealises acte) {
+	public int create(ActesRealises acte) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], acteationRealisees=%s", em, acte);
 		em.persist(acte);
+		em.flush();
+		return acte.getId();
 	}
 
 	@Override

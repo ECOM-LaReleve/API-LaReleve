@@ -9,7 +9,7 @@ import com.lr.entity.Logement;
 @Remote
 public interface ILogementEJBRemote {
 
-	void create(Logement logement);
+	int create(Logement logement);
 
 	void edit(Logement logement);
 

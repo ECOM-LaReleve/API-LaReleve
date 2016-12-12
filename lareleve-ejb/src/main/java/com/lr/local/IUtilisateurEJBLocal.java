@@ -9,7 +9,7 @@ import com.lr.entity.Utilisateur;
 @Local
 public interface IUtilisateurEJBLocal {
 
-	void create(Utilisateur utilisateur);
+	int create(Utilisateur utilisateur);
 
 	void edit(Utilisateur utilisateur);
 

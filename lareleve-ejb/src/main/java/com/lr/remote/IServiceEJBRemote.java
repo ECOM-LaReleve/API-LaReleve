@@ -9,7 +9,7 @@ import com.lr.entity.Service;
 @Remote
 public interface IServiceEJBRemote {
 
-	void create(Service service);
+	int create(Service service);
 
 	void edit(Service service);
 
