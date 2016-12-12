@@ -12,9 +12,11 @@ import com.lr.remote.IMenageEJBRemote;
 public class MenageEJB extends BasicEJB implements IMenageEJBRemote {
 
 	@Override
-	public void create(Menage menage) {
+	public int create(Menage menage) {
 		LOGGER.logDebug(this, "<CREATE>", "em=[%s], menage=%s", em, menage);
 		em.persist(menage);
+		em.flush();
+		return menage.getId();
 	}
 
 	@Override

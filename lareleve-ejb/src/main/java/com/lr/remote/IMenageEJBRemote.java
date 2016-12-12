@@ -9,7 +9,7 @@ import com.lr.entity.Menage;
 @Remote
 public interface IMenageEJBRemote {
 
-	void create(Menage menage);
+	int create(Menage menage);
 
 	void edit(Menage menage);
 
