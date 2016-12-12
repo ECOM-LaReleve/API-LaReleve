@@ -11,6 +11,8 @@ public interface ILogementEJBRemote {
 
 	void create(Logement logement);
 
+	void edit(Logement logement);
+
 	Logement find(Object id);
 
 	List<Logement> findAll();

@@ -18,6 +18,12 @@ public class LogementEJB extends BasicEJB implements ILogementEJBRemote{
 	}
 
 	@Override
+	public void edit(Logement logement) {
+		LOGGER.logDebug(this, "<UPDATE>", "em=[%s], logement=%s", em, logement);
+		em.merge(logement);
+	}
+
+	@Override
 	public Logement find(Object id) {
 		LOGGER.logDebug(this, "<READ>", "em=[%s], id=%s", em, id);
 		Query query = em.createNamedQuery("Logement.findById");

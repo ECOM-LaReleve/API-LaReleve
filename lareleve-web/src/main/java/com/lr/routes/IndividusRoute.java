@@ -127,6 +127,7 @@ public class IndividusRoute extends BasicRoute {
 			individu.setTel(aIndividu.getTel());
 			individu.setStatutFr(aIndividu.getStatutFr());
 			individu.setStatutMatrimonial(aIndividu.getStatutMatrimonial());
+			individu.setMenage(aIndividu.getMenage());
 			individuEJB.edit(individu);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {

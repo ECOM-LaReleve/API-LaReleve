@@ -107,7 +107,6 @@ public class MenagesRoute extends BasicRoute {
 
 		try {
 			Menage menage = menageEJB.find(Integer.parseInt(id));
-			//menage.setChefMenage(aMenage.getChefMenage());
 			menage.setAdresseActuelle(aMenage.getAdresseActuelle());
 			menage.setAdresseSortie(aMenage.getAdresseSortie());
 			menage.setDateEntree(aMenage.getDateEntree());

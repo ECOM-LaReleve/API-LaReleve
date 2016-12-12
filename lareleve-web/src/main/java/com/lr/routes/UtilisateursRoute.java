@@ -108,6 +108,7 @@ public class UtilisateursRoute extends BasicRoute {
 			utilisateur.setPassword(aUtilisateur.getPassword());
 			utilisateur.setPrenom(aUtilisateur.getPrenom());
 			utilisateur.setUsername(aUtilisateur.getUsername());
+			utilisateur.setService(aUtilisateur.getService());
 			utilisateurEJB.edit(utilisateur);
 			return responseBuilder(Response.Status.OK).build();
 		} catch (Exception e) {

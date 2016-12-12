@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -75,6 +76,32 @@ public class LogementsRoute extends BasicRoute {
 			return responseBuilder(Response.Status.OK).entity(logement).build();
 		}
 		return responseBuilder(Response.Status.NO_CONTENT).build();
+	}
+
+	@PUT
+	@Path("{id : \\d+}") // id must be digits
+	public Response update(@PathParam("id") String id, Logement aLogement) {
+		LOGGER.logDebug(this, "<PUT>", "logementsEJB=[%s], logements=%s",(logementEJB != null ? "set" : "null"), aLogement);
+		try {
+			Logement logement = logementEJB.find(Integer.parseInt(id));
+			logement.setAdresse(aLogement.getAdresse());
+			logement.setCharges(aLogement.getCharges());
+			logement.setDigicode(aLogement.getDigicode());
+			logement.setDirection(aLogement.getDirection());
+			logement.setEtage(aLogement.getEtage());
+			logement.setIdGestimmLogement(aLogement.getIdGestimmLogement());
+			logement.setIdGestimmMenages(aLogement.getIdGestimmMenages());
+			logement.setIdPOHI(aLogement.getIdPOHI());
+			logement.setLoyer(aLogement.getLoyer());
+			logement.setStatut(aLogement.getStatut());
+			logement.setSuperficie(aLogement.getSuperficie());
+			logement.setType(aLogement.getType());
+			logementEJB.edit(logement);
+			return responseBuilder(Response.Status.OK).build();
+		} catch (Exception e) {
+			LOGGER.logDebug(this, "<POST>", "Bad Request");
+			return responseBuilder(Response.Status.BAD_REQUEST).build();
+		}
 	}
 
 
